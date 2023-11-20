@@ -8,6 +8,7 @@ export default function Shoppage() {
     <div className="h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
       <Header />
       <Navbar />
+      <h1>Nyt view her - nok en komponent der viser JSON dataen.</h1>
       <Footer />
     </div>
   );
