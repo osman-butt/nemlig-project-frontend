@@ -1,3 +1,5 @@
+import Listitem from "./Listitem";
+
 function List() {
   return (
     <div className="max-w-[900px] p-4 mt-[-96px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
@@ -13,7 +15,11 @@ function List() {
                 <th className="text-center"></th>
               </tr>
             </thead>
-            <tbody className=""></tbody>
+            <tbody className="">
+              <Listitem />
+              <Listitem />
+              <Listitem />
+            </tbody>
           </table>
         </section>
       </div>
