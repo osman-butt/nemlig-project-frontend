@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 export default function Navbar() {
   return (
     <nav className="w-[1920px] h-[54px]">
-      <div className="fixed w-[1932px] h-[54px] top-0 left-0">
+      <div className="relative w-[1932px] h-[54px] top-0 left-0">
         <div className="relative w-[1920px] h-[54px] bg-[#58644c]">
           <NavLink
             to="/frost"
