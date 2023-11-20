@@ -44,7 +44,7 @@ export default function Loginpage() {
           </button>
           </div>
           <button onClick={() => navigate("/createaccount")}className="bg-[#58644C] hover:bg-[#ecbc9a] w-[400px] rounded-md mx-auto py-3 text-black font-medium">
-            Opret konto
+            Opret bruger
           </button>
 
           <div className="flex items-center justify-center">

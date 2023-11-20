@@ -18,9 +18,9 @@ export default function Nav() {
 
           <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer" to="/favorites">Favoritter</Link>
 
-          <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer" to="/shop">Log ind</Link>
+          <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer" to="/login">Log ind</Link>
 
-          <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer "to="/createaccount">Opret konto</Link>
+          <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer "to="/createaccount">Opret bruger</Link>
 
           <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer"to="/basket">{<AiOutlineShoppingCart size={30}/>}
           <p>0kr</p></Link>
@@ -47,7 +47,7 @@ export default function Nav() {
               <Link to="/login">Log ind</Link>
             </li>
             <li className="p-4 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
-              <Link to="/createaccount">Opret konto</Link>
+              <Link to="/createaccount">Opret bruger</Link>
             </li>
             <li className="p-4 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
               <Link to="/basket">{<AiOutlineShoppingCart size={30}/>}<p>0kr</p></Link>
