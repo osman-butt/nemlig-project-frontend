@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function Hero() {
+export default function Hero() {
   const navigate = useNavigate();
   return (
     <div className="text-black">
@@ -26,5 +26,3 @@ function Hero() {
     </div>
   );
 }
-
-export default Hero;

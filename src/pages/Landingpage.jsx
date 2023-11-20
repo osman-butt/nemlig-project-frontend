@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 
-function Landingpage() {
+export default function Landingpage() {
   return (
     <div
       className="h-screen bg-fixed bg-center bg-cover"
@@ -16,4 +16,4 @@ function Landingpage() {
   );
 }
 
-export default Landingpage;
+

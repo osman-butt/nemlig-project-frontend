@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Footer() {
+export default function Footer() {
   const companyName = "nemlig.com";
   return (
     <div className="w-full mx-auto py-16 px-4 grid lg:grid-cols-3 gap-8 text-white bg-[#58644C]">
@@ -22,5 +22,3 @@ function Footer() {
     </div>
   );
 }
-
-export default Footer;

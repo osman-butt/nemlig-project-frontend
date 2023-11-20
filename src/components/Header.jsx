@@ -2,7 +2,7 @@ import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+export default function Header() {
   const [nav, setNav] = useState(true);
 
   const handleNav = () => {
@@ -11,17 +11,11 @@ const Header = () => {
 
   return (
     <div className="flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-black uppercase font-medium">
-      <Link
-        className="w-full text-3xl font-bold text-[#d4793a] lowercase"
-        to="/"
-      >
+      <Link className="w-full text-3xl font-bold text-[#d4793a] lowercase" to="/">
         nemlig.com
       </Link>
       <ul className="hidden md:flex md:items-center">
-        <Link
-          className="p-4 hover:text-[#d4793a] hover:cursor-pointer"
-          to="/shop"
-        >
+        <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer" to="/shop">
           Dagligvarer
         </Link>
         <Link
@@ -55,6 +49,4 @@ const Header = () => {
       </div>
     </div>
   );
-};
-
-export default Header;
+}
