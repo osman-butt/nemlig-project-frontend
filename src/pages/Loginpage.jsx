@@ -48,7 +48,7 @@ export default function Loginpage() {
           </button>
 
           <div className="flex items-center justify-center">
-            <p className="py-4 font-medium">
+            <p className="py-4 font-medium underline cursor-pointer">
               Glemt password?
             </p>
           </div>
