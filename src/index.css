@@ -1,3 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Work+Sans:wght@100..900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  background-color: #e8e3d8;
+}
+
+body::-webkit-scrollbar {
+  width: 16px; /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #bebebe; /* color of the scroll thumb */
+  border-radius: 240px; /* roundness of the scroll thumb */
+  border: 4px solid #e8e3d8; /* creates padding around scroll thumb */
+}
