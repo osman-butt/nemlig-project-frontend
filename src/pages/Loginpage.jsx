@@ -1,7 +1,11 @@
 import image from "../assets/hero.jpg";
 import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
+
 
 export default function Loginpage() {
+  const navigate = useNavigate();
+
   return (
     <div
       className="h-screen bg-fixed bg-center bg-cover"
@@ -39,7 +43,7 @@ export default function Loginpage() {
             Log ind
           </button>
           </div>
-          <button className="bg-[#58644C] hover:bg-[#ecbc9a] w-[400px] rounded-md mx-auto py-3 text-black font-medium">
+          <button onClick={() => navigate("/createaccount")}className="bg-[#58644C] hover:bg-[#ecbc9a] w-[400px] rounded-md mx-auto py-3 text-black font-medium">
             Opret konto
           </button>
 
