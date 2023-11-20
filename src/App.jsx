@@ -1,8 +1,11 @@
+import Landingpage from "./pages/Landingpage";
+import { Route, Routes } from "react-router-dom";
+
 function App() {
   return (
-    <>
-      <h1 className="text-4xl text-bold text-center mt-2">Nemlig.com</h1>
-    </>
+    <Routes>
+      <Route path="/" element={<Landingpage />} />
+    </Routes>
   );
 }
 
