@@ -2,6 +2,7 @@
 import star from "../assets/star.jpg";
 import filledstar from "../assets/filledstar.jpg";
 import { useState } from "react";
+
 export default function Card({ data }) {
 
   const [favorite, setFavorite] = useState({});
@@ -18,7 +19,7 @@ export default function Card({ data }) {
   }
 
   function addToBasket(id) {
-    console.log("Added item with ID", id, "to basket");
+    console.log("Added item", id, "to basket");
   }
   if (!data || !data[0]) {
     return null;
