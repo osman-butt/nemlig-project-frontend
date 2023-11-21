@@ -5,7 +5,7 @@ export default function Card({ data }) {
   console.log(data[0]);
   return (
     <div className="flex flex-wrap justify-center">
-      {data[0].map((item) => (
+      {data.map((item) => (
         <div key={item.product_id} className="bg-white m-4 border border-gray-200 rounded-md">
           <div className="relative w-[200px] h-[317px] top-0 left-0 ">
             <img className="relative w-[102px] h-[150px] top-[27px] left-[49px] object-cover" alt="Image" src={item.image} />
