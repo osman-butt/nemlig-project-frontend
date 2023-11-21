@@ -2,32 +2,29 @@ import { Link } from "react-router-dom";
 
 export default function Confirm() {
   return (
-    <div className="max-w-[800px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
-      <div className="relative">
-        <div className="relative">
-          <div className="relative w-[660px] h-[466px] top-0 left-0 bg-[#e8e3d8] rounded-[8px]">
-            <div className="absolute w-[352px] h-[75px] top-[30px] left-[57px] [font-general] font-normal text-black text-[36px] tracking-[0] leading-[normal]">
-              Ordrebekræftelse
-            </div>
-            <div className="absolute w-[532px] h-[266px] top-[157px] left-[53px]">
-              <p className="absolute w-[516px] top-0 left-[12px] [font-general] font-bold text-black md:text-2xl sm:text-1xl md:py-1 tracking-[0] leading-[normal]">
-                Tak for din ordre!
-                <br />
-                <br />
-                Dit ordrenummer er #123012.
-              </p>
-              <Link to="/">
-                <button
-                  className="absolute w-[532px] h-[66px] top-[200px] left-0 [font-general] font-bold text-white text-[24px] tracking-[0] leading-[normal] border border-black rounded-md px-4 bg-[#58644c]"
-                  alt="Bestil btn"
-                  src="bestil-btn.png"
-                >
-                  {" "}
-                  Tilbage til forsiden
-                </button>
-              </Link>
-            </div>
-          </div>
+    <div className="max-w-[1240px] w-[80%] m-auto flex items-start text-center justify-center lg:mt-40 mt-10 ">
+      <div className="w-full md:w-[60%] max-w-[600px] bg-[#e8e3d8] rounded-[8px] p-6 flex flex-col">
+        <div className="font-general font-normal text-black text-3xl lg:text-4xl mb-10 lg:mb-20">
+          Ordrebekræftelse
+        </div>
+
+        <p className="font-general font-bold text-black text-lg lg:text-xl mb-8 lg:mb-12">
+          Tak for din ordre!
+          <br />
+          <br />
+          Dit ordrenummer er #123012.
+        </p>
+        <div className="mt-auto">
+          <Link to="/">
+            <button
+              className="w-full  h-12 lg:h-16 font-general font-bold text-white text-lg lg:text-xl border text-center justify-center border-black rounded-md bg-[#58644c]"
+              alt="Bestil btn"
+              src="bestil-btn.png"
+            >
+              {" "}
+              Tilbage til forsiden
+            </button>
+          </Link>
         </div>
       </div>
     </div>
