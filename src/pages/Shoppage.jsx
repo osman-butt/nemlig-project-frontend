@@ -7,12 +7,17 @@ import Items from "../components/Items";
 
 export default function Shoppage() {
   return (
-    <div className="h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-      <Header />
-      <Navbar />
-      <Search />
-      <Items />
+    <>
+      <div
+        className="min-h-screen bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <Header />
+        <Navbar />
+        <Search />
+        <Items />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
