@@ -3,25 +3,32 @@ import star from "../assets/star.jpg";
 
 export default function Card({ data }) {
   console.log(data[0]);
+
+  function addToBasket() {
+    console.log("Added to basket");
+  }
+  if (!data || !data[0]) {
+    return null;
+  }
   return (
     <div className="flex flex-wrap justify-center">
-      {data.map((item) => (
-        <div key={item.product_id} className="bg-white m-4 border border-gray-200 rounded-md">
-          <div className="relative w-[200px] h-[317px] top-0 left-0 ">
-            <img className="relative w-[102px] h-[150px] top-[27px] left-[49px] object-cover" alt="Image" src={item.image} />
-            <div className="absolute w-[147px] top-[180px] left-[26px] [font-family:'Roboto-Regular',Helvetica] font-normal text-black text-[18px] text-center tracking-[0] leading-[normal]">
-              {item.product_name}
+      {data[0].map((item) => (
+        <div key={item.product_id} className="bg-white m-4 border border-gray-200 rounded">
+          <div className="relative w-[200px] h-[317px]">
+            <div>
+              <img className="w-[19px] h-[18px] ml-auto mt-4 mr-4" alt="Star" src={star} />
             </div>
-            <div className="absolute w-[78px] top-[228px] left-[61px] [font-family:'Roboto-Bold',Helvetica] font-bold text-black text-[18px] text-center tracking-[0] leading-[normal]">
-              {item.price}
+            <div className="w-full h-[150px] m-auto mt-5">
+              <img className="w-[80px] h-[140px] object-cover m-auto" alt="Image" src={item.images[0].image_link} />
             </div>
-            <div className="absolute w-[147px] top-[204px] left-[26px] opacity-60 [font-family:'Roboto-Regular',Helvetica] font-normal text-black text-[14px] text-center tracking-[0] leading-[normal]">
-              {item.description}
-            </div>
-            <button className="absolute w-[115px] h-[45px] top-[259px] left-[40px] bg-[#d4793a] rounded-[4px] hover:bg-[#ecbc9a] [font-family:'Roboto-Regular',Helvetica] font-normal text-black text-[20px] text-center tracking-[0] leading-[normal] ">
+            <div className="relative w-full m-auto mt-2 font-medium text-black text-[16px] text-center">{item.product_name}</div>
+            <div className="w-full m-auto font-bold text-black text-[18px] text-center">{item.prices[0].price} kr.</div>
+            <button
+              onClick={addToBasket}
+              className="absolute w-[115px] h-[45px] top-[259px] left-[40px] bg-[#d4793a] rounded-[4px] hover:bg-[#ecbc9a]  font-normal text-black text-[20px] text-center"
+            >
               Læg i kurv
             </button>
-            <img className="absolute w-[19px] h-[18px] top-[7px] left-[158px]" alt="Star" src={star} />
           </div>
         </div>
       ))}
