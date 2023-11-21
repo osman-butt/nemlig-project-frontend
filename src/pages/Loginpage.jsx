@@ -1,5 +1,5 @@
 import image from "../assets/hero.jpg";
-import Nav from "../components/Nav";
+import Header2 from "../components/Header2";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,17 +10,17 @@ export default function Loginpage() {
     <div
       className="h-screen bg-fixed bg-center bg-cover"
       style={{ backgroundImage: `url(${image})` }}>
-      <Nav />
+      <Header2 />
 
       <div className="text-black">
       <div className="max-w-[600px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <div className="bg-[#e8e3d8] rounded">
-          <h2 className="font-medium md:text-2xl sm:text-s md:py-6">
+          <h2 className="font-medium text-2xl py-3">
             Log ind
           </h2>
 
-          <form className="w-full">
-            <div>
+          <form className="w-full grid justify-center">
+            <div className="">
               <label className="text-[#000000] font-bold p-4 pr-7">Email:</label>
               <input
                 className="border-2 border-[#d4793a] rounded-md w-[300px] h-[50px] px-4"

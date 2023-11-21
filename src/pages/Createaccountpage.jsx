@@ -1,5 +1,5 @@
 import image from "../assets/hero.jpg";
-import Nav from "../components/Nav";
+import Header2 from "../components/Header2";
 import { useNavigate } from "react-router-dom";
 
 
@@ -10,12 +10,12 @@ export default function Createaccountpage() {
     <div
       className="h-screen bg-fixed bg-center bg-cover"
       style={{ backgroundImage: `url(${image})` }}>
-      <Nav />
+      <Header2 />
 
       <div className="text-black">
       <div className="max-w-[600px] mt-[-96px] w-full h-screen mx-auto text-center flex flex-col justify-center">
         <div className="bg-[#e8e3d8] rounded">
-          <h2 className="font-medium md:text-2xl sm:text-xl md:py-6">
+          <h2 className="font-medium text-2xl py-3 md:text-2xl">
             Opret bruger
           </h2>
 
@@ -36,7 +36,7 @@ export default function Createaccountpage() {
                 placeholder="Skriv din adresse her"
               />
             </div>
-            <div className="flex pl-[73px]">
+            <div className="flex sm:pl-[73px] pl-[23px]">
               <label className="text-[#000000] font-bold p-2">Postnummer:</label>
               <input
                 className="border-2 border-[#d4793a] rounded-md w-[100px] h-[50px] px-4"
