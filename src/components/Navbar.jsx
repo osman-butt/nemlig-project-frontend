@@ -2,46 +2,44 @@ import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
-    <nav className="w-[1920px] h-[54px]">
-      <div className="relative w-[1932px] h-[54px] top-0 left-0">
-        <div className="relative w-[1920px] h-[54px] bg-[#58644c]">
-          <NavLink
-            to="/frost"
-            className="w-[49px] left-[354px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Frost
-          </NavLink>
-          <NavLink
-            to="/mejeri"
-            className="w-[56px] left-[451px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Mejeri
-          </NavLink>
-          <NavLink
-            to="/kød"
-            className="w-[49px] left-[555px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Kød
-          </NavLink>
-          <NavLink
-            to="/brød"
-            className="w-[49px] left-[652px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Brød
-          </NavLink>
-          <NavLink
-            to="/kolonial"
-            className="w-[77px] left-[749px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Kolonial
-          </NavLink>
-          <NavLink
-            to="/drikkevarer"
-            className="w-[94px] left-[874px] absolute h-[31px] top-[16px] [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] tracking-[0] leading-[normal]"
-          >
-            Drikkevarer
-          </NavLink>
-        </div>
+    <nav>
+      <div className="bg-[#58644c] flex flex-wrap justify-center lg:justify-start pl-4 lg:pl-60">
+        <NavLink
+          to="/frost"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Frost
+        </NavLink>
+        <NavLink
+          to="/mejeri"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Mejeri
+        </NavLink>
+        <NavLink
+          to="/kød"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Kød
+        </NavLink>
+        <NavLink
+          to="/brød"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Brød
+        </NavLink>
+        <NavLink
+          to="/kolonial"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Kolonial
+        </NavLink>
+        <NavLink
+          to="/drikkevarer"
+          className="px-2 py-1 text-base md:px-4 md:py-2 md:text-lg lg:px-6 lg:py-4 lg:text-xl [font-family:'Roboto-Regular',Helvetica] font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+        >
+          Drikkevarer
+        </NavLink>
       </div>
     </nav>
   );
