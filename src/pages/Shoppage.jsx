@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
+import Items from "../components/Items";
 
 export default function Shoppage() {
   return (
@@ -10,7 +11,7 @@ export default function Shoppage() {
       <Header />
       <Navbar />
       <Search />
-      <h1>Nyt view her - nok en komponent der viser JSON dataen.</h1>
+      <Items />
       <Footer />
     </div>
   );
