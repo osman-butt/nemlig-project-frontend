@@ -21,9 +21,15 @@ export default function Nav() {
           <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer" to="/login">Log ind</Link>
 
           <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer "to="/createaccount">Opret bruger</Link>
-
+          
           <Link className="p-4 hover:text-[#d4793a] hover:cursor-pointer"to="/basket">{<AiOutlineShoppingCart size={30}/>}
-          <p>0kr</p></Link>
+          
+          <p>0kr</p>
+          <p className="w-[17px] h-[17px] px-[5px] pb-[px] bg-[#d4793a] translate-y-[-60px] translate-x-[20px] text-xs rounded-full font-bold text-black">
+              1
+            </p>
+          </Link>
+          
 
         </ul>
         <div onClick={handleNav} className="block md:hidden hover:cursor-pointer">
@@ -50,7 +56,12 @@ export default function Nav() {
               <Link to="/createaccount">Opret bruger</Link>
             </li>
             <li className="p-4 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
-              <Link to="/basket">{<AiOutlineShoppingCart size={30}/>}<p>0kr</p></Link>
+              <Link to="/basket">{<AiOutlineShoppingCart size={30}/>}
+              <p>0kr</p>
+              <p className="w-[17px] h-[17px] px-[5px] pb-[px] bg-[#d4793a] translate-y-[-60px] translate-x-[20px] text-xs rounded-full font-bold text-black">
+              1
+            </p>
+              </Link>
             </li>
           </ul>
         </div>
