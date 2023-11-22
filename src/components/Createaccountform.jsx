@@ -5,7 +5,7 @@ export default function Createaccountform() {
   const navigate = useNavigate();
 
   return (
-    <div className="w-full max-w-lg m-auto flex flex-col justify-center text-black lg:mt-10 p-4">
+    <div className="w-full max-w-lg flex flex-col m-auto justify-center text-black lg:mt-10 p-4">
       <div className="bg-[#e8e3d8] rounded">
         <h2 className="font-medium text-2xl py-3 md:text-2xl text-center">Opret bruger</h2>
 
@@ -19,10 +19,7 @@ export default function Createaccountform() {
         </form>
 
         <div className="flex items-center justify-between px-3 m-6">
-          <button
-            onClick={() => navigate("/createaccount")}
-            className="bg-[#58644C] hover:bg-[#ecbc9a] w-full rounded-md py-3 text-black font-medium"
-          >
+          <button onClick={() => navigate("/createaccount")} className="bg-[#58644C] hover:bg-[#ecbc9a] w-full rounded-md py-3 font-medium">
             Opret bruger
           </button>
         </div>
