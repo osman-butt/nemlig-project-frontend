@@ -1,22 +1,18 @@
 import image from "../assets/hero.jpg";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
+import Adminhead from "../components/Adminhead";
+import Search from "../components/Search";
+import Admintable from "../components/Admintable";
 
-function Adminpage() {
+export default function Adminpage() {
   return (
-    <>
       <div
         className="min-h-screen bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        <Header />
-        <div className="max-w-[1240px] p-4 w-full mx-auto text-center rounded flex flex-col font-general bg-[#e8e3d8]">
-          <h1 className="text-3xl font-bold">Admin page</h1>
-        </div>
+        style={{ backgroundImage: `url(${image})` }}>
+        <Adminhead />
+        <Search />
+        <Admintable />
+        <Footer />
       </div>
-      <Footer />
-    </>
   );
 }
-
-export default Adminpage;

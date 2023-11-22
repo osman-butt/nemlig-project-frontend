@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Loginpage from "./pages/Loginpage";
 import Createaccountpage from "./pages/Createaccountpage.jsx";
 import Adminpage from "./pages/Adminpage.jsx";
+import Formdialog from "./components/Formdialog.jsx";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/order" element={<Orderpage />} />
       <Route path="/basket" element={<BasketPage />} />
       <Route path="/admin" element={<Adminpage />} />
-    </Routes>
+      <Route path="/formdialog" element={<Formdialog />} />
+    </Routes >
   );
 }
