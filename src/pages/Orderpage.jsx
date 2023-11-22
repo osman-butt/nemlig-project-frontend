@@ -7,14 +7,16 @@ import "../index.css";
 
 export default function Orderpage() {
   return (
-    <div
-      className="h-screen bg-fixed bg-center bg-cover"
-      style={{ backgroundImage: `url(${image})` }}
-    >
-      <Header />
-      <Navbar />
-      <Confirm />
+    <>
+      <div
+        className="h-screen bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <Header />
+        <Navbar />
+        <Confirm />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
