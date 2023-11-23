@@ -30,23 +30,15 @@ export default function Admintable() {
           Tilføj
         </button>
 
-        {dialogOpen && dialogType === "create" && (
-          <Createdialog closeDialog={closeDialog} />
-        )}
-        {dialogOpen && dialogType === "update" && (
-          <Updatedialog closeDialog={closeDialog} />
-        )}
-        {dialogOpen && dialogType === "delete" && (
-          <Deletedialog closeDialog={closeDialog} />
-        )}
+        {dialogOpen && dialogType === "create" && <Createdialog closeDialog={closeDialog} />}
+        {dialogOpen && dialogType === "update" && <Updatedialog closeDialog={closeDialog} />}
+        {dialogOpen && dialogType === "delete" && <Deletedialog closeDialog={closeDialog} />}
 
         <div className="mx-3">
           <table className="border-black border-solid border-2 w-full font-[700]">
             <tr className="border-black border-solid border-2 text-center text-xl md:text-2xl">
               <td className="border-black border-solid border-2">#</td>
-              <td className="border-black border-solid border-2">
-                Produktnavn
-              </td>
+              <td className="border-black border-solid border-2">Produktnavn</td>
               <td className="border-black border-solid border-2">Pris</td>
               <td className="border-black border-solid border-2">Opdater</td>
               <td className="border-black border-solid border-2">Slet</td>
@@ -54,7 +46,7 @@ export default function Admintable() {
 
             <tr className="border-black border-solid border-2 text-center">
               <td className="border-black border-solid border-2">1</td>
-              <td className="border-black border-solid border-2">Kanel</td>
+              <td className="border-black border-solid border-2">Kanelkebab</td>
               <td className="border-black border-solid border-2">10</td>
               <td
                 onClick={() => openDialog("update")}
@@ -73,9 +65,7 @@ export default function Admintable() {
 
             <tr className="border-black border-solid border-2 text-center">
               <td className="border-black border-solid border-2">2</td>
-              <td className="border-black border-solid border-2">
-                Syltede agurker
-              </td>
+              <td className="border-black border-solid border-2">Syltede agurker</td>
               <td className="border-black border-solid border-2">123</td>
               <td className="border-black border-solid border-2 hover:text-[#d4793a] cursor-pointer">
                 {editIcon}
@@ -99,9 +89,7 @@ export default function Admintable() {
 
             <tr className="border-black border-solid border-2 text-center">
               <td className="border-black border-solid border-2">4</td>
-              <td className="border-black border-solid border-2">
-                Ristede løg
-              </td>
+              <td className="border-black border-solid border-2">Ristede løg</td>
               <td className="border-black border-solid border-2">321</td>
               <td className="border-black border-solid border-2 hover:text-[#d4793a] cursor-pointer">
                 {editIcon}
