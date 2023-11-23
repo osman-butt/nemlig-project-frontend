@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 export default function Createaccountpage() {
   return (
     <>
-      <div className="h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
+      <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Header />
         <Createaccountform />
       </div>
