@@ -8,7 +8,7 @@ function Listitem({ product, addQuantity, deductQuantity }) {
           <div className="flex items-center py-2 align-middle">
             <img
               className="w-[30px] "
-              src={product.images[0].image_link}
+              src={product.images.image_link}
               alt="product-img"
             />
           </div>
