@@ -40,6 +40,12 @@ export default function Header({ basket }) {
           <>
             <Link
               className="p-4 hover:text-[#d4793a] hover:cursor-pointer"
+              to="/shop"
+            >
+              Dagligvarer
+            </Link>
+            <Link
+              className="p-4 hover:text-[#d4793a] hover:cursor-pointer"
               to="/favorites"
             >
               Favoritter
@@ -120,6 +126,11 @@ export default function Header({ basket }) {
             </>
           ) : (
             <>
+              <li className="p-4 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
+                <Link onClick={handleNav} to="/shop">
+                  Dagligvarer
+                </Link>
+              </li>
               <li className="p-4 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
                 <Link onClick={handleNav} to="/favorites">
                   Favoritter

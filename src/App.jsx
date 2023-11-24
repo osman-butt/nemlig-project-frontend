@@ -8,18 +8,19 @@ import Createaccountpage from "./pages/Createaccountpage.jsx";
 import Adminpage from "./pages/Adminpage.jsx";
 import { useEffect, useState } from "react";
 import Header from "./components/Header.jsx";
+import useLocalStorage from "./hooks/useLocalStorage.js";
 // import Formdialog from "./components/Formdialog.jsx";
 
 export default function App() {
   const [basket, setBasket] = useState([]);
 
+  const { getItem, setItem } = useLocalStorage("basket");
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("./src/basket.json");
-        const data = await response.json();
-        const dataArray = Object.values(data)[0];
-        setBasket(dataArray);
+        const basketArray = getItem() ? getItem() : setItem([]);
+        setBasket(basketArray);
       } catch (err) {
         console.log(err);
       }
@@ -38,7 +39,7 @@ export default function App() {
       ...updatedBasket[productIndex],
       quantity: updatedBasket[productIndex].quantity + 1,
     };
-
+    setItem(updatedBasket);
     setBasket(updatedBasket);
   };
 
@@ -56,7 +57,26 @@ export default function App() {
 
     updatedBasket[productIndex].quantity === 0 &&
       updatedBasket.splice(productIndex, 1);
+    setItem(updatedBasket);
+    setBasket(updatedBasket);
+  };
 
+  const addToBasket = product => {
+    const productIndex = basket.findIndex(
+      item => item.product_id === product.product_id
+    );
+    const updatedBasket = [...basket];
+    // Check if it exists in basket
+    if (productIndex > -1) {
+      updatedBasket[productIndex] = {
+        ...updatedBasket[productIndex],
+        quantity: updatedBasket[productIndex].quantity + 1,
+      };
+    } else {
+      const newItem = { ...product, quantity: 1 };
+      updatedBasket.push(newItem);
+    }
+    setItem(updatedBasket);
     setBasket(updatedBasket);
   };
 
@@ -71,7 +91,7 @@ export default function App() {
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/createaccount" element={<Createaccountpage />} />
-        <Route path="/shop" element={<Shoppage />} />
+        <Route path="/shop" element={<Shoppage addToBasket={addToBasket} />} />
         <Route path="/order" element={<Orderpage />} />
         <Route
           path="/basket"
