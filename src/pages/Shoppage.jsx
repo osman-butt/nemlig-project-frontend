@@ -8,13 +8,18 @@ import Items from "../components/Items";
 export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState("");
+  const [filter, setFilter] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch("./src/products.json");
         const data = await response.json();
-        const dataArray = Object.values(data)[0];
+        let dataArray = Object.values(data)[0];
+
+        if (filter){
+          dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)))
+        }
 
         if (sort === "asc") {
           dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
@@ -29,17 +34,21 @@ export default function Shoppage({ addToBasket }) {
       }
     };
     fetchData();
-  }, [sort]);
+  }, [sort, filter]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
+  }
+
+  function handleFilter(filterOptions){
+    setFilter(filterOptions)
   }
 
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar />
-        <Search onSort={handleSort} />
+        <Search handleSort={handleSort} handleFilter={handleFilter} />
         <Items addToBasket={addToBasket} products={products} />
       </div>
       <Footer />

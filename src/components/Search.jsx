@@ -1,4 +1,4 @@
-export default function Search({ onSort }) {
+export default function Search({ handleSort, handleFilter }) {
   return (
     <div className="max-w-[1240px] flex flex-row justify-center m-auto mt-4 font-general align-middle gap-10">
       <form className="flex flex-row justify-center gap-4">
@@ -13,15 +13,22 @@ export default function Search({ onSort }) {
       </form>
       <div className="hidden gap-4 md:flex">
         <select
-          onChange={e => onSort(e.target.value)}
+          onChange={e => handleSort(e.target.value)}
           className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]"
         >
-          <option value="">Sorter efter</option>
+          <option value="">Sorter efter:</option>
           <option value="asc">Alfabetisk</option>
           <option value=">">Pris (lav-høj)</option>
           <option value="<">Pris (høj-lav)</option>
         </select>
-        <button className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]">Kategori</button>
+        <select 
+        onChange={e => handleFilter(e.target.value)}
+        className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]"
+        >
+          <option value="">Filtrer efter</option>
+          <option value="Ikke tilsat sukker">Sukkerfri</option>
+          <option value="andet">Andet</option>
+          </select>
       </div>
     </div>
   );
