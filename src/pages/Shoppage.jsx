@@ -25,8 +25,6 @@ export default function Shoppage({ addToBasket }) {
         } else if (sort === "<") {
           dataArray.sort((a, b) => b.prices[0].price - a.prices[0].price);
         }
-        console.log(dataArray);
-
         setProducts(dataArray);
       } catch (err) {
         console.log(err);
