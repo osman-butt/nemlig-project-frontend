@@ -1,14 +1,16 @@
 import {useEffect, useState} from "react";
 import image from "../assets/hero.jpg";
+import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
 
 export default function Shoppage() {
-const [items, setItems] = useState([]);
+const [item, setItem] = useState([]);
 const [sort, setSort] = useState("");
-const [category, setCategory] = useState("");
+
+
 
 useEffect(() => {
   const fetchData = async () => {
@@ -16,21 +18,26 @@ useEffect(() => {
       const response = await fetch("./src/products-data.json");
       const data = await response.json();
       const dataArray = Object.values(data)[0];
-      setItems(dataArray);
+
+      if (sort === "asc"){
+        dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
+      } else if (sort === "desc") {
+        dataArray.sort((a, b) => b.product_name.localeCompare(a.product_name));
+      }
+
+      setItem(dataArray);
     } catch (err) {
       console.log(err);
     }
   };
   fetchData();
-}, []);
+}, [sort]);
   
-function handleSort(sortOption){
-  console.log(sortOption);
+
+function handleSort(sortOptions){
+  setSort(sortOptions);
 }
 
-function handleCategory(categoryOption){
-  console.log(categoryOption);
-}
 
   return (
     <>
@@ -38,9 +45,10 @@ function handleCategory(categoryOption){
         className="min-h-screen bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${image})` }}
       >
+
         <Navbar />
-        <Search onSort={handleSort} onCategory={handleCategory} />
-        <Items data={items} />
+        <Search onSort={handleSort}  />
+        <Items data={item} />
       </div>
       <Footer />
     </>
