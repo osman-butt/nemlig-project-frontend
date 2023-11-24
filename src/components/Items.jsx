@@ -1,22 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Card from "./Card";
 
-export default function Items() {
-  const [data, setData] = useState([]);
+export default function Items({ data }) {
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("./src/test-data.json");
-        const data = await response.json();
-        const dataArray = Object.values(data)[0];
-        setData(dataArray);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
+
+
 
   return (
     <div className="max-w-[1240px] mx-auto">

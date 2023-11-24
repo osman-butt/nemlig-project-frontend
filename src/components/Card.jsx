@@ -13,7 +13,7 @@ export default function Card({ data }) {
       <img className="translate-x-[74px]" alt="Star" src={star} />
       <img
         className="object-contain w-[150px] h-[150px]"
-        src={data.images[0].image_link}
+       src={data.images.image_link}
         alt="productImage"
       />
       <p className="font-medium text-center">{data.product_name}</p>
