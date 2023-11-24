@@ -5,11 +5,7 @@ export default function Card({ data, addToBasket }) {
   return (
     <article className="bg-white rounded flex flex-col items-center gap-2 p-4 w-[200px] justify-self-center">
       <img className="translate-x-[74px]" alt="Star" src={star} />
-      <img
-        className="object-contain w-[150px] h-[150px]"
-        src={data.images.image_link}
-        alt="productImage"
-      />
+      <img className="object-contain w-[150px] h-[150px]" src={data.images.image_link} alt="productImage" />
       <p className="font-medium text-center">{data.product_name}</p>
       <p className="font-light text-[14px]">{data.product_underline}</p>
       <p className="font-bold text-[18px] mt-auto">
