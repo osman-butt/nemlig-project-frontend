@@ -5,7 +5,7 @@ import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
 
-export default function Shoppage() {
+export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState("");
 
@@ -39,7 +39,7 @@ export default function Shoppage() {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar />
         <Search onSort={handleSort} />
-        <Items products={products} />
+        <Items addToBasket={addToBasket} products={products} />
       </div>
       <Footer />
     </>
