@@ -4,7 +4,7 @@ import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
 
-export default function Shoppage() {
+export default function Shoppage({ addToBasket }) {
   return (
     <>
       <div
@@ -13,7 +13,7 @@ export default function Shoppage() {
       >
         <Navbar />
         <Search />
-        <Items />
+        <Items addToBasket={addToBasket} />
       </div>
       <Footer />
     </>
