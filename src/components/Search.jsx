@@ -17,8 +17,10 @@ export default function Search({ onSort }) {
           className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]"
         >
           <option value="">Sorter efter</option>
-          <option value="asc">Navn: A-Å</option>
-          <option value="desc">Navn: Å-A</option>
+          <option value="asc">A-Å</option>
+          <option value="desc">Å-A</option>
+          <option value=">">Billigst</option>
+          <option value="<">Dyrest</option>
         </select>
         <button className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]">Kategori</button>
       </div>

@@ -20,7 +20,12 @@ export default function Shoppage({ addToBasket }) {
           dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
         } else if (sort === "desc") {
           dataArray.sort((a, b) => b.product_name.localeCompare(a.product_name));
+        } else if (sort === ">") {
+          dataArray.sort((a, b) => a.prices[0].price - b.prices[0].price);
+        } else if (sort === "<") {
+          dataArray.sort((a, b) => b.prices[0].price - a.prices[0].price);
         }
+        console.log(dataArray);
 
         setProducts(dataArray);
       } catch (err) {
