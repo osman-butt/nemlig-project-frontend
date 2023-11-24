@@ -1,4 +1,6 @@
-export default function Search() {
+export default function Search({onSort }) {
+
+
   return (
     <div className="max-w-[1240px] flex flex-row justify-center m-auto mt-4 font-general align-middle gap-10">
       <form className="flex flex-row justify-center gap-4">
@@ -12,7 +14,11 @@ export default function Search() {
         </button>
       </form>
       <div className="hidden gap-4 md:flex">
-        <button className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]">Sortér</button>
+        <select onChange={(e) => onSort(e.target.value)} className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]">
+          <option value="">Sorter efter</option>
+          <option value="asc">A-Å</option>
+          <option value="desc">Å-A</option>
+        </select>
         <button className="h-[53px] px-4 bg-white rounded font-normal text-[20px] text-black  hover:bg-[#ecbc9a]">Kategori</button>
       </div>
     </div>
