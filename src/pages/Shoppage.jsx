@@ -12,7 +12,7 @@ export default function Shoppage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("./src/products-data.json");
+        const response = await fetch("./src/products.json");
         const data = await response.json();
         const dataArray = Object.values(data)[0];
 
