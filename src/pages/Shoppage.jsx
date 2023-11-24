@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import image from "../assets/hero.jpg";
-import Header from "../components/Header";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
@@ -39,7 +38,6 @@ function handleCategory(categoryOption){
         className="min-h-screen bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${image})` }}
       >
-        <Header />
         <Navbar />
         <Search onSort={handleSort} onCategory={handleCategory} />
         <Items data={items} />
