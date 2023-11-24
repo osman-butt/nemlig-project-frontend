@@ -1,7 +1,7 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import Table from "./Table";
 import Createdialog from "./Createdialog";
-
 
 export default function Items() {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -11,7 +11,7 @@ export default function Items() {
   const closeDialog = () => {
     setDialogOpen(false);
   };
-  
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,14 +29,19 @@ export default function Items() {
   }, []);
 
   return (
-    <div>
+    <div className="mb-20 mx-24">
       {dialogOpen && <Createdialog closeDialog={closeDialog} />}
 
-       <button onClick={openDialog} className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md my-4 ml-3 py-2 text-black font-medium text-xl">
+      <button
+        onClick={openDialog}
+        className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md my-4 ml-3 py-2 text-black font-medium text-xl"
+      >
         Tilføj
-    </button>
+      </button>
       {data.map((item) => (
-        <Table key={item.product_id} data={item} />
+        <React.Fragment key={item.product_id}>
+          <Table data={item} />
+        </React.Fragment>
       ))}
     </div>
   );
