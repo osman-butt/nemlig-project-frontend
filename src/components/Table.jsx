@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { AiOutlineEdit, AiOutlineClose } from "react-icons/ai";
-import Createdialog from "./Createdialog";
 import Updatedialog from "./Updatedialog";
 import Deletedialog from "./Deletedialog";
 
@@ -19,18 +18,13 @@ export default function Table(data) {
   const closeDialog = () => {
     setDialogOpen(false);
   };
-  {
-    dialogOpen && dialogType === "create" && <Createdialog closeDialog={closeDialog} />;
-  }
-  {
-    dialogOpen && dialogType === "update" && <Updatedialog closeDialog={closeDialog} />;
-  }
-  {
-    dialogOpen && dialogType === "delete" && <Deletedialog closeDialog={closeDialog} />;
-  }
+
 
   return (
     <>
+    {dialogOpen && dialogType === "update" && <Updatedialog closeDialog={closeDialog} />}
+    {dialogOpen && dialogType === "delete" && <Deletedialog closeDialog={closeDialog} />}
+    
       <div className="mx-3">
         <table className="border-black border-solid border-2 w-full font-[700]">
           <tr className="border-black border-solid border-2 text-center">
@@ -56,3 +50,5 @@ export default function Table(data) {
     </>
   );
 }
+
+
