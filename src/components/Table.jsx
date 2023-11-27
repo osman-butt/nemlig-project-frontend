@@ -28,36 +28,34 @@ export default function Table({ data }) {
         <Deletedialog closeDialog={closeDialog} />
       )}
 
-      <div className="mx-20">
-        <table className="border-black border-solid border-2 w-full font-[700] bg-[#e8e3d8]">
-          <tbody>
-            <tr className="border-black border-solid border-2 text-center">
-              <td className="border-black border-solid border-2 p-2 w-1/5">
-                {data.product_id}
-              </td>
-              <td className="border-black border-solid border-2 p-2 w-2/5">
-                {data.product_name}
-              </td>
-              <td className="border-black border-solid border-2 p-2 w-1/5">
-                {data.prices[0].price}
-              </td>
-              <td
-                onClick={() => openDialog("update")}
-                className="border-black border-solid border-2 p-2 w-1/5 hover:text-[#d4793a] cursor-pointer text-center align-middle"
-              >
-                {editIcon}
-              </td>
+      <table className="border-black border-solid border-2 w-full font-[700] bg-[#e8e3d8]">
+        <tbody>
+          <tr className="border-black border-solid border-2 text-center">
+            <td className="border-black border-solid border-2 p-2 w-1/5">
+              {data.product_id}
+            </td>
+            <td className="border-black border-solid border-2 p-2 w-2/5">
+              {data.product_name}
+            </td>
+            <td className="border-black border-solid border-2 p-2 w-1/5">
+              {data.prices[0].price}
+            </td>
+            <td
+              onClick={() => openDialog("update")}
+              className="border-black border-solid border-2 p-2 w-1/5 hover:text-[#d4793a] cursor-pointer text-center align-middle"
+            >
+              {editIcon}
+            </td>
 
-              <td
-                onClick={() => openDialog("delete")}
-                className="border-black border-solid border-2 p-2 w-1/5 hover:text-[#d4793a] cursor-pointer"
-              >
-                {deleteIcon}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <td
+              onClick={() => openDialog("delete")}
+              className="border-black border-solid border-2 p-2 w-1/5 hover:text-[#d4793a] cursor-pointer"
+            >
+              {deleteIcon}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </>
   );
 }
