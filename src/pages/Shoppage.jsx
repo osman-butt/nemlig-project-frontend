@@ -21,6 +21,7 @@ export default function Shoppage({ addToBasket }) {
           dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)))
         }
 
+        // WE NEED TO IMPLEMENT SERVER-SIDE SORTING INSTEAD, AS IT ONLY SORTS THE CURRENT PAGE
         if (sort === "asc") {
           dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
         } else if (sort === ">") {
