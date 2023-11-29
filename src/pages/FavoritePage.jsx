@@ -13,22 +13,22 @@ export default function FavoritePage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("./src/favorites.json");
-        const data = await response.json();
-        let dataArray = Object.values(data)[0];
+        const response = await fetch("http://localhost:3000/favorites");
+        let data = await response.json();
+        console.log(data);
 
         if (filter) {
-          dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)));
+          data = data.filter((product) => product.labels.some((label) => label.label_name.includes(filter)));
         }
 
         if (sort === "asc") {
-          dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
+          data.sort((a, b) => a.product_name.localeCompare(b.product_name));
         } else if (sort === ">") {
-          dataArray.sort((a, b) => a.prices[0].price - b.prices[0].price);
+          data.sort((a, b) => a.prices[0].price - b.prices[0].price);
         } else if (sort === "<") {
-          dataArray.sort((a, b) => b.prices[0].price - a.prices[0].price);
+          data.sort((a, b) => b.prices[0].price - a.prices[0].price);
         }
-        setProducts(dataArray);
+        setProducts(data);
       } catch (err) {
         console.log(err);
       }
