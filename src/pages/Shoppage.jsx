@@ -24,9 +24,9 @@ export default function Shoppage({ addToBasket }) {
         if (sort === "asc") {
           dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
         } else if (sort === ">") {
-          dataArray.sort((a, b) => a.prices[0].price - b.prices[0].price);
+          dataArray.sort((a, b) => (a.prices && a.prices[0] ? a.prices[0].price : 0) - (b.prices && b.prices[0] ? b.prices[0].price : 0));
         } else if (sort === "<") {
-          dataArray.sort((a, b) => b.prices[0].price - a.prices[0].price);
+          dataArray.sort((a, b) => (b.prices && b.prices[0] ? b.prices[0].price : 0) - (a.prices && a.prices[0] ? a.prices[0].price : 0));
         }
         setProducts(dataArray);
       } catch (err) {
