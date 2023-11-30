@@ -25,7 +25,9 @@ export default function Table({ data }) {
         <Updatedialog 
         closeDialog={closeDialog}
         productName={data.product_name}
-        productPrice={data.prices[0].price}/>
+        productPrice={data.prices[0].price}
+        productImage={data.images[0].image_link}
+        />
       )}
       {dialogOpen && dialogType === "delete" && (
         <Deletedialog closeDialog={closeDialog} />
