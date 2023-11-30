@@ -22,7 +22,10 @@ export default function Table({ data }) {
   return (
     <>
       {dialogOpen && dialogType === "update" && (
-        <Updatedialog closeDialog={closeDialog} />
+        <Updatedialog 
+        closeDialog={closeDialog}
+        productName={data.product_name}
+        productPrice={data.prices[0].price}/>
       )}
       {dialogOpen && dialogType === "delete" && (
         <Deletedialog closeDialog={closeDialog} />

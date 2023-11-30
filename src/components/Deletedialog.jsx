@@ -1,6 +1,6 @@
 export default function Deletedialog({ closeDialog }) {
   return (
-    <div>
+    <div className="fixed inset-0 pt-[50%] sm:pt-[40%] md:pt-[20%] items-center justify-center z-50 bg-black bg-opacity-50">
       <dialog open className="px-5">
         <h1 className="text-center text-2xl font-bold py-5">
           Er du sikker på, <br /> at du vil slette denne vare?
