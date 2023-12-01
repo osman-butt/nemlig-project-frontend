@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import axios from "axios";
 import image from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
@@ -7,48 +8,48 @@ import Footer from "../components/Footer";
 
 export default function FavoritePage({ addToBasket }) {
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
-  const [filter, setFilter] = useState("");
+  const [label, setLabel] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/favorites");
-        let data = await response.json();
-        console.log(data);
+        const baseUrl = "http://localhost:3000/favorites";
+        const url = searchQuery ? `${baseUrl}/search` : baseUrl;
 
-        if (filter) {
-          data = data.filter((product) => product.labels.some((label) => label.label_name.includes(filter)));
-        }
-
-        if (sort === "asc") {
-          data.sort((a, b) => a.product_name.localeCompare(b.product_name));
-        } else if (sort === ">") {
-          data.sort((a, b) => a.prices[0].price - b.prices[0].price);
-        } else if (sort === "<") {
-          data.sort((a, b) => b.prices[0].price - a.prices[0].price);
-        }
-        setProducts(data);
+        const response = await axios.get(url, {
+          params: {
+            search: searchQuery,
+            sort: sort,
+            label: label,
+          },
+        });
+        setProducts(response.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [sort, filter]);
+  }, [sort, label, searchQuery]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
   }
 
   function handleFilter(filterOptions) {
-    setFilter(filterOptions);
+    setLabel(filterOptions);
+  }
+
+  function handleSearch(searchQuery) {
+    setSearchQuery(searchQuery);
   }
 
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar />
-        <Search handleSort={handleSort} handleFilter={handleFilter} />
+        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
         <Items addToBasket={addToBasket} products={products} />
       </div>
       <Footer />

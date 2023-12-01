@@ -23,10 +23,9 @@ export default function Shoppage({ addToBasket }) {
             search: searchQuery,
             sort: sort,
             label: label,
-          }
+          },
         });
         let dataArray = Object.values(response.data)[0];
-        console.log(response)
         setProducts(dataArray);
       } catch (err) {
         console.log(err);
@@ -39,8 +38,8 @@ export default function Shoppage({ addToBasket }) {
     setSort(sortOptions);
   }
 
-  function handleFilter(filterOptions){
-    setLabel(filterOptions)
+  function handleFilter(filterOptions) {
+    setLabel(filterOptions);
   }
 
   function handleSearch(searchQuery) {
