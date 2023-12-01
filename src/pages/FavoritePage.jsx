@@ -25,7 +25,7 @@ export default function FavoritePage({ addToBasket }) {
             label: label,
           },
         });
-        setProducts(response.data);
+        setProducts(response.data.data);
       } catch (err) {
         console.log(err);
       }

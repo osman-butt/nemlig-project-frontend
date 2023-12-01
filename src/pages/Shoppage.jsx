@@ -25,8 +25,8 @@ export default function Shoppage({ addToBasket }) {
             label: label,
           },
         });
-        let dataArray = Object.values(response.data)[0];
-        setProducts(dataArray);
+        //let dataArray = Object.values(response.data)[0];
+        setProducts(response.data.data);
       } catch (err) {
         console.log(err);
       }
