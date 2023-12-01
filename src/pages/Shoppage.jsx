@@ -5,12 +5,15 @@ import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
+import Pagination from "../components/Pagination";
 
 export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
   const [label, setLabel] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,16 +26,20 @@ export default function Shoppage({ addToBasket }) {
             search: searchQuery,
             sort: sort,
             label: label,
+            page: page,
           },
         });
-        //let dataArray = Object.values(response.data)[0];
         setProducts(response.data.data);
+        if (response.data.meta){
+          setTotalPages(response.data.meta.pagination.last_page)
+        }
+
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [sort, label, searchQuery]);
+  }, [sort, label, searchQuery, page]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -52,6 +59,7 @@ export default function Shoppage({ addToBasket }) {
         <Navbar />
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
         <Items addToBasket={addToBasket} products={products} />
+        {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
     </>
