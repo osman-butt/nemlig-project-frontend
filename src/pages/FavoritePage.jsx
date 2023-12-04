@@ -15,7 +15,7 @@ export default function FavoritePage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = "http://localhost:3000/favorites";
+        const baseUrl = "http://localhost:3000/api/v1/favorites";
         const url = searchQuery ? `${baseUrl}/search` : baseUrl;
 
         const response = await axios.get(url, {

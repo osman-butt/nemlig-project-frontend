@@ -18,7 +18,7 @@ export default function Shoppage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = "http://localhost:3000/products";
+        const baseUrl = "http://localhost:3000/api/v1/products";
         const url = searchQuery ? `${baseUrl}/search` : baseUrl;
 
         const response = await axios.get(url, {
@@ -30,10 +30,9 @@ export default function Shoppage({ addToBasket }) {
           },
         });
         setProducts(response.data.data);
-        if (response.data.meta){
-          setTotalPages(response.data.meta.pagination.last_page)
+        if (response.data.meta) {
+          setTotalPages(response.data.meta.pagination.last_page);
         }
-
       } catch (err) {
         console.log(err);
       }
