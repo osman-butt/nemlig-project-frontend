@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../api/axios.js";
 import image from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
@@ -19,8 +19,7 @@ export default function Shoppage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = "http://localhost:3000/api/v1/products";
-        const url = searchQuery ? `${baseUrl}/search` : baseUrl;
+        const url = searchQuery ? "/products/search" : "/products";
 
         const response = await axios.get(url, {
           params: {
