@@ -11,6 +11,7 @@ export default function FavoritePage({ addToBasket }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
   const [label, setLabel] = useState("");
+  const [category, setCategory] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,15 +24,17 @@ export default function FavoritePage({ addToBasket }) {
             search: searchQuery,
             sort: sort,
             label: label,
+            category: category,
           },
         });
         setProducts(response.data.data);
+        console.log(response.data.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [sort, label, searchQuery]);
+  }, [sort, label, searchQuery, category]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -48,7 +51,7 @@ export default function FavoritePage({ addToBasket }) {
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-        <Navbar />
+        <Navbar setCategory={setCategory} />
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
         <Items addToBasket={addToBasket} products={products} />
       </div>
