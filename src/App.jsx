@@ -30,8 +30,8 @@ export default function App() {
   }, []);
 
   // Function to add quantity
-  const addQuantity = (product_id) => {
-    const productIndex = basket.findIndex((item) => item.product_id === product_id);
+  const addQuantity = product_id => {
+    const productIndex = basket.findIndex(item => item.product_id === product_id);
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -43,8 +43,8 @@ export default function App() {
   };
 
   // Function to deduct quantity
-  const deductQuantity = (product_id) => {
-    const productIndex = basket.findIndex((item) => item.product_id === product_id);
+  const deductQuantity = product_id => {
+    const productIndex = basket.findIndex(item => item.product_id === product_id);
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -57,8 +57,8 @@ export default function App() {
     setBasket(updatedBasket);
   };
 
-  const addToBasket = (product) => {
-    const productIndex = basket.findIndex((item) => item.product_id === product.product_id);
+  const addToBasket = product => {
+    const productIndex = basket.findIndex(item => item.product_id === product.product_id);
     const updatedBasket = [...basket];
     // Check if it exists in basket
     if (productIndex > -1) {
@@ -83,12 +83,7 @@ export default function App() {
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage addToBasket={addToBasket} />} />
         <Route path="/order" element={<Orderpage />} />
-        <Route
-          path="/basket"
-          element={
-            <BasketPage basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />
-          }
-        />
+        <Route path="/basket" element={<BasketPage basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
         <Route path="/favorites" element={<FavoritePage addToBasket={addToBasket} />} />
