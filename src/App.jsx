@@ -11,6 +11,7 @@ import Header from "./components/Header.jsx";
 import useLocalStorage from "./hooks/useLocalStorage.js";
 // import Formdialog from "./components/Formdialog.jsx";
 import FavoritePage from "./pages/FavoritePage.jsx";
+import NotFoundpage from "./pages/NotFoundpage.jsx";
 
 export default function App() {
   const [basket, setBasket] = useState([]);
@@ -31,7 +32,9 @@ export default function App() {
 
   // Function to add quantity
   const addQuantity = product_id => {
-    const productIndex = basket.findIndex(item => item.product_id === product_id);
+    const productIndex = basket.findIndex(
+      item => item.product_id === product_id
+    );
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -44,7 +47,9 @@ export default function App() {
 
   // Function to deduct quantity
   const deductQuantity = product_id => {
-    const productIndex = basket.findIndex(item => item.product_id === product_id);
+    const productIndex = basket.findIndex(
+      item => item.product_id === product_id
+    );
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -52,13 +57,16 @@ export default function App() {
       quantity: updatedBasket[productIndex].quantity - 1,
     };
 
-    updatedBasket[productIndex].quantity === 0 && updatedBasket.splice(productIndex, 1);
+    updatedBasket[productIndex].quantity === 0 &&
+      updatedBasket.splice(productIndex, 1);
     setItem(updatedBasket);
     setBasket(updatedBasket);
   };
 
   const addToBasket = product => {
-    const productIndex = basket.findIndex(item => item.product_id === product.product_id);
+    const productIndex = basket.findIndex(
+      item => item.product_id === product.product_id
+    );
     const updatedBasket = [...basket];
     // Check if it exists in basket
     if (productIndex > -1) {
@@ -76,17 +84,34 @@ export default function App() {
 
   return (
     <>
-      <Header basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />
+      <Header
+        basket={basket}
+        addQuantity={addQuantity}
+        deductQuantity={deductQuantity}
+      />
       <Routes>
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage addToBasket={addToBasket} />} />
         <Route path="/order" element={<Orderpage />} />
-        <Route path="/basket" element={<BasketPage basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />} />
+        <Route
+          path="/basket"
+          element={
+            <BasketPage
+              basket={basket}
+              addQuantity={addQuantity}
+              deductQuantity={deductQuantity}
+            />
+          }
+        />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
-        <Route path="/favorites" element={<FavoritePage addToBasket={addToBasket} />} />
+        <Route
+          path="/favorites"
+          element={<FavoritePage addToBasket={addToBasket} />}
+        />
+        <Route path="/*" element={<NotFoundpage />} />
       </Routes>
     </>
   );
