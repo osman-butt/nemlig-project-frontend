@@ -1,46 +1,50 @@
-import { NavLink } from "react-router-dom";
-
-export default function Navbar() {
+export default function Navbar({ setCategory }) {
   return (
     <nav>
       <div className="bg-[#58644c] w-full font-general">
         <div className="max-w-[1240px] flex flex-wrap justify-center md:justify-start m-auto z-50 py-2 align-middle">
-          <NavLink
-            to="/frost"
+          <button
+          onClick={() => setCategory("")}
+          className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+          >
+            Alle
+          </button>
+          <button
+            onClick={() => setCategory("frost")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
           >
             Frost
-          </NavLink>
-          <NavLink
-            to="/mejeri"
+          </button>
+          <button
+            onClick={() => setCategory("mejeri")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
           >
             Mejeri
-          </NavLink>
-          <NavLink
-            to="/kød"
+          </button>
+          <button
+            onClick={() => setCategory("kød")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
           >
             Kød
-          </NavLink>
-          <NavLink
-            to="/brød"
+          </button>
+          <button
+            onClick={() => setCategory("brød")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
           >
             Brød
-          </NavLink>
-          <NavLink
-            to="/kolonial"
+          </button>
+          <button
+            onClick={() => setCategory("kolonial")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
           >
             Kolonial
-          </NavLink>
-          <NavLink
-            to="/drikkevarer"
+          </button>
+          <button
+            onClick={() => setCategory("drikkevarer")}
             className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
           >
             Drikkevarer
-          </NavLink>
+          </button>
         </div>
       </div>
     </nav>

@@ -12,6 +12,7 @@ export default function Shoppage({ addToBasket }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
   const [label, setLabel] = useState("");
+  const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
@@ -27,6 +28,7 @@ export default function Shoppage({ addToBasket }) {
             sort: sort,
             label: label,
             page: page,
+            category: category,
           },
         });
         setProducts(response.data.data);
@@ -38,7 +40,7 @@ export default function Shoppage({ addToBasket }) {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, page]);
+  }, [sort, label, searchQuery, page, category]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -57,7 +59,7 @@ export default function Shoppage({ addToBasket }) {
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-        <Navbar />
+        <Navbar setCategory={setCategory} />
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
         <Items addToBasket={addToBasket} products={products} />
         {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
