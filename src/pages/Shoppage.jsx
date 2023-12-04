@@ -42,10 +42,12 @@ export default function Shoppage({ addToBasket }) {
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
+    // setPage(1);
   }
 
   function handleFilter(filterOptions) {
     setLabel(filterOptions);
+    setPage(1);
   }
 
   function handleSearch(searchQuery) {

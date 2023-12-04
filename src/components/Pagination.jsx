@@ -1,15 +1,18 @@
 export default function Pagination({ page, totalPages, setPage }){
+
+  const buttonStyle = "h-[30px] px-4 bg-white font-normal text-black lg:text-[20px] md:text-[20px] sm:text-[15px] hover:bg-[#ecbc9a]"
+
     return (
-      <div>
-        <button onClick={() => setPage(1)}>First page</button>
-        <button onClick={() => setPage(prevPage => Math.max(prevPage - 1))} disabled={page === 1}>
+      <div className="m-auto flex flex-row justify-center align-middle gap-2 p-2">
+        <button className={buttonStyle} onClick={() => setPage(1)}>First page</button>
+        <button className={buttonStyle} onClick={() => setPage(prevPage => prevPage - 1)} disabled={page === 1}>
           Previous
         </button>
-        <span>Page {page} of {totalPages}</span>
-        <button onClick={() => setPage(prevPage => Math.min(prevPage + 1))} disabled={page === totalPages}>
+        <span className="h-[30px] px-4 bg-white font-normal text-black lg:text-[20px] md:text-[20px] sm:text-[15px]">Page {page} of {totalPages}</span>
+        <button className={buttonStyle} onClick={() => setPage(prevPage => prevPage + 1)} disabled={page === totalPages}>
           Next
         </button>
-        <button onClick={() => setPage(totalPages)}>Last page</button>
+        <button className={buttonStyle} onClick={() => setPage(totalPages)}>Last page</button>
       </div>
     );
   }
