@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import usePrivateAxios from "../hooks/usePrivateAxios";
 import image from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
@@ -13,13 +13,13 @@ export default function FavoritePage({ addToBasket }) {
   const [label, setLabel] = useState("");
   const [category, setCategory] = useState("");
 
+  const privateAxios = usePrivateAxios();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const baseUrl = "http://localhost:3000/api/v1/favorites";
-        const url = searchQuery ? `${baseUrl}/search` : baseUrl;
-
-        const response = await axios.get(url, {
+        const url = searchQuery ? "/favorites/search" : "/favorites";
+        const response = await privateAxios.get(url, {
           params: {
             search: searchQuery,
             sort: sort,
@@ -34,7 +34,7 @@ export default function FavoritePage({ addToBasket }) {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, category]);
+  }, [sort, label, searchQuery, category, privateAxios]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
