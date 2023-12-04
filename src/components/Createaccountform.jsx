@@ -1,48 +1,128 @@
 import { useNavigate } from "react-router-dom";
-import InputField from "./InputField";
+// import InputField from "./InputField";
+import axios from "../api/axios";
+import FormInput from "./FormInput";
+import { useState } from "react";
 
 export default function Createaccountform() {
   const navigate = useNavigate();
 
+  const [name, setName] = useState("");
+  const [street, setStreet] = useState("");
+  const [zipCode, setZipCode] = useState();
+  const [city, setCity] = useState("");
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        "/register",
+        JSON.stringify({
+          user_email: email,
+          user_password: password,
+          customer: {
+            customer_name: name,
+            addresses: {
+              street: street,
+              city: city,
+              zip_code: Number(zipCode),
+              country: "Danmark",
+            },
+          },
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          // withCredentials: true,
+        }
+      );
+      navigate("/login");
+    } catch (error) {
+      setError(true);
+      setErrorMessage(error.response?.data.message);
+    }
+  };
+
   return (
-    <div className="flex flex-col justify-center w-full max-w-lg py-8 m-auto text-black">
+    <div className="w-full max-w-lg pt-8 m-auto">
       <div className="bg-[#e8e3d8] rounded">
-        <h2 className="py-3 text-2xl font-medium text-center md:text-2xl">
+        <h2 className="py-3 text-2xl font-medium text-center pt-6">
           Opret bruger
         </h2>
-
-        <form className="grid justify-around w-full gap-y-2">
-          <InputField
-            label="Navn:"
-            type="text"
-            placeholder="Skriv dit fulde navn her"
-          />
-          <InputField
-            label="Adresse:"
-            type="text"
-            placeholder="Skriv din adresse her"
-          />
-          <InputField
-            label="Postnummer:"
-            type="text"
-            placeholder="Postnummer"
-          />
-          <InputField label="By:" type="text" placeholder="By" />
-          <InputField label="E-mail:" type="email" placeholder="E-mail" />
-          <InputField
-            label="Password:"
-            type="password"
-            placeholder="Password"
-          />
-        </form>
-
-        <div className="flex items-center justify-between px-3 m-6">
-          <button
-            onClick={() => navigate("/createaccount")}
-            className="bg-[#58644C] hover:bg-[#ecbc9a] w-full rounded-md py-3 font-medium"
-          >
-            Opret bruger
-          </button>
+        <div className="w-full max-w-xs m-auto mt-4">
+          <form className="" onSubmit={handleSubmit}>
+            <div className="mb-2">
+              <FormInput
+                label="Navn"
+                type="text"
+                placeholder="Navn"
+                value={name}
+                onChange={setName}
+              />
+            </div>
+            <div className="mb-2">
+              <FormInput
+                label="Adresse"
+                type="text"
+                placeholder="Adresse"
+                value={street}
+                onChange={setStreet}
+              />
+            </div>
+            <div className="mb-2">
+              <FormInput
+                label="Postnummer"
+                type="number"
+                placeholder="Postnummer"
+                value={zipCode}
+                onChange={setZipCode}
+              />
+            </div>
+            <div className="mb-2">
+              <FormInput
+                label="By"
+                type="text"
+                placeholder="By"
+                value={city}
+                onChange={setCity}
+              />
+            </div>
+            <div className="mb-2">
+              <FormInput
+                label="E-mail"
+                type="mail"
+                placeholder="E-mail"
+                value={email}
+                onChange={setEmail}
+              />
+            </div>
+            <div className="mb-2">
+              <FormInput
+                label="Password"
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={setPassword}
+              />
+            </div>
+            {error ? (
+              <p className="pb-0 text-center text-red-600">{errorMessage}</p>
+            ) : (
+              <p></p>
+            )}
+            <div className="flex items-center py-4">
+              <button
+                type="submit"
+                className="w-full px-4 py-3 font-bold text-white bg-[#58644C] rounded hover:bg-[#798072] focus:outline-none focus:shadow-outline"
+              >
+                Opret bruger
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
