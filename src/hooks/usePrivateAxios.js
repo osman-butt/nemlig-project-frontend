@@ -5,6 +5,19 @@ import { axiosPrivate } from "../api/axios";
 
 // See https://www.bezkoder.com/axios-interceptors-refresh-token/
 
+// Purpose:
+// Abstracts authentication logic. If the accessToken is invalid
+// the hook will make a new request to "backend-url/refresh"
+// in order to obtain a new accessToken and set it to the
+// global state (this is implemented in useRefreshToken)
+// If the refreshToken is invalid, and error is returned
+
+// Usage:
+// import usePrivateAxios from "..."
+// Initialize: const privateAxios = usePrivateAxios();
+// Inside useEffect Hook:
+// const response = await privateAxios.get(url);
+
 function usePrivateAxios() {
   const refreshToken = useRefreshToken();
   const { auth } = useAuth();
