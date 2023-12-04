@@ -12,11 +12,14 @@ function usePrivateAxios() {
   useEffect(() => {
     const requestInterceptor = axiosPrivate.interceptors.request.use(
       config => {
-        // Do something before request is sent
+        // Before the request is sent, add the auth header
+        if (!config.headers["Authorization"]) {
+          config.headers["Authorization"] = `Bearer ${auth}`;
+        }
         return config;
       },
       error => {
-        // Do something with request error
+        // If error return the error
         return Promise.reject(error);
       }
     );
@@ -24,12 +27,23 @@ function usePrivateAxios() {
     const responseInterceptor = axiosPrivate.interceptors.response.use(
       response => {
         // Any status code from range of 2xx
-        // Do something with response data
         return response;
       },
-      error => {
+      async error => {
         // Any status codes outside range of 2xx
         // Do something with response error
+        const prevRequest = error?.config;
+        if (error?.response?.status === 403 && !prevRequest?.sent) {
+          // we dont want to end in a inifinte loop to the /refresh route
+          // So we set the prevRequest=true, to only try once
+          prevRequest.sent = true;
+          // Get new accessToken
+          const accessToken = await refreshToken();
+          // Add the new accessToken to the header
+          prevRequest.headers["Authorization"] = `Bearer ${accessToken}`;
+          // return axios instance
+          return axiosPrivate(prevRequest);
+        }
         return Promise.reject(error);
       }
     );
@@ -39,7 +53,8 @@ function usePrivateAxios() {
       axiosPrivate.interceptors.request.eject(requestInterceptor);
       axiosPrivate.interceptors.response.eject(responseInterceptor);
     };
-  });
+  }, [auth, refreshToken]);
+  return axiosPrivate;
 }
 
 export default usePrivateAxios;
