@@ -1,46 +1,53 @@
-import { NavLink } from "react-router-dom";
+export default function Navbar({ setCategory, setPage }) {
 
-export default function Navbar() {
+  const buttonStyle = "text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+
   return (
     <nav>
       <div className="bg-[#58644c] w-full font-general">
         <div className="max-w-[1240px] flex flex-wrap justify-center md:justify-start m-auto z-50 py-2 align-middle">
-          <NavLink
-            to="/frost"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+          <button
+          onClick={() => setCategory("")}
+          className={buttonStyle}
+          >
+            Alle
+          </button>
+          <button
+            onClick={() => {setCategory("frost"); setPage(1)}}
+            className={buttonStyle}
           >
             Frost
-          </NavLink>
-          <NavLink
-            to="/mejeri"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+          </button>
+          <button
+            onClick={() => {setCategory("mejeri"); setPage(1)}}
+            className={buttonStyle}
           >
             Mejeri
-          </NavLink>
-          <NavLink
-            to="/kød"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px] hover:text-[#d4793a] hover:cursor-pointer"
+          </button>
+          <button
+            onClick={() => {setCategory("kød"); setPage(1)}}
+            className={buttonStyle}
           >
             Kød
-          </NavLink>
-          <NavLink
-            to="/brød"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+          </button>
+          <button
+            onClick={() => {setCategory("brød"); setPage(1)}}
+            className={buttonStyle}
           >
             Brød
-          </NavLink>
-          <NavLink
-            to="/kolonial"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+          </button>
+          <button
+            onClick={() => {setCategory("kolonial"); setPage(1)}}
+            className={buttonStyle}
           >
             Kolonial
-          </NavLink>
-          <NavLink
-            to="/drikkevarer"
-            className="text-base px-4 md:text-lg lg:py-4 lg:text-xl font-normal text-white text-[18px]  hover:text-[#d4793a] hover:cursor-pointer"
+          </button>
+          <button
+            onClick={() => {setCategory("drikkevarer"); setPage(1)}}
+            className={buttonStyle}
           >
             Drikkevarer
-          </NavLink>
+          </button>
         </div>
       </div>
     </nav>
