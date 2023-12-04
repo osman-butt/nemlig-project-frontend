@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import image from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
-import Footer from "../components/Footer";
 import Items from "../components/Items";
+import Footer from "../components/Footer";
 
-export default function Shoppage({ addToBasket }) {
+export default function FavoritePage({ addToBasket }) {
   const [products, setProducts] = useState([]);
   const [sort, setSort] = useState("");
   const [filter, setFilter] = useState("");
@@ -13,12 +13,12 @@ export default function Shoppage({ addToBasket }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("./src/products.json");
+        const response = await fetch("./src/favorites.json");
         const data = await response.json();
         let dataArray = Object.values(data)[0];
 
-        if (filter){
-          dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)))
+        if (filter) {
+          dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)));
         }
 
         if (sort === "asc") {
@@ -40,8 +40,8 @@ export default function Shoppage({ addToBasket }) {
     setSort(sortOptions);
   }
 
-  function handleFilter(filterOptions){
-    setFilter(filterOptions)
+  function handleFilter(filterOptions) {
+    setFilter(filterOptions);
   }
 
   return (
