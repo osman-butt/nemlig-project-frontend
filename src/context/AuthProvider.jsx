@@ -7,10 +7,10 @@ function AuthProvider({ children }) {
   // This holds the access token
   const [auth, setAuth] = useState();
   // This holds the user and roles: {user: "test@mail.dk",roles:["cutomer"]}
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState();
 
   return (
-    <AuthContext.Provider value={{ auth, setAuth, user, setUser }}>
+    <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
     </AuthContext.Provider>
   );

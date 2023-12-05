@@ -10,7 +10,11 @@ function useRefreshToken() {
       withCredentials: true,
     });
     // Setting new accesstoken
-    setAuth(response.data.accessToken);
+    setAuth({
+      accessToken: response.data.accessToken,
+      user_email: response.data.user_email,
+      user_roles: response.data.user_roles,
+    });
 
     return response.data.accessToken;
   }

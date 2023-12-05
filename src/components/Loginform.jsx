@@ -33,7 +33,11 @@ export default function Loginform() {
           }
         );
         // Set global auth state
-        setAuth(response.data.accessToken);
+        setAuth({
+          accessToken: response.data.accessToken,
+          user_email: response.data.user_email,
+          user_roles: response.data.user_roles,
+        });
 
         setError(false);
         setErrorMessage("");

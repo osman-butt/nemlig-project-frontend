@@ -12,16 +12,20 @@ import useLocalStorage from "./hooks/useLocalStorage.js";
 // import Formdialog from "./components/Formdialog.jsx";
 import FavoritePage from "./pages/FavoritePage.jsx";
 import NotFoundpage from "./pages/NotFoundpage.jsx";
+import useRefreshToken from "./hooks/useRefreshToken.js";
+import useAuth from "./hooks/useAuth.js";
 
 export default function App() {
   const [basket, setBasket] = useState([]);
 
   const { getItem, setItem } = useLocalStorage("basket");
+  const refreshToken = useRefreshToken();
+  const { auth } = useAuth();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        const basketArray = getItem() ? getItem() : setItem([]);
+        const basketArray = getItem() || [];
         setBasket(basketArray);
       } catch (err) {
         console.log(err);
@@ -30,6 +34,17 @@ export default function App() {
     fetchData();
   }, []);
 
+  // Persist user when refresh
+  useEffect(() => {
+    const verifyRefreshToken = async () => {
+      try {
+        await refreshToken();
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    !auth?.accessToken && verifyRefreshToken();
+  }, []);
   // Function to add quantity
   const addQuantity = product_id => {
     const productIndex = basket.findIndex(
