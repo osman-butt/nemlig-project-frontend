@@ -34,16 +34,16 @@ export default function Table({ data }) {
       <table className="font-medium bg-[#e8e3d8]">
         <tbody>
           <tr className="text-center text-xs sm:text-lg md:text-xl">
-            <td className="border-black border-solid border-2 p-2 w-[8%]">{data.product_id}</td>
-            <td className="border-black border-solid border-2 p-2 w-[8%]">
+            <td className="border-black border-solid border-2 p-2 w-[2%]">{data.product_id}</td>
+            <td className="border-black border-solid border-2 p-2 w-[6%]">
               <img
                 className="w-[50%] mx-auto"
                 src={data.images && data.images[0] ? data.images[0].image_url : ""}
                 alt=""
               />
             </td>
-            <td className="border-black border-solid border-2 p-2 w-2/5">{data.product_name}</td>
-            <td className="border-black border-solid border-2 p-2 w-1/5">
+            <td className="border-black border-solid border-2 p-2 w-[20%]">{data.product_name}</td>
+            <td className="border-black border-solid border-2 p-2 w-[10%]">
               {data.prices && data.prices[0] ? data.prices[0].price + " kr." : "N/A"}
             </td>
             <td
