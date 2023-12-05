@@ -9,11 +9,11 @@ function DesktopNav({ basket, auth }) {
   const { setAuth } = useAuth();
 
   async function handleLogout() {
+    setAuth();
     // Make a request to your server's logout endpoint
     await axios.get("http://localhost:3000/api/v1/logout", {
       withCredentials: true,
     });
-    setAuth();
   }
 
   return (
@@ -28,20 +28,24 @@ function DesktopNav({ basket, auth }) {
           <>
             <DesktopNavItem path="/shop">Dagligvarer</DesktopNavItem>
             {auth && (
-              <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
+              <>
+                <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
+                <DesktopNavItem path="/login">
+                  <button onClick={handleLogout}>LOG UD</button>
+                </DesktopNavItem>
+              </>
             )}
-            {!auth && <DesktopNavItem path="/login">Log ind</DesktopNavItem>}
             {!auth && (
-              <DesktopNavItem path="/createaccount">
-                Opret bruger
-              </DesktopNavItem>
+              <>
+                <DesktopNavItem path="/login">Log ind</DesktopNavItem>
+                <DesktopNavItem path="/createaccount">
+                  Opret bruger
+                </DesktopNavItem>
+              </>
             )}
-            {auth && (
-              <DesktopNavItem path="/login">
-                <button onClick={handleLogout}>LOG UD</button>
-              </DesktopNavItem>
-            )}
-            <DesktopNavBasket basket={basket} />
+            <div className="h-10 align-top">
+              <DesktopNavBasket basket={basket} />
+            </div>
           </>
         )}
       </ul>
