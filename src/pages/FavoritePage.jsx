@@ -48,12 +48,22 @@ export default function FavoritePage({ addToBasket }) {
     setSearchQuery(searchQuery);
   }
 
+  async function removeFromFavorites(product){
+    try {
+      await privateAxios.delete(`/favorites/${product.favorite_id}`);
+      const newProducts = products.filter((item) => item.favorite_id !== product.favorite_id);
+      setProducts(newProducts);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} />
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} />
+        <Items addToBasket={addToBasket} products={products} removeFromFavorites={removeFromFavorites} />
       </div>
       <Footer />
     </>
