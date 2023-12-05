@@ -1,4 +1,4 @@
-import InputField from "./InputField";
+import FormInput from "./FormInput";
 
 export default function Updatedialog({ closeDialog, productName, productPrice, productImage }) {
   return (
@@ -6,19 +6,19 @@ export default function Updatedialog({ closeDialog, productName, productPrice, p
       <dialog open className="">
         <h1 className="text-center text-2xl font-bold py-3">Opdater vare</h1>
         <form className="gap-y-2 px-10 grid">
-          <InputField
+          <FormInput
             label="Produktnavn:"
             type="text"
             placeholder="Skriv navn på produkt her"
             value={productName}
           />
-          <InputField
+          <FormInput
             label="Pris:"
             type="text"
             placeholder="Skriv pris på varen her"
             value={productPrice + " kr."}
           />
-          <InputField
+          <FormInput
             label="Billede:"
             type="text"
             placeholder="Indsæt link til billede her"

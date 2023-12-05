@@ -31,10 +31,8 @@ export default function App() {
   }, []);
 
   // Function to add quantity
-  const addQuantity = product_id => {
-    const productIndex = basket.findIndex(
-      item => item.product_id === product_id
-    );
+  const addQuantity = (product_id) => {
+    const productIndex = basket.findIndex((item) => item.product_id === product_id);
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -46,10 +44,8 @@ export default function App() {
   };
 
   // Function to deduct quantity
-  const deductQuantity = product_id => {
-    const productIndex = basket.findIndex(
-      item => item.product_id === product_id
-    );
+  const deductQuantity = (product_id) => {
+    const productIndex = basket.findIndex((item) => item.product_id === product_id);
 
     const updatedBasket = [...basket];
     updatedBasket[productIndex] = {
@@ -57,16 +53,13 @@ export default function App() {
       quantity: updatedBasket[productIndex].quantity - 1,
     };
 
-    updatedBasket[productIndex].quantity === 0 &&
-      updatedBasket.splice(productIndex, 1);
+    updatedBasket[productIndex].quantity === 0 && updatedBasket.splice(productIndex, 1);
     setItem(updatedBasket);
     setBasket(updatedBasket);
   };
 
-  const addToBasket = product => {
-    const productIndex = basket.findIndex(
-      item => item.product_id === product.product_id
-    );
+  const addToBasket = (product) => {
+    const productIndex = basket.findIndex((item) => item.product_id === product.product_id);
     const updatedBasket = [...basket];
     // Check if it exists in basket
     if (productIndex > -1) {
@@ -84,11 +77,9 @@ export default function App() {
 
   return (
     <>
-      <Header
-        basket={basket}
-        addQuantity={addQuantity}
-        deductQuantity={deductQuantity}
-      />
+      
+      <Header basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />
+
       <Routes>
         <Route path="/" element={<Landingpage />} />
         <Route path="/login" element={<Loginpage />} />
@@ -98,19 +89,12 @@ export default function App() {
         <Route
           path="/basket"
           element={
-            <BasketPage
-              basket={basket}
-              addQuantity={addQuantity}
-              deductQuantity={deductQuantity}
-            />
+            <BasketPage basket={basket} addQuantity={addQuantity} deductQuantity={deductQuantity} />
           }
         />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
-        <Route
-          path="/favorites"
-          element={<FavoritePage addToBasket={addToBasket} />}
-        />
+        <Route path="/favorites" element={<FavoritePage addToBasket={addToBasket} />} />
         <Route path="/*" element={<NotFoundpage />} />
       </Routes>
     </>

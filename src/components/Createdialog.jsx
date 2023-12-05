@@ -1,4 +1,4 @@
-import InputField from "./InputField";
+import FormInput from "./FormInput";
 
 export default function Createdialog({ closeDialog }) {
   return (
@@ -6,9 +6,9 @@ export default function Createdialog({ closeDialog }) {
       <dialog open className="rounded-md">
         <h1 className="text-center text-2xl font-bold py-3">Tilføj vare</h1>
         <form className="gap-y-2 px-10 grid">
-          <InputField label="Produktnavn:" type="text" placeholder="Skriv navn på produkt her" />
-          <InputField label="Pris:" type="text" placeholder="Skriv pris på varen her" />
-          <InputField label="Billede:" type="text" placeholder="Indsæt link til billede her" />
+          <FormInput label="Produktnavn:" type="text" placeholder="Skriv navn på produkt her" />
+          <FormInput label="Pris:" type="text" placeholder="Skriv pris på varen her" />
+          <FormInput label="Billede:" type="text" placeholder="Indsæt link til billede her" />
           <button
             className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md mb-4 my-2 py-2 text-black font-medium text-xl"
             onClick={closeDialog}
