@@ -55,12 +55,21 @@ export default function Shoppage({ addToBasket }) {
     setSearchQuery(searchQuery);
   }
 
+  async function addToFavorites(product) {
+    try {
+      await axios.post('/favorites', { product_id: product.product_id });
+      // Update the state or refetch the data here
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} setPage={setPage}/>
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} />
+        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} />
         {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
