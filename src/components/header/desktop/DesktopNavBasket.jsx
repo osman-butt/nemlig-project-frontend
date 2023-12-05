@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function DesktopNavBasket({ basket }) {
   return (
     <Link
-      className="p-4 pb-0 hover:text-[#d4793a] hover:cursor-pointer w-32 flex flex-col items-center"
+      className=" pb-0 hover:text-[#d4793a] hover:cursor-pointer w-32 flex flex-col items-center"
       to="/basket"
     >
-      {<AiOutlineShoppingCart size={30} />}
+      {<AiOutlineShoppingCart size={22} />}
 
       <p>
         {basket &&
