@@ -27,7 +27,7 @@ function usePrivateAxios() {
       config => {
         // Before the request is sent, add the auth header
         if (!config.headers["Authorization"]) {
-          config.headers["Authorization"] = `Bearer ${auth}`;
+          config.headers["Authorization"] = `Bearer ${auth.accessToken}`;
         }
         return config;
       },
