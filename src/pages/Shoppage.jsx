@@ -62,6 +62,7 @@ export default function Shoppage({ addToBasket }) {
 
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+    setPage(1);
   }
 
   async function addToFavorites(product) {
