@@ -7,6 +7,8 @@ import Footer from "../components/Footer";
 import Items from "../components/Items";
 import Pagination from "../components/Pagination";
 import usePrivateAxios from "../hooks/usePrivateAxios.js";
+import useAuth from "../hooks/useAuth.js";
+
 
 export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
@@ -16,14 +18,18 @@ export default function Shoppage({ addToBasket }) {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
   const privateAxios = usePrivateAxios();
+
+  const { auth } = useAuth(); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = searchQuery ? "/products/search" : "/products";
+        const url = auth && auth.user_email ? (searchQuery ? "/products/authenticated/search" : "/products/authenticated") : (searchQuery ? "/products/search" : "/products");
+        const axiosInstance = auth && auth.user_email ? privateAxios : axios;
 
-        const response = await axios.get(url, {
+        const response = await axiosInstance.get(url, {
           params: {
             search: searchQuery,
             sort: sort,
@@ -33,6 +39,7 @@ export default function Shoppage({ addToBasket }) {
           },
         });
         setProducts(response.data.data);
+        console.log(response.data.data);
         if (response.data.meta) {
           setTotalPages(response.data.meta.pagination.last_page);
         }
@@ -41,7 +48,7 @@ export default function Shoppage({ addToBasket }) {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, page, category]);
+  }, [sort, label, searchQuery, page, category, privateAxios, auth]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -62,9 +69,20 @@ export default function Shoppage({ addToBasket }) {
       await privateAxios.post("/favorites", {
         product_id: product.product_id,
       });
-      // OPDATER STATE/REFETCH HERE
+      // update state of products - return a new array that includes the updated product (added to favorite) and all the other products so we dont have to refetch each time
+      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: 1} : p))
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  async function removeFromFavorites(product){
+    try {
+      await privateAxios.delete(`/favorites/${product.favorite_id}`);
+      // update state of products - return a new array that includes the updated product (removed from favorite) and all the other products so we dont have to refetch each time
+      setProducts(products.map(item => item.product_id === product.product_id ? {...item, favorite_id: null} : item));
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -73,8 +91,8 @@ export default function Shoppage({ addToBasket }) {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} setPage={setPage}/>
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} />
-        {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
+        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+        {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
     </>
