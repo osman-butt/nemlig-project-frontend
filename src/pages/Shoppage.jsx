@@ -6,6 +6,7 @@ import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
 import Pagination from "../components/Pagination";
+import usePrivateAxios from "../hooks/usePrivateAxios.js";
 
 export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
@@ -15,6 +16,7 @@ export default function Shoppage({ addToBasket }) {
   const [category, setCategory] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const privateAxios = usePrivateAxios();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,8 +59,10 @@ export default function Shoppage({ addToBasket }) {
 
   async function addToFavorites(product) {
     try {
-      await axios.post('/favorites', { product_id: product.product_id });
-      // Update the state or refetch the data here
+      await privateAxios.post("/favorites", {
+        product_id: product.product_id,
+      });
+      // OPDATER STATE/REFETCH HERE
     } catch (error) {
       console.error(error);
     }
