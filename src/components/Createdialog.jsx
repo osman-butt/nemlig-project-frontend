@@ -48,6 +48,20 @@ export default function Createdialog({ closeDialog }) {
             placeholder="Indsæt link til billede her"
             name="productImage"
           />
+          <FormInput label="Labels:" type="option" placeholder="Vælg labels her" name="labels" />
+
+          <FormInput
+            label="Antal på lager:"
+            type="number"
+            placeholder="Skriv antal her"
+            name="productAmount"
+          />
+          <FormInput
+            label="Kategori:"
+            type="text"
+            placeholder="Skriv kategori her"
+            name="productCategory"
+          />
           <FormInput
             label="Pris:"
             type="text"
