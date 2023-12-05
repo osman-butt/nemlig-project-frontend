@@ -63,7 +63,7 @@ export default function FavoritePage({ addToBasket }) {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} />
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} removeFromFavorites={removeFromFavorites} />
+        <Items addToBasket={addToBasket} products={products} removeFromFavorites={removeFromFavorites} alwaysShowStar={true} />
       </div>
       <Footer />
     </>

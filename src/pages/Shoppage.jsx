@@ -92,7 +92,7 @@ export default function Shoppage({ addToBasket }) {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} setPage={setPage}/>
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites}/>
+        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} auth={auth}/>
         {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
