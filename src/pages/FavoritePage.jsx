@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import usePrivateAxios from "../hooks/usePrivateAxios";
 import image from "../assets/hero.jpg";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
@@ -7,48 +8,51 @@ import Footer from "../components/Footer";
 
 export default function FavoritePage({ addToBasket }) {
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
-  const [filter, setFilter] = useState("");
+  const [label, setLabel] = useState("");
+  const [category, setCategory] = useState("");
+
+  const privateAxios = usePrivateAxios();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("./src/favorites.json");
-        const data = await response.json();
-        let dataArray = Object.values(data)[0];
-
-        if (filter) {
-          dataArray = dataArray.filter(product => product.labels.some(label => label.label_name.includes(filter)));
-        }
-
-        if (sort === "asc") {
-          dataArray.sort((a, b) => a.product_name.localeCompare(b.product_name));
-        } else if (sort === ">") {
-          dataArray.sort((a, b) => a.prices[0].price - b.prices[0].price);
-        } else if (sort === "<") {
-          dataArray.sort((a, b) => b.prices[0].price - a.prices[0].price);
-        }
-        setProducts(dataArray);
+        const url = searchQuery ? "/favorites/search" : "/favorites";
+        const response = await privateAxios.get(url, {
+          params: {
+            search: searchQuery,
+            sort: sort,
+            label: label,
+            category: category,
+          },
+        });
+        setProducts(response.data.data);
+        console.log(response.data.data);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [sort, filter]);
+  }, [sort, label, searchQuery, category, privateAxios]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
   }
 
   function handleFilter(filterOptions) {
-    setFilter(filterOptions);
+    setLabel(filterOptions);
+  }
+
+  function handleSearch(searchQuery) {
+    setSearchQuery(searchQuery);
   }
 
   return (
     <>
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-        <Navbar />
-        <Search handleSort={handleSort} handleFilter={handleFilter} />
+        <Navbar setCategory={setCategory} />
+        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
         <Items addToBasket={addToBasket} products={products} />
       </div>
       <Footer />
