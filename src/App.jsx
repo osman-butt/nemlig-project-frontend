@@ -23,9 +23,9 @@ export default function App() {
   const { auth } = useAuth();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       try {
-        const basketArray = getItem() ? getItem() : setItem([]);
+        const basketArray = getItem() || [];
         setBasket(basketArray);
       } catch (err) {
         console.log(err);
