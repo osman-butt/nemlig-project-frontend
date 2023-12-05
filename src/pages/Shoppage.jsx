@@ -21,11 +21,13 @@ export default function Shoppage({ addToBasket }) {
 
   const privateAxios = usePrivateAxios();
 
+  // In order to get the user email from the auth object, we need to destructure it from the useAuth hook
   const { auth } = useAuth(); 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        // If the user is authenticated, we want to fetch the authenticated products, otherwise we want to fetch the non-authenticated products
         const url = auth && auth.user_email ? (searchQuery ? "/products/authenticated/search" : "/products/authenticated") : (searchQuery ? "/products/search" : "/products");
         const axiosInstance = auth && auth.user_email ? privateAxios : axios;
 
@@ -92,7 +94,7 @@ export default function Shoppage({ addToBasket }) {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} setPage={setPage}/>
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} auth={auth}/>
+        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} auth={auth} alwaysShowStar={false}/>
         {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
