@@ -1,4 +1,5 @@
-import FormInput from "../../../components/FormInput.jsx";
+import FormInput from "./CrudFormInput.jsx";
+import { handleInputChange, handleImageChange, handlePriceOrDateChange, handleIsCampaignChange, handleSelectChange } from "../AdminUtils/eventHandlers.js";
 import { useState } from "react";
 import axios from "../../../api/axios.js";
 
@@ -11,10 +12,10 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
     images: [{ image_url: "" }],
     labels: [],
     categories: [],
-    inventory_stock: 0,
+    inventory_stock: "",
     prices: [
       {
-        price: 0,
+        price: "",
         starting_at: "",
         is_campaign: false,
         ending_at: "",
@@ -22,63 +23,12 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
     ],
   });
 
-
-  function handleInputChange(event) {
-    const {name, value} = event.target;
-    setProductData({
-      ...productData,
-      [name]: name === 'inventory_stock' ? Number(value) : value,
-    });
-  }
-
-  function handleImageChange(event) {
-    setProductData({
-      ...productData,
-      images: [{ ...productData.images[0], image_url: event.target.value }],
-    });
-  }
-
-  function handlePriceChange(event) {
-    setProductData({
-      ...productData,
-      prices: [{ ...productData.prices[0], price: Number(event.target.value) }],
-    });
-  }
-
-  function handleStartingAtChange(event) {
-    setProductData({
-      ...productData,
-      prices: [{ ...productData.prices[0], starting_at: event.target.value }],
-    });
-  }
-
-  function handleIsCampaignChange(event) {
-    setProductData({
-      ...productData,
-      prices: [{ ...productData.prices[0], is_campaign: event.target.checked }],
-    });
-  }
-
-  function handleEndingAtChange(event) {
-    setProductData({
-      ...productData,
-      prices: [{ ...productData.prices[0], ending_at: event.target.value }],
-    });
-  }
-
-  function handleLabelChange(event){
-    setProductData({
-      ...productData,
-      labels: [Number(event.target.value)]
-    })
-  }
-
-  function handleCategoryChange(event){
-    setProductData({
-      ...productData,
-      categories: [Number(event.target.value)]
-    })
-  }
+  // Setup instances of event handlers
+  const handleInputChangeInstance = handleInputChange(setProductData);
+  const handleImageChangeInstance = handleImageChange(setProductData);
+  const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData);
+  const handleIsCampaignChangeInstance = handleIsCampaignChange(setProductData);
+  const handleSelectChangeInstance = handleSelectChange(setProductData);
 
   async function handleAddProduct(event) {
     event.preventDefault();
@@ -109,7 +59,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv navn på produkt her"
             name="product_name"
             value={productData.product_name}
-            onChange={handleInputChange}
+            onChange={handleInputChangeInstance}
           />
           <FormInput
             label="Produkt understregning:"
@@ -117,7 +67,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv produkt understregning her"
             name="product_underline"
             value={productData.product_underline}
-            onChange={(event) => handleInputChange(event.target.value)}
+            onChange={handleInputChangeInstance}
           />
           <FormInput
             label="Produktbeskrivelse:"
@@ -125,23 +75,23 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv produktbeskrivelse her"
             name="product_description"
             value={productData.product_description}
-            onChange={handleInputChange}
+            onChange={handleInputChangeInstance}
           />
           <FormInput
             label="Billede:"
             type="text"
             placeholder="Indsæt link til billede her"
             value={productData.images[0].image_url}
-            onChange={handleImageChange}
+            onChange={handleImageChangeInstance}
           />
           <label className="font-bold"> Label:
-          <select className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleLabelChange}>
+          <select name="labels" className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleSelectChangeInstance}>
             <option value="">Vælg label: </option>
             {labelData.map(label => <option key={label.label_id} value={label.label_id}>{label.label_name}</option> )}
           </select>
           </label>
           <label className="font-bold"> Kategori:
-          <select className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleCategoryChange}>
+          <select name="categories" className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleSelectChangeInstance}>
             <option value="">Vælg kategori: </option>
             {categoryData.map(category => <option key={category.category_id} value={category.category_id}>{category.category_name}</option> )}
           </select>
@@ -153,7 +103,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv antal her"
             name="inventory_stock"
             value={productData.inventory_stock}
-            onChange={handleInputChange}
+            onChange={handleInputChangeInstance}
           />
 
           <fieldset className="border-2 border-solid">
@@ -162,21 +112,24 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
               label="Pris:"
               type="number"
               placeholder="Skriv pris på varen her"
+              name="price"
               value={productData.prices[0].price}
-              onChange={handlePriceChange}
-            />
-            <FormInput
-              label="Start dato"
-              type="date"
-              value={productData.prices[0].starting_at}
-              onChange={handleStartingAtChange}
+              onChange={handlePriceOrDateChangeInstance}
             />
             <div>
               <p>Kampagne</p>
-              <input type="checkbox" value={productData.is_campaign} onChange={handleIsCampaignChange} />
+              <input type="checkbox" value={productData.is_campaign} onChange={handleIsCampaignChangeInstance} />
             </div>
 
-            <FormInput label="Slut dato" type="date" value={productData.prices[0].ending_at} onChange={handleEndingAtChange} />
+            <FormInput
+              label="Start dato"
+              type="date"
+              name="starting_at"
+              value={productData.prices[0].starting_at}
+              onChange={handlePriceOrDateChangeInstance}
+            />
+
+            <FormInput label="Slut dato" type="date" name="ending_at" value={productData.prices[0].ending_at} onChange={handlePriceOrDateChangeInstance} />
           </fieldset>
 
           <div>

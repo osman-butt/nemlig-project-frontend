@@ -8,7 +8,7 @@ function FormInput({ label, type, value, onChange, placeholder, name }) {
         placeholder={placeholder}
         name={name}
         value={value}
-        onChange={onChange}
+        onChange={e => onChange(e.target.value)}
       />
     </label>
   );
