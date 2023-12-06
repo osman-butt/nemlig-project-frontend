@@ -2,7 +2,7 @@ import { useState } from "react";
 import Table from "./Table";
 import Createdialog from "./Createdialog";
 
-export default function Admintable({ data }) {
+export default function Admintable({ data, labelData, categoryData }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const openDialog = () => {
     setDialogOpen(true);
@@ -13,7 +13,7 @@ export default function Admintable({ data }) {
 
   return (
     <div className="mx-5 py-5">
-      {dialogOpen && <Createdialog closeDialog={closeDialog} data={data} />}
+      {dialogOpen && <Createdialog closeDialog={closeDialog} data={data} labelData={labelData} categoryData={categoryData} />}
       <button onClick={openDialog} className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md my-4 py-2 text-black font-medium text-xl">
         Tilføj
       </button>

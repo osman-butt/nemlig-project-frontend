@@ -14,6 +14,8 @@ export default function Adminpage() {
   const [label, setLabel] = useState("");
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [labelData, setLabelData] = useState([]);
+  const [categoryData, setCategoryData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,21 @@ export default function Adminpage() {
     fetchData();
   }, [searchQuery, sort, label, page]);
 
+  // Fetch all labels and categories
+  useEffect(() => {
+    const fetchLabelsandCategories = async () => {
+      try {
+        const labelResponse = await axios.get("/products/labels");
+        const categoriesResponse = await axios.get("/products/categories");
+        setLabelData(labelResponse.data)
+        setCategoryData(categoriesResponse.data)
+      } catch (err){
+        console.log(err);
+      }
+    };
+    fetchLabelsandCategories();
+  }, []);
+
   function handleSort(sortOptions) {
     setSort(sortOptions);
     // setPage(1);
@@ -50,13 +67,14 @@ export default function Adminpage() {
 
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+    setPage(1);
   }
 
   return (
     <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
       <Adminhead />
       <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-      <Admintable data={data} />
+      <Admintable data={data} labelData={labelData} categoryData={categoryData} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <Footer />
     </div>
