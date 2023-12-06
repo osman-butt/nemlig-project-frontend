@@ -29,7 +29,9 @@ export default function Table({ data }) {
           productImage={data.images[0].image_url}
         />
       )}
-      {dialogOpen && dialogType === "delete" && <Deletedialog closeDialog={closeDialog} />}
+      {dialogOpen && dialogType === "delete" && (
+        <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />
+      )}
 
       <table className="font-medium bg-[#e8e3d8]">
         <tbody>
