@@ -1,12 +1,37 @@
 import FormInput from "./FormInput";
+import {useState} from "react";
 import axios from "../api/axios";
 
 export default function Createdialog({ closeDialog }) {
-  const handleAddProduct = async (event) => {
+  const [productData, setProductData] = useState({
+    product_name: "",
+    product_underline: "",
+    product_description: "",
+    images: [{ image_url: "" }],
+    labels: [],
+    categories: [],
+    inventory_stock: "",
+    prices: [
+      {
+        price: "",
+        starting_at: "",
+        is_campaign: false,
+        ending_at: "",
+      }
+    ]
+  });
+
+  function handleInputChange(event){
+    setProductData({
+      ...productData,
+      [event.target.name]: event.target.value
+    });
+  }
+  async function handleAddProduct(event){
     event.preventDefault();
 
     try {
-      const response = await axios.post("/products");
+      const response = await axios.post("/products", productData);
 
       if (response.status === 200) {
         console.log("Produkt tilføjet!");
@@ -17,7 +42,7 @@ export default function Createdialog({ closeDialog }) {
     } catch (error) {
       console.error("Fejl ved håndtering af anmodning:", error);
     }
-  };
+  }
 
   return (
     <div className="fixed overflow-scroll inset-0 pt-10 items-center justify-center z-50 bg-black bg-opacity-50">
@@ -28,13 +53,17 @@ export default function Createdialog({ closeDialog }) {
             label="Produktnavn:"
             type="text"
             placeholder="Skriv navn på produkt her"
-            name="productName"
+            name="product_name"
+            value={productData.product_name}
+            onChange={handleInputChange}
           />
           <FormInput
             label="Produkt understregning:"
             type="text"
             placeholder="Skriv produkt understregning her"
-            name="productUnderline"
+            name="product_underline"
+            value={productData.product_underline}
+            onChange={handleInputChange}
           />
           <FormInput
             label="Produktbeskrivelse:"

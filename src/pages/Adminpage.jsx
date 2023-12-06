@@ -60,7 +60,7 @@ export default function Adminpage() {
       <Adminhead />
       <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       <Admintable data={data} />
-      {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
+      <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <Footer />
     </div>
   );
