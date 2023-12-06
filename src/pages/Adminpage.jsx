@@ -53,10 +53,7 @@ export default function Adminpage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-fixed bg-center bg-cover"
-      style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
       <Adminhead />
       <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       <Admintable data={data} />

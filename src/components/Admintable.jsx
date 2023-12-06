@@ -13,11 +13,8 @@ export default function Admintable({ data }) {
 
   return (
     <div className="mx-5 py-5">
-      {dialogOpen && <Createdialog closeDialog={closeDialog} />}
-      <button
-        onClick={openDialog}
-        className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md my-4 py-2 text-black font-medium text-xl"
-      >
+      {dialogOpen && <Createdialog closeDialog={closeDialog} data={data} />}
+      <button onClick={openDialog} className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md my-4 py-2 text-black font-medium text-xl">
         Tilføj
       </button>
       {data.map((item) => (
