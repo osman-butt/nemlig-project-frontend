@@ -20,15 +20,23 @@ export default function Table({ data }) {
 
   return (
     <>
-      {dialogOpen && dialogType === "update" && <Updatedialog closeDialog={closeDialog} data={data} />}
-      {dialogOpen && dialogType === "delete" && <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />}
+      {dialogOpen && dialogType === "update" && (
+        <Updatedialog closeDialog={closeDialog} data={data} />
+      )}
+      {dialogOpen && dialogType === "delete" && (
+        <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />
+      )}
 
       <table className="font-medium bg-[#e8e3d8]">
         <tbody>
           <tr className="text-center text-xs sm:text-lg md:text-xl">
             <td className="border-black border-solid border-2 p-2 w-[2%]">{data.product_id}</td>
             <td className="border-black border-solid border-2 p-2 w-[6%]">
-              <img className="w-[50%] mx-auto" src={data.images && data.images[0] ? data.images[0].image_url : ""} alt="" />
+              <img
+                className="w-5 mx-auto"
+                src={data.images && data.images[0] ? data.images[0].image_url : ""}
+                alt=""
+              />
             </td>
             <td className="border-black border-solid border-2 p-2 w-[20%]">{data.product_name}</td>
             <td className="border-black border-solid border-2 p-2 w-[10%]">
@@ -41,7 +49,10 @@ export default function Table({ data }) {
               {editIcon}
             </td>
 
-            <td onClick={() => openDialog("delete")} className="border-black border-solid border-2 p-2 w-[2%] hover:text-[#d4793a] cursor-pointer">
+            <td
+              onClick={() => openDialog("delete")}
+              className="border-black border-solid border-2 p-2 w-[2%] hover:text-[#d4793a] cursor-pointer"
+            >
               {deleteIcon}
             </td>
           </tr>
