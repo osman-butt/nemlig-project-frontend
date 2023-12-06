@@ -1,16 +1,15 @@
 import FormInput from "./FormInput";
 import { useState } from "react";
-import axios from "../api/axios";
+import axios from "../api/axios.js";
 
-export default function Createdialog({ closeDialog, data }) {
-  console.log(data);
+export default function Createdialog({ closeDialog }) {
   const [productData, setProductData] = useState({
     product_name: "",
     product_underline: "",
     product_description: "",
     images: [{ image_url: "" }],
-    labels: [],
-    categories: [],
+    labels: [6],
+    categories: [5],
     inventory_stock: 0,
     prices: [
       {
@@ -22,10 +21,12 @@ export default function Createdialog({ closeDialog, data }) {
     ],
   });
 
+
   function handleInputChange(event) {
+    const {name, value} = event.target;
     setProductData({
       ...productData,
-      [event.target.name]: event.target.value,
+      [name]: name === 'inventory_stock' ? Number(value) : value,
     });
   }
 
@@ -39,7 +40,7 @@ export default function Createdialog({ closeDialog, data }) {
   function handlePriceChange(event) {
     setProductData({
       ...productData,
-      prices: [{ ...productData.prices[0], price: event.target.value }],
+      prices: [{ ...productData.prices[0], price: Number(event.target.value) }],
     });
   }
 
@@ -53,7 +54,7 @@ export default function Createdialog({ closeDialog, data }) {
   function handleIsCampaignChange(event) {
     setProductData({
       ...productData,
-      prices: [{ ...productData.prices[0], is_campaign: event.target.check }],
+      prices: [{ ...productData.prices[0], is_campaign: event.target.checked }],
     });
   }
 
@@ -77,6 +78,7 @@ export default function Createdialog({ closeDialog, data }) {
         console.error("Noget gik galt ved tilføjelse af produktet.");
       }
     } catch (error) {
+      console.log(productData);
       console.error("Fejl ved håndtering af anmodning:", error);
     }
   }
@@ -106,7 +108,7 @@ export default function Createdialog({ closeDialog, data }) {
             label="Produktbeskrivelse:"
             type="text"
             placeholder="Skriv produktbeskrivelse her"
-            name="productDescription"
+            name="product_description"
             value={productData.product_description}
             onChange={handleInputChange}
           />
@@ -114,21 +116,9 @@ export default function Createdialog({ closeDialog, data }) {
             label="Billede:"
             type="text"
             placeholder="Indsæt link til billede her"
-            name="productImage"
             value={productData.images[0].image_url}
             onChange={handleImageChange}
           />
-          <select name="labels" onChange={handleInputChange}>
-            {data.labels &&
-              data.labels.map((label) => (
-                <option key={label.id} value={label.id}>
-                  {label.name}
-                </option>
-              ))}
-          </select>
-
-          <FormInput label="Kategori:" type="text" placeholder="Skriv kategori her" name="productCategory" />
-
           <FormInput
             label="Antal på lager:"
             type="number"
@@ -144,14 +134,12 @@ export default function Createdialog({ closeDialog, data }) {
               label="Pris:"
               type="number"
               placeholder="Skriv pris på varen her"
-              name="productPrice"
               value={productData.prices[0].price}
               onChange={handlePriceChange}
             />
             <FormInput
               label="Start dato"
               type="date"
-              name="productPrice"
               value={productData.prices[0].starting_at}
               onChange={handleStartingAtChange}
             />
@@ -160,7 +148,7 @@ export default function Createdialog({ closeDialog, data }) {
               <input type="checkbox" value={productData.is_campaign} onChange={handleIsCampaignChange} />
             </div>
 
-            <FormInput label="Slut dato" type="date" name="productPrice" value={productData.prices[0].ending_at} onChange={handleEndingAtChange} />
+            <FormInput label="Slut dato" type="date" value={productData.prices[0].ending_at} onChange={handleEndingAtChange} />
           </fieldset>
 
           <div>
