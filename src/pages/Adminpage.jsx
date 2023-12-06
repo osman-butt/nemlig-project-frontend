@@ -1,6 +1,5 @@
 import image from "../assets/hero.jpg";
 import Footer from "../components/Footer";
-import Adminhead from "../components/Adminhead";
 import Search from "../components/Search";
 import Admintable from "../components/Admintable";
 import Pagination from "../components/Pagination.jsx";
@@ -72,7 +71,6 @@ export default function Adminpage() {
 
   return (
     <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-      <Adminhead />
       <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       <Admintable data={data} labelData={labelData} categoryData={categoryData} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />

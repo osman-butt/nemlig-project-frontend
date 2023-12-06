@@ -3,7 +3,7 @@ import { AiOutlineEdit, AiOutlineClose } from "react-icons/ai";
 import Updatedialog from "./Updatedialog";
 import Deletedialog from "./Deletedialog";
 
-export default function Table({ data }) {
+export default function Table({ data, labelData, categoryData }) {
   const [dialogType, setDialogType] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
@@ -21,13 +21,13 @@ export default function Table({ data }) {
   return (
     <>
       {dialogOpen && dialogType === "update" && (
-        <Updatedialog closeDialog={closeDialog} data={data} />
+        <Updatedialog closeDialog={closeDialog} data={data} labelData={labelData} categoryData={categoryData} />
       )}
       {dialogOpen && dialogType === "delete" && (
         <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />
       )}
 
-      <table className="font-medium bg-[#e8e3d8] max-w-[1240px] m-auto">
+      <table className="font-medium bg-[#e8e3d8]">
         <tbody>
           <tr className="text-center text-xs sm:text-lg md:text-xl">
             <td className="border-black border-solid border-2 p-2 w-[2%]">{data.product_id}</td>

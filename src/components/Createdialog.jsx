@@ -134,16 +134,18 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             value={productData.images[0].image_url}
             onChange={handleImageChange}
           />
-
-          <select onChange={handleLabelChange}>
+          <label className="font-bold"> Label:
+          <select className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleLabelChange}>
             <option value="">Vælg label: </option>
             {labelData.map(label => <option key={label.label_id} value={label.label_id}>{label.label_name}</option> )}
           </select>
-
-          <select onChange={handleCategoryChange}>
+          </label>
+          <label className="font-bold"> Kategori:
+          <select className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={handleCategoryChange}>
             <option value="">Vælg kategori: </option>
             {categoryData.map(category => <option key={category.category_id} value={category.category_id}>{category.category_name}</option> )}
           </select>
+          </label>
 
           <FormInput
             label="Antal på lager:"
