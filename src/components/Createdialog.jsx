@@ -2,14 +2,15 @@ import FormInput from "./FormInput";
 import { useState } from "react";
 import axios from "../api/axios.js";
 
-export default function Createdialog({ closeDialog }) {
+export default function Createdialog({ closeDialog, labelData, categoryData}) {
+
   const [productData, setProductData] = useState({
     product_name: "",
     product_underline: "",
     product_description: "",
     images: [{ image_url: "" }],
-    labels: [6],
-    categories: [5],
+    labels: [],
+    categories: [],
     inventory_stock: 0,
     prices: [
       {
@@ -65,6 +66,20 @@ export default function Createdialog({ closeDialog }) {
     });
   }
 
+  function handleLabelChange(event){
+    setProductData({
+      ...productData,
+      labels: [Number(event.target.value)]
+    })
+  }
+
+  function handleCategoryChange(event){
+    setProductData({
+      ...productData,
+      categories: [Number(event.target.value)]
+    })
+  }
+
   async function handleAddProduct(event) {
     event.preventDefault();
 
@@ -102,7 +117,7 @@ export default function Createdialog({ closeDialog }) {
             placeholder="Skriv produkt understregning her"
             name="product_underline"
             value={productData.product_underline}
-            onChange={handleInputChange}
+            onChange={(event) => handleInputChange(event.target.value)}
           />
           <FormInput
             label="Produktbeskrivelse:"
@@ -119,6 +134,17 @@ export default function Createdialog({ closeDialog }) {
             value={productData.images[0].image_url}
             onChange={handleImageChange}
           />
+
+          <select onChange={handleLabelChange}>
+            <option value="">Vælg label: </option>
+            {labelData.map(label => <option key={label.label_id} value={label.label_id}>{label.label_name}</option> )}
+          </select>
+
+          <select onChange={handleCategoryChange}>
+            <option value="">Vælg kategori: </option>
+            {categoryData.map(category => <option key={category.category_id} value={category.category_id}>{category.category_name}</option> )}
+          </select>
+
           <FormInput
             label="Antal på lager:"
             type="number"

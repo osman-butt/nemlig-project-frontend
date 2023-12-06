@@ -27,7 +27,7 @@ export default function Table({ data }) {
         <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />
       )}
 
-      <table className="font-medium bg-[#e8e3d8]">
+      <table className="font-medium bg-[#e8e3d8] max-w-[1240px] m-auto">
         <tbody>
           <tr className="text-center text-xs sm:text-lg md:text-xl">
             <td className="border-black border-solid border-2 p-2 w-[2%]">{data.product_id}</td>
