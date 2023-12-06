@@ -83,7 +83,7 @@ export default function Shoppage({ addToBasket }) {
     try {
       await privateAxios.delete(`/favorites/${product.favorite_id}`);
       // update state of products - return a new array that includes the updated product (removed from favorite) and all the other products so we dont have to refetch each time
-      setProducts(products.map(item => item.product_id === product.product_id ? {...item, favorite_id: null} : item));
+      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: null} : p));
     } catch (err) {
       console.log(err);
     }
