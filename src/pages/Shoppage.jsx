@@ -6,6 +6,9 @@ import Search from "../components/Search";
 import Footer from "../components/Footer";
 import Items from "../components/Items";
 import Pagination from "../components/Pagination";
+import usePrivateAxios from "../hooks/usePrivateAxios.js";
+import useAuth from "../hooks/useAuth.js";
+
 
 export default function Shoppage({ addToBasket }) {
   const [products, setProducts] = useState([]);
@@ -16,12 +19,19 @@ export default function Shoppage({ addToBasket }) {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  const privateAxios = usePrivateAxios();
+
+  // In order to get the user email from the auth object, we need to destructure it from the useAuth hook
+  const { auth } = useAuth(); 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const url = searchQuery ? "/products/search" : "/products";
+        // If the user is authenticated, we want to fetch the authenticated products, otherwise we want to fetch the non-authenticated products
+        const url = auth && auth.user_email ? (searchQuery ? "/products/authenticated/search" : "/products/authenticated") : (searchQuery ? "/products/search" : "/products");
+        const axiosInstance = auth && auth.user_email ? privateAxios : axios;
 
-        const response = await axios.get(url, {
+        const response = await axiosInstance.get(url, {
           params: {
             search: searchQuery,
             sort: sort,
@@ -31,6 +41,7 @@ export default function Shoppage({ addToBasket }) {
           },
         });
         setProducts(response.data.data);
+        console.log(response.data.data);
         if (response.data.meta) {
           setTotalPages(response.data.meta.pagination.last_page);
         }
@@ -39,7 +50,7 @@ export default function Shoppage({ addToBasket }) {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, page, category]);
+  }, [sort, label, searchQuery, page, category, privateAxios, auth]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -53,6 +64,29 @@ export default function Shoppage({ addToBasket }) {
 
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
+    setPage(1);
+  }
+
+  async function addToFavorites(product) {
+    try {
+      await privateAxios.post("/favorites", {
+        product_id: product.product_id,
+      });
+      // update state of products - return a new array that includes the updated product (added to favorite) and all the other products so we dont have to refetch each time
+      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: 1} : p))
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function removeFromFavorites(product){
+    try {
+      await privateAxios.delete(`/favorites/${product.favorite_id}`);
+      // update state of products - return a new array that includes the updated product (removed from favorite) and all the other products so we dont have to refetch each time
+      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: null} : p));
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
@@ -60,8 +94,8 @@ export default function Shoppage({ addToBasket }) {
       <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
         <Navbar setCategory={setCategory} setPage={setPage}/>
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} />
-        {!searchQuery && <Pagination page={page} totalPages={totalPages} setPage={setPage} />}
+        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} auth={auth} alwaysShowStar={false}/>
+        {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />
     </>
