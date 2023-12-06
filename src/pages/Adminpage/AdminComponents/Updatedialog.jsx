@@ -1,8 +1,10 @@
 import FormInput from "../../../components/FormInput";
+import { handleInputChange, handleImageChange, handleIsCampaignChange, handlePriceOrDateChange } from "../AdminUtils/eventHandlers";
 import axios from "../../../api/axios";
 import { useState } from "react";
 
 export default function Updatedialog({ closeDialog, data, labelData, categoryData }) {
+  
 
   const [productData, setProductData] = useState({
     product_name: data.product_name,
@@ -70,13 +72,19 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
           </select>
           </label>
           <FormInput label="Antal på lager:" type="text" placeholder="Skriv antal her" name="inventory_stock" value={productData.inventory_stock} />
-          <FormInput label="Pris:" type="text" placeholder="Skriv pris på varen her" value={productData.prices[0].price + " kr."} />
-          <FormInput label="Start dato" type="date" value={productData.prices[0].starting_at} />
-          <div>
-            <p>Kampagne</p>
-            <input type="checkbox" checked={data.prices[0].is_campaign} />
+          <fieldset className="border-4 border-solid black">
+          {productData.prices.map((price, index) => (
+          <div key={index}>
+            <FormInput label="Pris:" type="text" placeholder="Skriv pris på varen her" value={price.price + " kr."} />
+            <div>
+              <p>Kampagne</p>
+              <input type="checkbox" checked={price.is_campaign || false} onChange={event => handleIsCampaignChange(index)(event.target.checked)}/>
+            </div>
+            <FormInput label="Start dato" type="date" value={price.starting_at ? new Date(price.starting_at).toISOString().split('T')[0] : ""}  />
+            <FormInput label="Slut dato" type="date" value={new Date(price.ending_at).toISOString().split('T')[0]} />
           </div>
-          <FormInput label="Slut dato" type="date" value={data.prices[0].ending_at} />
+            ))}
+          </fieldset>
           <div>
             <button
               className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md mb-4 my-2 py-2 text-black font-medium text-xl"
