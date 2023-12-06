@@ -1,10 +1,10 @@
-import image from "../assets/hero.jpg";
-import Footer from "../components/Footer";
-import Search from "../components/Search";
-import Admintable from "../components/Admintable";
-import Pagination from "../components/Pagination.jsx";
+import image from "../../assets/hero.jpg";
+import Footer from "../../components/Footer.jsx";
+import Search from "../../components/Search.jsx";
+import Admintable from "./AdminComponents/Admintable.jsx";
+import Pagination from "../../components/Pagination.jsx";
 import { useState, useEffect } from "react";
-import axios from "../api/axios.js";
+import axios from "../../api/axios.js";
 
 export default function Adminpage() {
   const [data, setData] = useState([]);

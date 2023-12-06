@@ -1,5 +1,5 @@
-import FormInput from "./FormInput";
-import axios from "../api/axios";
+import FormInput from "../../../components/FormInput";
+import axios from "../../../api/axios";
 import { useState } from "react";
 
 export default function Updatedialog({ closeDialog, data, labelData, categoryData }) {

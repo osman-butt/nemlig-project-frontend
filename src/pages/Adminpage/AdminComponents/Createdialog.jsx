@@ -1,6 +1,6 @@
-import FormInput from "./FormInput";
+import FormInput from "../../../components/FormInput.jsx";
 import { useState } from "react";
-import axios from "../api/axios.js";
+import axios from "../../../api/axios.js";
 
 export default function Createdialog({ closeDialog, labelData, categoryData}) {
 
