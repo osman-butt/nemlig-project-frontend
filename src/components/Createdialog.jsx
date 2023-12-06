@@ -10,10 +10,10 @@ export default function Createdialog({ closeDialog }) {
     images: [{ image_url: "" }],
     labels: [],
     categories: [],
-    inventory_stock: "",
+    inventory_stock: 0,
     prices: [
       {
-        price: "",
+        price: 0,
         starting_at: "",
         is_campaign: false,
         ending_at: "",
