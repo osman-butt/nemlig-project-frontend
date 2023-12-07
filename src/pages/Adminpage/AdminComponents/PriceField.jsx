@@ -17,6 +17,7 @@ export default function PriceField({ price, index, handlePriceOrDateChangeInstan
             <p>Kampagne</p>
             <input 
               type="checkbox" 
+              name="is_campaign"
               checked={price.is_campaign} 
               onChange={(event) => handlePriceOrDateChangeInstance("is_campaign", index)(event.target.checked)} 
             />

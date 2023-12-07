@@ -11,6 +11,32 @@ import axios from "../../../api/axios";
 import { useState } from "react";
 
 export default function Updatedialog({ closeDialog, data, labelData, categoryData, setUpdate }) {
+  // Dynamic field states
+  const [prices, setPrices] = useState(data.prices.map((price) => ({
+    price_id: price.price_id,
+    price: price.price,
+    starting_at: price.starting_at,
+    is_campaign: price.is_campaign,
+    ending_at: price.ending_at,
+  })))
+  const [images, setImages] = useState(data.images.map((image) => ({
+    image_id: image.image_id,
+    image_url: image.image_url,
+  })));
+
+  function addPriceField() {
+    setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
+  }
+  function removePriceField(index) {
+    setPrices(prices.filter((_, i) => i !== index));
+  }
+  function addImageField() {
+    setImages([...images, { image_url: "" }]);
+  }
+  function removeImageField(index) {
+    setImages(images.filter((_, i) => i !== index));
+  }
+
   const [productData, setProductData] = useState({
     product_name: data.product_name,
     product_underline: data.product_underline,
@@ -48,8 +74,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
   // Setup instances of event handlers
   const handleInputChangeInstance = handleInputChange(setProductData);
-  const handleImageChangeInstance = handleImageChange(setProductData);
-  const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData);
+  const handleImageChangeInstance = handleImageChange(setProductData, setImages);
+  const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
   const handleSelectChangeInstance = handleSelectChange(setProductData);
 
   return (
@@ -81,18 +107,27 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.product_description || ""}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-          {productData.images.map((image, index) => {
-            return (
-          <FormInput
-            key={index}
-            label="Billede:"
-            type="text"
-            placeholder="Indsæt link til billede her"
-            value={image.image_url}
-            onChange={(value) => handleImageChangeInstance("image_url", index)(value)}
-          />
-          );
-        })}
+            {images.map((image, index) => {
+              return (
+                <div key={index}>
+                  <FormInput
+                    label="Billede:"
+                    type="text"
+                    placeholder="Indsæt link til billede her"
+                    value={image.image_url}
+                    onChange={(value) => handleImageChangeInstance("image_url", index)(value)}
+                  />
+                  <div className="flex flex-row justify-between font-bold">
+                    <button type="button" onClick={() => removeImageField(index)} disabled={productData.images.length <= 1}>
+                      Fjern billede
+                    </button>
+                    <button type="button" onClick={addImageField}>
+                      Tilføj billede
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
 
           <SelectField
             name={`labels]`}
@@ -119,7 +154,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
 
-          {productData.prices.map((price, index) => {
+          {prices.map((price, index) => {
             return (
               <PriceField
                 key={index}
@@ -127,6 +162,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
                 index={index}
                 prices={productData.prices}
                 handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
+                removePriceField={removePriceField}
+                addPriceField={addPriceField}
               />
             );
           })}
