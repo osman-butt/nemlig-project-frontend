@@ -3,7 +3,6 @@ import {
   handleInputChange,
   handleImageChange,
   handlePriceOrDateChange,
-  handleIsCampaignChange,
   handleSelectChange,
 } from "../AdminUtils/eventHandlers.js";
 import PriceField from "./PriceField.jsx";
@@ -52,7 +51,6 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
-  const handleIsCampaignChangeInstance = handleIsCampaignChange(setProductData, setPrices);
   const handleSelectChangeInstance = handleSelectChange(setProductData);
 
   async function handleAddProduct(event) {
@@ -161,7 +159,6 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
               index={index}
               prices={prices}
               handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-              handleIsCampaignChangeInstance={handleIsCampaignChangeInstance}
               removePriceField={removePriceField}
               addPriceField={addPriceField}
             />

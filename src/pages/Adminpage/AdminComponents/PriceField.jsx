@@ -1,6 +1,6 @@
 import FormInput from '../../../components/FormInput';
 
-export default function PriceField({ price, index, handlePriceOrDateChangeInstance, handleIsCampaignChangeInstance, prices, removePriceField, addPriceField }) {
+export default function PriceField({ price, index, handlePriceOrDateChangeInstance, prices, removePriceField, addPriceField }) {
     return (
       <fieldset key={price.price_id} className="border-4 border-solid black">
         <div className="px-2">
@@ -18,7 +18,7 @@ export default function PriceField({ price, index, handlePriceOrDateChangeInstan
             <input 
               type="checkbox" 
               checked={price.is_campaign} 
-              onChange={(event) => handleIsCampaignChangeInstance(index)(event.target.checked)} 
+              onChange={(event) => handlePriceOrDateChangeInstance("is_campaign", index)(event.target.checked)} 
             />
           </div>
           <FormInput

@@ -2,7 +2,6 @@ import FormInput from "../../../components/FormInput";
 import {
   handleInputChange,
   handleImageChange,
-  handleIsCampaignChange,
   handlePriceOrDateChange,
   handleSelectChange,
 } from "../AdminUtils/eventHandlers";
@@ -51,7 +50,6 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData);
-  const handleIsCampaignChangeInstance = handleIsCampaignChange(setProductData);
   const handleSelectChangeInstance = handleSelectChange(setProductData);
 
   return (
@@ -129,7 +127,6 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
                 index={index}
                 prices={productData.prices}
                 handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-                handleIsCampaignChangeInstance={handleIsCampaignChangeInstance}
               />
             );
           })}

@@ -46,25 +46,6 @@ function handlePriceOrDateChange(setProductData, setPrices) {
   };
 }
 
-function handleIsCampaignChange(setProductData, setPrices) {
-  return function (index) {
-    return function (value) {
-      setProductData((prevState) => {
-        const updatedPrices = [...prevState.prices];
-        updatedPrices[index] = { ...updatedPrices[index], is_campaign: value };
-        return { ...prevState, prices: updatedPrices };
-      });
-      if (setPrices) {
-        setPrices((prevPrices) => {
-          const updatedPrices = [...prevPrices];
-          updatedPrices[index] = { ...updatedPrices[index], is_campaign: value };
-          return updatedPrices;
-        });
-      }
-    };
-  };
-}
-
 function handleSelectChange(setProductData) {
   return function (name, value) {
     setProductData((prevState) => ({
@@ -74,4 +55,4 @@ function handleSelectChange(setProductData) {
   };
 }
 
-export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleIsCampaignChange, handleSelectChange };
+export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange };
