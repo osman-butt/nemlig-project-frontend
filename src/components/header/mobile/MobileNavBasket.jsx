@@ -6,7 +6,7 @@ function MobileNavBasket({ handleNav }) {
   const { cart } = useCart();
   return (
     <li className="p-4 pb-0 border-b border-[#d4793a] font-bold hover:text-[#d4793a] hover:cursor-pointer">
-      <Link onClick={handleNav} to="/basket">
+      <Link onClick={handleNav} to="/cart">
         {<AiOutlineShoppingCart size={30} />}
         <p>
           {cart &&

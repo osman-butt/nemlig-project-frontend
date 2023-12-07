@@ -8,7 +8,7 @@ function DesktopNavBasket() {
   return (
     <Link
       className=" pb-0 hover:text-[#d4793a] hover:cursor-pointer w-32 flex flex-col items-center"
-      to="/basket"
+      to="/cart"
     >
       {<AiOutlineShoppingCart size={22} />}
 

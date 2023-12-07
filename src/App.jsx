@@ -39,7 +39,7 @@ export default function App() {
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage />} />
         <Route path="/order" element={<Orderpage />} />
-        <Route path="/basket" element={<BasketPage />} />
+        <Route path="/cart" element={<BasketPage />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
         <Route path="/favorites" element={<FavoritePage />} />
