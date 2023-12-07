@@ -1,22 +1,27 @@
 import FormInput from "../../../components/FormInput.jsx";
-import { handleInputChange, handleImageChange, handlePriceOrDateChange, handleIsCampaignChange, handleSelectChange } from "../AdminUtils/eventHandlers.js";
+import {
+  handleInputChange,
+  handleImageChange,
+  handlePriceOrDateChange,
+  handleIsCampaignChange,
+  handleSelectChange,
+} from "../AdminUtils/eventHandlers.js";
 import PriceField from "./PriceField.jsx";
 import { useState } from "react";
 import axios from "../../../api/axios.js";
 
-export default function Createdialog({ closeDialog, labelData, categoryData}) {
+export default function Createdialog({ closeDialog, labelData, categoryData }) {
   // Dynamic field states
   const [prices, setPrices] = useState([{ price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
 
-  function addPriceField(){
+  function addPriceField() {
     setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
   }
 
-   function removePriceField(index){
+  function removePriceField(index) {
     setPrices(prices.filter((_, i) => i !== index));
-   }
+  }
 
- 
   const [productData, setProductData] = useState({
     product_name: "",
     product_underline: "",
@@ -42,15 +47,13 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
   const handleIsCampaignChangeInstance = handleIsCampaignChange(setProductData, setPrices);
   const handleSelectChangeInstance = handleSelectChange(setProductData);
 
-
-
   async function handleAddProduct(event) {
     event.preventDefault();
 
     const updatedProductData = {
       ...productData,
       ...(prices.length > 0 && { prices }),
-    }
+    };
 
     try {
       const response = await axios.post("/products", updatedProductData);
@@ -78,7 +81,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv navn på produkt her"
             name="product_name"
             value={productData.product_name}
-            onChange={(value) => handleInputChangeInstance('product_name', value)}
+            onChange={(value) => handleInputChangeInstance("product_name", value)}
           />
           <FormInput
             label="Produkt understregning:"
@@ -86,43 +89,58 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv produkt understregning her"
             name="product_underline"
             value={productData.product_underline}
-            onChange={(value) => handleInputChangeInstance('product_underline', value)}
-            />
+            onChange={(value) => handleInputChangeInstance("product_underline", value)}
+          />
           <FormInput
             label="Produktbeskrivelse:"
             type="text"
             placeholder="Skriv produktbeskrivelse her"
             name="product_description"
             value={productData.product_description}
-            onChange={(value) => handleInputChangeInstance('product_description', value)}
+            onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-            <div className="font-bold">
-          <FormInput
-            label="Billede:"
-            type="text"
-            placeholder="Indsæt link til billede her"
-            value={productData.image_url} 
-            onChange={(value) => handleImageChangeInstance('image_url', value)}
-           />
-            </div>
+          <div className="font-bold">
+            <FormInput
+              label="Billede:"
+              type="text"
+              placeholder="Indsæt link til billede her"
+              value={productData.image_url}
+              onChange={(value) => handleImageChangeInstance("image_url", value)}
+            />
+          </div>
 
-           <label className="font-bold"> Label:
-              <select 
-                name="labels" 
-                className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
-                onChange={(event) => handleSelectChangeInstance('labels', event.target.value)}
-              >
-                <option value="">Vælg label: </option>
-                {labelData.map(label => <option key={label.label_id} value={label.label_id}>{label.label_name}</option> )}
-                </select>
-            </label>
+          <label className="font-bold">
+            {" "}
+            Label:
+            <select
+              name="labels"
+              className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
+              onChange={(event) => handleSelectChangeInstance("labels", event.target.value)}
+            >
+              <option value="">Vælg label: </option>
+              {labelData.map((label) => (
+                <option key={label.label_id} value={label.label_id}>
+                  {label.label_name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-          
-          <label className="font-bold"> Kategori:
-          <select name="categories" className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline" onChange={(event) => handleSelectChangeInstance('categories', event.target.value)}>
-            <option value="">Vælg kategori: </option>
-            {categoryData.map(category => <option key={category.category_id} value={category.category_id}>{category.category_name}</option> )}
-          </select>
+          <label className="font-bold">
+            {" "}
+            Kategori:
+            <select
+              name="categories"
+              className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
+              onChange={(event) => handleSelectChangeInstance("categories", event.target.value)}
+            >
+              <option value="">Vælg kategori: </option>
+              {categoryData.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
           </label>
 
           <FormInput
@@ -131,9 +149,9 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
             placeholder="Skriv antal her"
             name="inventory_stock"
             value={productData.inventory_stock}
-            onChange={(value) => handleInputChangeInstance('inventory_stock', value)}
+            onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
-            
+
           {prices.map((price, index) => (
             <PriceField
               key={index}
@@ -146,8 +164,6 @@ export default function Createdialog({ closeDialog, labelData, categoryData}) {
               addPriceField={addPriceField}
             />
           ))}
-            
-          
 
           <div>
             <button
