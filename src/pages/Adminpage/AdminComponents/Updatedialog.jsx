@@ -7,6 +7,7 @@ import {
   handleSelectChange,
 } from "../AdminUtils/eventHandlers";
 import PriceField from "./PriceField.jsx";
+import SelectField from "./SelectField.jsx";
 import axios from "../../../api/axios";
 import { useState } from "react";
 
@@ -85,44 +86,26 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.images[0].image_url}
             onChange={(value) => handleImageChangeInstance("image_url", value)}
           />
-{(data.labels.length > 0 ? data.labels : [null]).map((label, index) => (
-  <label key={index} className="font-bold">
-    {" "}Labels:
-    <select
-      name={`labels[${index}]`}
-      onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
-      className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
-    >
-      <option value={label ? label.label_id : ""}>
-        {label ? label.label_name : "Vælg label"}
-      </option>
-      {labelData.map((label) => (
-        <option key={label.label_id} value={label.label_id}>
-          {label.label_name}
-        </option>
-      ))}
-    </select>
-  </label>
-))}
-{(data.categories.length > 0 ? data.categories : [null]).map((category, index) => (
-  <label key={index} className="font-bold">
-    {" "}Kategori:
-    <select
-      name={`categories[${index}]`}
-      onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
-      className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
-    >
-      <option value={category ? category.category_id : ""}>
-        {category ? category.category_name : "Vælg kategori"}
-      </option>
-      {categoryData.map((category) => (
-        <option key={category.category_id} value={category.category_id}>
-          {category.category_name}
-        </option>
-      ))}
-    </select>
-  </label>
-))}
+          {(data.labels.length > 0 ? data.labels : [null]).map((label, index) => (
+            <SelectField
+              key={index}
+              name={`labels[${index}]`}
+              value={label ? label.label_id : ""}
+              onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
+              options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
+              placeholder="Vælg label"
+            />
+          ))}
+          {(data.categories.length > 0 ? data.categories : [null]).map((category, index) => (
+            <SelectField
+              key={index}
+              name={`categories[${index}]`}
+              value={category ? category.category_id : ""}
+              onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
+              options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
+              placeholder="Vælg kategori"
+            />
+          ))}
           <FormInput
             label="Antal på lager:"
             type="text"
