@@ -167,7 +167,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             />
           ))}
 
-          <div>
+          <div className="flex flex-row justify-around">
             <button
               className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md mb-4 my-2 py-2 text-black font-medium text-xl"
               onClick={closeDialog}

@@ -35,7 +35,7 @@ export default function Table({ data, labelData, categoryData, setData, setUpdat
       <tr>
         <td className="border-black border-solid border-2">{data.product_id}</td>
         <td className="border-black border-solid border-2 p-1">
-          <img className="m-auto h-12 sm:h-14 md:h-16" src={data.images && data.images[0] ? data.images[0].image_url : ""} alt="" />
+          <img className="m-auto h-12 sm:h-14 md:h-16 sm:max-w-[100px]" src={data.images && data.images[0] ? data.images[0].image_url : ""} alt="" />
         </td>
         <td className="border-black border-solid border-2 p-1">{data.product_name}</td>
         <td className="border-black border-solid border-2 p-1">{data.prices && data.prices[0] ? data.prices[0].price + " kr." : "N/A"}</td>
