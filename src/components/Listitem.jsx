@@ -1,6 +1,8 @@
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import useCart from "../hooks/useCart";
 
 function Listitem({ product, addQuantity, deductQuantity }) {
+  const { incrementCartItem, decrementCartItem } = useCart();
   return (
     <>
       <tr className="text-left text-[14px] border-gray-500 border-b">
@@ -8,7 +10,7 @@ function Listitem({ product, addQuantity, deductQuantity }) {
           <div className="flex items-center py-2 align-middle">
             <img
               className="w-[30px] "
-              src={product.images.image_link}
+              src={product.images[0].image_url}
               alt="product-img"
             />
           </div>
@@ -40,14 +42,14 @@ function Listitem({ product, addQuantity, deductQuantity }) {
           <div className="flex flex-row items-center justify-center align-middle">
             <CiCircleMinus
               size={30}
-              onClick={() => deductQuantity(product.product_id)}
+              onClick={() => decrementCartItem(product)}
             />
             <p className="mx-1 w-[30px] py-1 px-1 bg-[#58644c] rounded-full font-bold text-white">
               {product.quantity}
             </p>
             <CiCirclePlus
               size={30}
-              onClick={() => addQuantity(product.product_id)}
+              onClick={() => incrementCartItem(product)}
             />
           </div>
         </td>
