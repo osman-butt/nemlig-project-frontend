@@ -14,6 +14,7 @@ import axios from "../../../api/axios.js";
 export default function Createdialog({ closeDialog, labelData, categoryData, setUpdate }) {
   // Dynamic field states
   const [prices, setPrices] = useState([{ price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
+  const [images, setImages] = useState([{ image_url: "" }]);
 
   function addPriceField() {
     setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
@@ -21,6 +22,12 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
 
   function removePriceField(index) {
     setPrices(prices.filter((_, i) => i !== index));
+  }
+  function addImageField() {
+    setImages([...images, { image_url: "" }]);
+  }
+  function removeImageField(index) {
+    setImages(images.filter((_, i) => i !== index));
   }
 
   const [productData, setProductData] = useState({
@@ -43,7 +50,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
 
   // Setup instances of event handlers
   const handleInputChangeInstance = handleInputChange(setProductData);
-  const handleImageChangeInstance = handleImageChange(setProductData);
+  const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
   const handleIsCampaignChangeInstance = handleIsCampaignChange(setProductData, setPrices);
   const handleSelectChangeInstance = handleSelectChange(setProductData);
@@ -54,6 +61,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
     const updatedProductData = {
       ...productData,
       ...(prices.length > 0 && { prices }),
+      ...(images.length > 0 && { images }),
     };
 
     try {
@@ -101,15 +109,25 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             value={productData.product_description}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-          <div className="font-bold">
-            <FormInput
-              label="Billede:"
-              type="text"
-              placeholder="Indsæt link til billede her"
-              value={productData.image_url}
-              onChange={(value) => handleImageChangeInstance("image_url", value)}
-            />
-          </div>
+          {images.map((image, index) => (
+            <div key={index}>
+              <FormInput
+                label={`Billede ${index + 1}:`}
+                type="text"
+                placeholder="Indsæt link til billede her"
+                value={image.image_url}
+                onChange={(value) => handleImageChangeInstance('image_url', index) (value)}
+              />
+              <div className="flex flex-row justify-between font-bold">
+                <button type="button" onClick={() => removeImageField(index)} disabled={images.length <= 1}>
+                  Fjern billede
+                </button>
+                <button type="button" onClick={addImageField}>
+                  Tilføj billede
+                </button>
+              </div>
+            </div>
+          ))}
 
           <SelectField
             name={`labels`}

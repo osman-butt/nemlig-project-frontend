@@ -7,14 +7,25 @@ function handleInputChange(setProductData) {
   };
 }
 
-function handleImageChange(setProductData) {
-  return function (name, value) {
-    setProductData((prevState) => ({
-      ...prevState,
-      images: [{ ...prevState.images[0], [name]: value }],
-    }));
+function handleImageChange(setProductData, setImages) {
+  return function (name, index) {
+    return function (value) {
+    setProductData((prevState) => {
+      const updatedImages = [...prevState.images];
+      updatedImages[index] = { ...updatedImages[index], [name]: value };
+      return { ...prevState, images: updatedImages };
+    });
+    if (setImages){
+      setImages((prevImages) => {
+        const updatedImages = [...prevImages];
+        updatedImages[index] = { ...updatedImages[index], [name]: value };
+        return updatedImages;
+      })
+    }
+  };
   };
 }
+
 
 function handlePriceOrDateChange(setProductData, setPrices) {
   return function (name, index) {
