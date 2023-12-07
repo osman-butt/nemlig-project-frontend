@@ -2,7 +2,7 @@ import { useState } from "react";
 import Table from "./Table";
 import Createdialog from "./Createdialog";
 
-export default function Admintable({ data, labelData, categoryData }) {
+export default function Admintable({ data, labelData, categoryData, setData }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const openDialog = () => {
     setDialogOpen(true);
@@ -28,13 +28,15 @@ export default function Admintable({ data, labelData, categoryData }) {
         Tilføj produkt
       </button>
       <table className="font-medium bg-[#e8e3d8] text-center text-xs sm:text-lg md:text-xl w-full">
-        <thead className="text-sm sm:text-xl md:text-2xl">
-          <th className="border-black border-solid border-2">ID</th>
-          <th className="border-black border-solid border-2">Billede</th>
-          <th className="border-black border-solid border-2">Produktnavn</th>
-          <th className="border-black border-solid border-2">Pris</th>
-          <th className="border-black border-solid border-2 p-2">Rediger</th>
-          <th className="border-black border-solid border-2">Slet</th>
+        <thead className="uppercase text-sm sm:text-xl md:text-2xl border-[3px] border-solid border-black">
+          <tr>
+            <th className="border-black border-solid border-[3px] p-1">ID</th>
+            <th className="border-black border-solid border-[3px] p-1">Billede</th>
+            <th className="border-black border-solid border-[3px] p-1">Produktnavn</th>
+            <th className="border-black border-solid border-[3px] p-1">Pris</th>
+            <th className="border-black border-solid border-[3px] p-1">Rediger</th>
+            <th className="border-black border-solid border-[3px] p-1">Slet</th>
+          </tr>
         </thead>
         <tbody>
           {data.map((item) => (
@@ -43,6 +45,7 @@ export default function Admintable({ data, labelData, categoryData }) {
               data={item}
               labelData={labelData}
               categoryData={categoryData}
+              setData={setData}
             />
           ))}
         </tbody>
