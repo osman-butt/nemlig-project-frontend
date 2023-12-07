@@ -10,7 +10,7 @@ import PriceField from "./PriceField.jsx";
 import { useState } from "react";
 import axios from "../../../api/axios.js";
 
-export default function Createdialog({ closeDialog, labelData, categoryData }) {
+export default function Createdialog({ closeDialog, labelData, categoryData, setUpdate }) {
   // Dynamic field states
   const [prices, setPrices] = useState([{ price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
 
@@ -59,6 +59,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData }) {
       const response = await axios.post("/products", updatedProductData);
 
       if (response.status === 200) {
+        setUpdate(true); // trigger a re-render
         console.log("Produkt tilføjet!");
         closeDialog();
       } else {

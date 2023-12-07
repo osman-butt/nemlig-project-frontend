@@ -2,7 +2,7 @@ import { useState } from "react";
 import Table from "./Table";
 import Createdialog from "./Createdialog";
 
-export default function Admintable({ data, labelData, categoryData, setData }) {
+export default function Admintable({ data, labelData, categoryData, setData, setUpdate }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const openDialog = () => {
     setDialogOpen(true);
@@ -13,18 +13,8 @@ export default function Admintable({ data, labelData, categoryData, setData }) {
 
   return (
     <div className="py-5 px-2 max-w-[1240px] m-auto">
-      {dialogOpen && (
-        <Createdialog
-          closeDialog={closeDialog}
-          data={data}
-          labelData={labelData}
-          categoryData={categoryData}
-        />
-      )}
-      <button
-        onClick={openDialog}
-        className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[150px] rounded-md my-4 py-2 text-black font-medium text-xl"
-      >
+      {dialogOpen && <Createdialog closeDialog={closeDialog} data={data} labelData={labelData} categoryData={categoryData} setUpdate={setUpdate} />}
+      <button onClick={openDialog} className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[150px] rounded-md my-4 py-2 text-black font-medium text-xl">
         Tilføj produkt
       </button>
       <table className="font-medium bg-[#e8e3d8] text-center text-xs sm:text-lg md:text-xl w-full">
@@ -40,13 +30,7 @@ export default function Admintable({ data, labelData, categoryData, setData }) {
         </thead>
         <tbody>
           {data.map((item) => (
-            <Table
-              key={item.product_id}
-              data={item}
-              labelData={labelData}
-              categoryData={categoryData}
-              setData={setData}
-            />
+            <Table key={item.product_id} data={item} labelData={labelData} categoryData={categoryData} setData={setData} setUpdate={setUpdate} />
           ))}
         </tbody>
       </table>

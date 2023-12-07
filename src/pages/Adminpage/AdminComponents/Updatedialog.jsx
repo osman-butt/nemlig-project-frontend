@@ -11,7 +11,7 @@ import SelectField from "./SelectField.jsx";
 import axios from "../../../api/axios";
 import { useState } from "react";
 
-export default function Updatedialog({ closeDialog, data, labelData, categoryData }) {
+export default function Updatedialog({ closeDialog, data, labelData, categoryData, setUpdate }) {
   const [productData, setProductData] = useState({
     product_name: data.product_name,
     product_underline: data.product_underline,
@@ -38,6 +38,10 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     try {
       const response = await axios.put(`/products/${data.product_id}`, productData);
       console.log(response);
+      if (response.status === 200) {
+        setUpdate(true); // trigger a re-render
+      }
+      closeDialog();
     } catch (err) {
       console.log(err);
     }

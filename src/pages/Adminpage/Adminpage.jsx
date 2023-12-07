@@ -15,6 +15,7 @@ export default function Adminpage() {
   const [totalPages, setTotalPages] = useState(1);
   const [labelData, setLabelData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,12 +33,13 @@ export default function Adminpage() {
         if (response.data.meta) {
           setTotalPages(response.data.meta.pagination.last_page);
         }
+        setUpdate(false);
       } catch (err) {
         console.log(err);
       }
     };
     fetchData();
-  }, [searchQuery, sort, label, page]);
+  }, [searchQuery, sort, label, page, update]);
 
   // Fetch all labels and categories
   useEffect(() => {
@@ -70,14 +72,11 @@ export default function Adminpage() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-fixed bg-center bg-cover"
-      style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
       <div className="pt-2">
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       </div>
-      <Admintable data={data} labelData={labelData} categoryData={categoryData} setData={setData} />
+      <Admintable data={data} labelData={labelData} categoryData={categoryData} setData={setData} setUpdate={setUpdate} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <Footer />
     </div>

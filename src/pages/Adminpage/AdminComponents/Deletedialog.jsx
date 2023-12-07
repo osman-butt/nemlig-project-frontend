@@ -1,11 +1,14 @@
 import axios from "../../../api/axios.js";
 
-export default function Deletedialog({ closeDialog, product_id, setData }) {
+export default function Deletedialog({ closeDialog, product_id, setData, setUpdate }) {
   const deleteProduct = async (product_id) => {
     try {
       const response = await axios.delete(`products/${product_id}`);
-      console.log("Produkt slettet:", response.data);
-      closeDialog();
+      if (response.status === 200) {
+        console.log("Produkt slettet:", response.data);
+        setUpdate(true); // trigger a re-render
+        closeDialog();
+      }
       setData((prevData) => prevData.filter((item) => item.product_id !== product_id));
     } catch (error) {
       console.error("Fejl ved sletning af produkt:", error);
