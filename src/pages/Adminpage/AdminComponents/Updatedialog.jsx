@@ -15,11 +15,15 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     product_name: data.product_name,
     product_underline: data.product_underline,
     product_description: data.product_description,
-    images: [{ image_url: data.images[0].image_url }],
+    images: data.images.map((image) => ({
+      image_id: image.image_id,
+      image_url: image.image_url,
+    })),
     labels: [],
     categories: [],
     inventory_stock: data.inventory.inventory_stock,
     prices: data.prices.map((price) => ({
+      price_id: price.price_id,
       price: price.price,
       starting_at: price.starting_at,
       is_campaign: price.is_campaign,
@@ -29,6 +33,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
   async function handleUpdateProduct(event) {
     event.preventDefault();
+    console.log(`Product data:`, productData);
     try {
       const response = await axios.put(`/products/${data.product_id}`, productData);
       console.log(response);
@@ -84,7 +89,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             {" "}
             Labels:
             <select
-              name="categories"
+              name="labels"
               onChange={(event) => handleSelectChangeInstance("labels", event.target.value)}
               className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
             >
@@ -126,7 +131,6 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
           />
           <fieldset className="border-4 border-solid black">
             {productData.prices.map((price, index) => {
-              console.log(price);
               return (
                 <PriceField
                   key={index}
