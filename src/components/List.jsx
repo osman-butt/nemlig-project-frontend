@@ -3,11 +3,15 @@ import useCart from "../hooks/useCart";
 import Listitem from "./Listitem";
 import usePrivateAxios from "../hooks/usePrivateAxios.js";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 function List() {
   const { cart } = useCart();
   const [customer, setCustomer] = useState();
   const { auth } = useAuth();
+
+  const navigate = useNavigate();
+
   const privateAxios = usePrivateAxios();
   useEffect(() => {
     const fetchCustomer = async () => {
@@ -99,16 +103,26 @@ function List() {
                 kr.
               </p>
             </div>
-            {cart.length > 0 && (
-              <button
-                onClick={() => console.log("BESTILT")}
-                className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
-                  cart.length === 0 && "disabled cursor-not-allowed"
-                }`}
-              >
-                Bestil
-              </button>
-            )}
+            {cart.length > 0 &&
+              (auth?.accessToken ? (
+                <button
+                  onClick={() => console.log("BESTILT")}
+                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
+                    cart.length === 0 && "disabled cursor-not-allowed"
+                  }`}
+                >
+                  Bestil
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate("/login")}
+                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
+                    cart.length === 0 && "disabled cursor-not-allowed"
+                  }`}
+                >
+                  Login
+                </button>
+              ))}
           </div>
         </section>
       </div>
