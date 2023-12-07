@@ -111,7 +111,7 @@ function List() {
                     cart.length === 0 && "disabled cursor-not-allowed"
                   }`}
                 >
-                  Bestil
+                  Gå til checkud
                 </button>
               ) : (
                 <button
