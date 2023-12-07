@@ -27,11 +27,6 @@ function CartProvider({ children }) {
     return items;
   }
 
-  async function deleteCartDB() {
-    const response = await privateAxios.delete("/cart/items");
-    return response;
-  }
-
   async function deleteCartLocalStorage() {
     setItem([]);
     return getItem();
@@ -44,6 +39,51 @@ function CartProvider({ children }) {
       quantity: item.quantity,
     }));
     return items;
+  }
+
+  // Increment cart item
+  async function incrementCartItem(product_id) {
+    const productIndex = cart.findIndex(item => item.product_id === product_id);
+
+    const updatedBasket = [...cart];
+    updatedBasket[productIndex] = {
+      ...updatedBasket[productIndex],
+      quantity: updatedBasket[productIndex].quantity + 1,
+    };
+    if (auth?.accessToken) {
+      await privateAxios.put("/cart/items", {
+        product_id: product_id,
+        quantity: 1,
+      });
+      setCart(updatedBasket);
+    } else {
+      setCart(updatedBasket);
+      setItem(updatedBasket);
+    }
+  }
+
+  // Increment cart item
+  async function decrementCartItem(product_id) {
+    const productIndex = cart.findIndex(item => item.product_id === product_id);
+
+    const updatedBasket = [...cart];
+    updatedBasket[productIndex] = {
+      ...updatedBasket[productIndex],
+      quantity: updatedBasket[productIndex].quantity - 1,
+    };
+
+    updatedBasket[productIndex].quantity === 0 &&
+      updatedBasket.splice(productIndex, 1);
+    if (auth?.accessToken) {
+      await privateAxios.put("/cart/items", {
+        product_id: product_id,
+        quantity: -1,
+      });
+      setCart(updatedBasket);
+    } else {
+      setCart(updatedBasket);
+      setItem(updatedBasket);
+    }
   }
 
   useEffect(() => {
@@ -60,10 +100,6 @@ function CartProvider({ children }) {
 
     const removeLocalStorage = () => {
       deleteCartLocalStorage();
-    };
-
-    const removeCartDB = async () => {
-      await deleteCartDB();
     };
 
     const postLocalCartToDB = async data => {
@@ -89,7 +125,9 @@ function CartProvider({ children }) {
   }, [auth]);
 
   return (
-    <CartContext.Provider value={{ cart, setCart }}>
+    <CartContext.Provider
+      value={{ cart, setCart, incrementCartItem, decrementCartItem }}
+    >
       {children}
     </CartContext.Provider>
   );
