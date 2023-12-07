@@ -27,7 +27,7 @@ export default function Admintable({ data, labelData, categoryData }) {
       >
         Tilføj produkt
       </button>
-      <table className="font-medium bg-[#e8e3d8] text-center text-xs sm:text-lg md:text-xl">
+      <table className="font-medium bg-[#e8e3d8] text-center text-xs sm:text-lg md:text-xl w-full">
         <thead className="text-sm sm:text-xl md:text-2xl">
           <th className="border-black border-solid border-2">ID</th>
           <th className="border-black border-solid border-2">Billede</th>
@@ -36,7 +36,7 @@ export default function Admintable({ data, labelData, categoryData }) {
           <th className="border-black border-solid border-2 p-2">Rediger</th>
           <th className="border-black border-solid border-2">Slet</th>
         </thead>
-        <tbody className="">
+        <tbody>
           {data.map((item) => (
             <Table
               key={item.product_id}

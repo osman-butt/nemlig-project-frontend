@@ -53,7 +53,7 @@ export default function Table({ data, labelData, categoryData }) {
         </td>
         <td
           onClick={() => openDialog("update")}
-          className="border-black border-solid border-2 p-1 hover:text-[#d4793a] w-[2%]"
+          className="border-black border-solid border-2 p-1 hover:text-[#d4793a]"
         >
           {editIcon}
         </td>
