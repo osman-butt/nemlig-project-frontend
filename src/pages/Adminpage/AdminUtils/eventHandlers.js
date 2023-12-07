@@ -55,11 +55,11 @@ function handleIsCampaignChange(setProductData, setPrices) {
   }
 }
 
-function handleSelectChange(setState) {
+function handleSelectChange(setProductData) {
   return function (name, value) {
-    setState(prevState => ({
+    setProductData(prevState => ({
       ...prevState,
-      [name]: Array.isArray(Number(value)) ? Number(value) : [Number(value)],
+      [name]: [...prevState[name], Number(value)],
     }));
   };
 }
