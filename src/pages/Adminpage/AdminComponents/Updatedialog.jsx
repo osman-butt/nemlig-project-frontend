@@ -83,14 +83,19 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.product_description || ""}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
+          {productData.images.map((image, index) => {
+            return (
           <FormInput
+            key={index}
             label="Billede:"
             type="text"
             placeholder="Indsæt link til billede her"
             value={productData.images[0].image_url}
             onChange={(value) => handleImageChangeInstance("image_url", value)}
           />
-
+          );
+        })};
+        
           <SelectField
             name={`labels]`}
             value={productData.labels[0] || ""}
