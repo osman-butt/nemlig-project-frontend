@@ -25,14 +25,14 @@ export default function PriceField({ price, index, handlePriceOrDateChangeInstan
             label="Start dato"
             type="date"
             name="starting_at"
-            value={price.starting_at}
+            value={price.starting_at ? new Date(price.starting_at).toISOString().split('T')[0] : ''}
             onChange={(value) => handlePriceOrDateChangeInstance('starting_at', index)(value)}
           />
           <FormInput
             label="Slut dato"
             type="date"
             name="ending_at"
-            value={price.ending_at}
+            value={price.ending_at ? new Date(price.ending_at).toISOString().split('T')[0] : ''}
             onChange={(value) => handlePriceOrDateChangeInstance('ending_at', index)(value)}
           />
           <div className="flex flex-row justify-between font-bold">

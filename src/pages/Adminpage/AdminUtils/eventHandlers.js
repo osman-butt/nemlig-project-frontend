@@ -24,11 +24,13 @@ function handlePriceOrDateChange(setProductData, setPrices) {
         updatedPrices[index] = { ...updatedPrices[index], [name]: name === 'price' ? Number(value) : value };
         return { ...prevState, prices: updatedPrices };
       });
+      if (setPrices){
       setPrices(prevPrices => {
         const updatedPrices = [...prevPrices];
         updatedPrices[index] = { ...updatedPrices[index], [name]: name === 'price' ? Number(value) : value };
         return updatedPrices;
       });
+      }
     }
   }
 }
@@ -41,11 +43,14 @@ function handleIsCampaignChange(setProductData, setPrices) {
         updatedPrices[index] = { ...updatedPrices[index], is_campaign: value };
         return { ...prevState, prices: updatedPrices };
       });
+      if (setPrices){
       setPrices(prevPrices => {
         const updatedPrices = [...prevPrices];
         updatedPrices[index] = { ...updatedPrices[index], is_campaign: value };
         return updatedPrices;
+        
       });
+    }
     }
   }
 }
