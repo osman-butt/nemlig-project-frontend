@@ -56,7 +56,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
   return (
     <div className="fixed overflow-scroll inset-0 pt-10 items-center justify-center z-50 bg-black bg-opacity-50">
-      <dialog open className="">
+      <dialog open className="rounded-md">
         <h1 className="text-center text-2xl font-bold py-3">Opdater vare</h1>
         <form onSubmit={handleUpdateProduct} className="gap-y-2 px-10 grid">
           <FormInput
@@ -115,20 +115,20 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.inventory_stock}
             onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
-          <fieldset className="border-4 border-solid black">
-            {productData.prices.map((price, index) => {
-              return (
-                <PriceField
-                  key={index}
-                  price={price}
-                  index={index}
-                  prices={productData.prices}
-                  handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-                  handleIsCampaignChangeInstance={handleIsCampaignChangeInstance}
-                />
-              );
-            })}
-          </fieldset>
+
+          {productData.prices.map((price, index) => {
+            return (
+              <PriceField
+                key={index}
+                price={price}
+                index={index}
+                prices={productData.prices}
+                handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
+                handleIsCampaignChangeInstance={handleIsCampaignChangeInstance}
+              />
+            );
+          })}
+
           <div>
             <button
               className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md mb-4 my-2 py-2 text-black font-medium text-xl"

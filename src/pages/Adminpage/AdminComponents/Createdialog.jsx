@@ -7,6 +7,7 @@ import {
   handleSelectChange,
 } from "../AdminUtils/eventHandlers.js";
 import PriceField from "./PriceField.jsx";
+import SelectField from "./SelectField.jsx";
 import { useState } from "react";
 import axios from "../../../api/axios.js";
 
@@ -60,7 +61,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
 
       if (response.status === 200) {
         setUpdate(true); // trigger a re-render
-        console.log("Produkt tilføjet!");
+        console.log("Produkt tilføjet!", response.data);
         closeDialog();
       } else {
         console.error("Noget gik galt ved tilføjelse af produktet.");
@@ -110,39 +111,21 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             />
           </div>
 
-          <label className="font-bold">
-            {" "}
-            Label:
-            <select
-              name="labels"
-              className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
-              onChange={(event) => handleSelectChangeInstance("labels", event.target.value)}
-            >
-              <option value="">Vælg label: </option>
-              {labelData.map((label) => (
-                <option key={label.label_id} value={label.label_id}>
-                  {label.label_name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <SelectField
+            name={`labels`}
+            value={productData.labels[0] || ""}
+            onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
+            options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
+            placeholder="Vælg label"
+          />
 
-          <label className="font-bold">
-            {" "}
-            Kategori:
-            <select
-              name="categories"
-              className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline"
-              onChange={(event) => handleSelectChangeInstance("categories", event.target.value)}
-            >
-              <option value="">Vælg kategori: </option>
-              {categoryData.map((category) => (
-                <option key={category.category_id} value={category.category_id}>
-                  {category.category_name}
-                </option>
-              ))}
-            </select>
-          </label>
+          <SelectField
+            name={`categories`}
+            value={productData.categories[0] || ""}
+            onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
+            options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
+            placeholder="Vælg kategori"
+          />
 
           <FormInput
             label="Antal på lager:"
