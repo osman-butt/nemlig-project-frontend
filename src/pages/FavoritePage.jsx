@@ -6,7 +6,7 @@ import Search from "../components/Search";
 import Items from "../components/Items";
 import Footer from "../components/Footer";
 
-export default function FavoritePage({ addToBasket }) {
+export default function FavoritePage() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
@@ -48,10 +48,12 @@ export default function FavoritePage({ addToBasket }) {
     setSearchQuery(searchQuery);
   }
 
-  async function removeFromFavorites(product){
+  async function removeFromFavorites(product) {
     try {
       await privateAxios.delete(`/favorites/${product.favorite_id}`);
-      const newProducts = products.filter((item) => item.favorite_id !== product.favorite_id);
+      const newProducts = products.filter(
+        item => item.favorite_id !== product.favorite_id
+      );
       setProducts(newProducts);
     } catch (err) {
       console.log(err);
@@ -60,10 +62,21 @@ export default function FavoritePage({ addToBasket }) {
 
   return (
     <>
-      <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
+      <div
+        className="min-h-screen bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${image})` }}
+      >
         <Navbar setCategory={setCategory} />
-        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} removeFromFavorites={removeFromFavorites} alwaysShowStar={true} />
+        <Search
+          handleSort={handleSort}
+          handleFilter={handleFilter}
+          handleSearch={handleSearch}
+        />
+        <Items
+          products={products}
+          removeFromFavorites={removeFromFavorites}
+          alwaysShowStar={true}
+        />
       </div>
       <Footer />
     </>
