@@ -71,7 +71,9 @@ export default function Adminpage() {
 
   return (
     <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
+      <div className="pt-2">
       <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
+      </div>
       <Admintable data={data} labelData={labelData} categoryData={categoryData} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <Footer />
