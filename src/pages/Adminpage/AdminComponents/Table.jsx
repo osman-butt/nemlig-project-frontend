@@ -3,13 +3,12 @@ import { AiOutlineEdit, AiOutlineClose } from "react-icons/ai";
 import Updatedialog from "./Updatedialog";
 import Deletedialog from "./Deletedialog";
 
-export default function Table({ data, labelData, categoryData }) {
+export default function Table({ data, labelData, categoryData, setData }) {
   const [dialogType, setDialogType] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const iconStyle = {
     cursor: "pointer",
-    display: "block",
     margin: "auto",
   };
 
@@ -35,14 +34,14 @@ export default function Table({ data, labelData, categoryData }) {
         />
       )}
       {dialogOpen && dialogType === "delete" && (
-        <Deletedialog closeDialog={closeDialog} product_id={data.product_id} />
+        <Deletedialog closeDialog={closeDialog} product_id={data.product_id} setData={setData} />
       )}
 
-      <tr className="">
+      <tr>
         <td className="border-black border-solid border-2">{data.product_id}</td>
         <td className="border-black border-solid border-2 p-1">
           <img
-            className="w-5 sm:w-7 md:w-8 m-auto"
+            className="m-auto h-12 sm:h-14 md:h-16"
             src={data.images && data.images[0] ? data.images[0].image_url : ""}
             alt=""
           />

@@ -77,7 +77,7 @@ export default function Adminpage() {
       <div className="pt-2">
         <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       </div>
-      <Admintable data={data} labelData={labelData} categoryData={categoryData} />
+      <Admintable data={data} labelData={labelData} categoryData={categoryData} setData={setData} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
       <Footer />
     </div>
