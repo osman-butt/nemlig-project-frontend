@@ -90,8 +90,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             label="Billede:"
             type="text"
             placeholder="Indsæt link til billede her"
-            value={productData.images[0].image_url}
-            onChange={(value) => handleImageChangeInstance("image_url", value)}
+            value={image.image_url}
+            onChange={(value) => handleImageChangeInstance("image_url", index)(value)}
           />
           );
         })}
