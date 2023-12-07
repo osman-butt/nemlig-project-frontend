@@ -42,17 +42,25 @@ function CartProvider({ children }) {
   }
 
   // Increment cart item
-  async function incrementCartItem(product_id) {
-    const productIndex = cart.findIndex(item => item.product_id === product_id);
+  async function incrementCartItem(product) {
+    const productIndex = cart.findIndex(
+      item => item.product_id === product.product_id
+    );
 
     const updatedBasket = [...cart];
-    updatedBasket[productIndex] = {
-      ...updatedBasket[productIndex],
-      quantity: updatedBasket[productIndex].quantity + 1,
-    };
+    // Check if it exists in basket
+    if (productIndex > -1) {
+      updatedBasket[productIndex] = {
+        ...updatedBasket[productIndex],
+        quantity: updatedBasket[productIndex].quantity + 1,
+      };
+    } else {
+      const newItem = { ...product, quantity: 1 };
+      updatedBasket.push(newItem);
+    }
     if (auth?.accessToken) {
       await privateAxios.put("/cart/items", {
-        product_id: product_id,
+        product_id: product.product_id,
         quantity: 1,
       });
       setCart(updatedBasket);
@@ -63,8 +71,10 @@ function CartProvider({ children }) {
   }
 
   // Increment cart item
-  async function decrementCartItem(product_id) {
-    const productIndex = cart.findIndex(item => item.product_id === product_id);
+  async function decrementCartItem(product) {
+    const productIndex = cart.findIndex(
+      item => item.product_id === product.product_id
+    );
 
     const updatedBasket = [...cart];
     updatedBasket[productIndex] = {
@@ -76,7 +86,7 @@ function CartProvider({ children }) {
       updatedBasket.splice(productIndex, 1);
     if (auth?.accessToken) {
       await privateAxios.put("/cart/items", {
-        product_id: product_id,
+        product_id: product.product_id,
         quantity: -1,
       });
       setCart(updatedBasket);
