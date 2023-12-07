@@ -19,8 +19,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
       image_id: image.image_id,
       image_url: image.image_url,
     })),
-    labels: [],
-    categories: [],
+    labels: data.labels.map((label) => label.label_id),
+    categories: data.categories.map((category) => category.category_id),
     inventory_stock: data.inventory.inventory_stock,
     prices: data.prices.map((price) => ({
       price_id: price.price_id,

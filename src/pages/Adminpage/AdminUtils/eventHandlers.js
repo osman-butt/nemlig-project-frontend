@@ -55,14 +55,13 @@ function handleIsCampaignChange(setProductData, setPrices) {
   }
 }
 
-function handleSelectChange(setProductData) {
-  return function(name, value) {
-      setProductData(prevState => ({
-        ...prevState,
-        [name]: name === "labels" ? [...prevState.labels, Number(value)] : [...prevState.categories, Number(value)]
-      }));
-
-  }
+function handleSelectChange(setState) {
+  return function (name, value) {
+    setState(prevState => ({
+      ...prevState,
+      [name]: Array.isArray(Number(value)) ? Number(value) : [Number(value)],
+    }));
+  };
 }
 
 export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleIsCampaignChange, handleSelectChange }
