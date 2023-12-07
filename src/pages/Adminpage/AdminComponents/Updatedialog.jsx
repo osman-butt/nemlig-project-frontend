@@ -25,16 +25,25 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
   })));
 
   function addPriceField() {
-    setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
-  }
-  function removePriceField(index) {
-    setPrices(prices.filter((_, i) => i !== index));
+    const newPrice = { price: "", starting_at: "", is_campaign: false, ending_at: "" };
+    setPrices([...prices, newPrice]);
+    setProductData({ ...productData, prices: [...productData.prices, newPrice] });
   }
   function addImageField() {
-    setImages([...images, { image_url: "" }]);
+    const newImage = { image_url: "" };
+    setImages([...images, newImage]);
+    setProductData({ ...productData, images: [...productData.images, newImage]});
+    
+  }
+  function removePriceField(index) {
+    const newPrices = prices.filter((_, i) => i !== index);
+    setPrices(newPrices);
+    setProductData({ ...productData, prices: newPrices});
   }
   function removeImageField(index) {
-    setImages(images.filter((_, i) => i !== index));
+    const newImages = images.filter((_, i) => i !== index);
+    setImages(newImages);
+    setProductData({ ...productData, images: newImages});
   }
 
   const [productData, setProductData] = useState({
@@ -59,7 +68,12 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
   async function handleUpdateProduct(event) {
     event.preventDefault();
-    console.log(`Product data:`, productData);
+    const updatedProductData = {
+    ...productData,
+    prices: prices,
+    images: images,
+    };
+    console.log(`Product data:`, updatedProductData);
     try {
       const response = await axios.put(`/products/${data.product_id}`, productData);
       console.log(response);
