@@ -146,7 +146,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             >
               Luk
             </button>
-            <button className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md ml-[7rem] mb-4 my-2 py-2 text-black font-medium text-xl">
+            <button className="bg-[rgb(212,121,58)] hover:bg-[#ecbc9a] w-[100px] rounded-md ml-[11.5rem] py-2 text-black font-medium text-xl">
               Opdater
             </button>
           </div>
