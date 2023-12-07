@@ -50,7 +50,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
           <FormInput label="Produktnavn:" type="text" placeholder="Skriv navn på produkt her" name="product_name" value={productData.product_name} onChange={(value) => handleInputChangeInstance('product_name', value)}/>
           <FormInput label="Produkt understregning:" type="text" placeholder="Skriv navn på produkt her" name="product_underline" value={productData.product_underline} onChange={(value) => handleInputChangeInstance('product_underline', value)} />
-          <FormInput label="Produktbeskrivelse:" type="text" placeholder="Skriv navn på produkt her" name="product_description" value={productData.product_description} onChange={(value) => handleInputChangeInstance('product_description', value)} />
+          <FormInput label="Produktbeskrivelse:" type="text" placeholder="Skriv navn på produkt her" name="product_description" value={productData.product_description || ""} onChange={(value) => handleInputChangeInstance('product_description', value)} />
           <FormInput label="Billede:" type="text" placeholder="Indsæt link til billede her" value={productData.images[0].image_url} onChange={(value) => handleImageChangeInstance('image_url', value)}/>
           <label className="font-bold"> Labels:
           <select name="categories" onChange={(event) => handleSelectChangeInstance('labels', event.target.value)} className="mt-2 w-full px-4 py-3 leading-tight text-black border rounded shadow focus:outline-none focus:shadow-outline">
