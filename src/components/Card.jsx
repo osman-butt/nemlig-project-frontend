@@ -5,7 +5,6 @@ import useCart from "../hooks/useCart";
 
 export default function Card({
   data,
-  addToBasket,
   addToFavorites,
   removeFromFavorites,
   auth,

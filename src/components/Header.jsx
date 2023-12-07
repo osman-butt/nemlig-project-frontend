@@ -5,7 +5,7 @@ import NavLogo from "./header/NavLogo";
 import useAuth from "../hooks/useAuth";
 import { useLocation } from "react-router";
 
-export default function Header({ basket }) {
+export default function Header() {
   const [nav, setNav] = useState(true);
   const { auth } = useAuth();
   const location = useLocation();
@@ -29,8 +29,8 @@ export default function Header({ basket }) {
       </div>
       <div className="flex justify-between items-center h-18 max-w-[1240px] mx-auto px-4 pb-4 text-black uppercase font-medium">
         <NavLogo />
-        <DesktopNav basket={basket} auth={auth} />
-        <MobileNav handleNav={handleNav} basket={basket} nav={nav} />
+        <DesktopNav auth={auth} />
+        <MobileNav handleNav={handleNav} nav={nav} />
       </div>
     </>
   );

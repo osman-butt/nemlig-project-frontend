@@ -9,8 +9,7 @@ import Pagination from "../components/Pagination";
 import usePrivateAxios from "../hooks/usePrivateAxios.js";
 import useAuth from "../hooks/useAuth.js";
 
-
-export default function Shoppage({ addToBasket }) {
+export default function Shoppage() {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
@@ -22,13 +21,20 @@ export default function Shoppage({ addToBasket }) {
   const privateAxios = usePrivateAxios();
 
   // In order to get the user email from the auth object, we need to destructure it from the useAuth hook
-  const { auth } = useAuth(); 
+  const { auth } = useAuth();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         // If the user is authenticated, we want to fetch the authenticated products, otherwise we want to fetch the non-authenticated products
-        const url = auth && auth.user_email ? (searchQuery ? "/products/authenticated/search" : "/products/authenticated") : (searchQuery ? "/products/search" : "/products");
+        const url =
+          auth && auth.user_email
+            ? searchQuery
+              ? "/products/authenticated/search"
+              : "/products/authenticated"
+            : searchQuery
+            ? "/products/search"
+            : "/products";
         const axiosInstance = auth && auth.user_email ? privateAxios : axios;
 
         const response = await axiosInstance.get(url, {
@@ -73,17 +79,25 @@ export default function Shoppage({ addToBasket }) {
         product_id: product.product_id,
       });
       // update state of products - return a new array that includes the updated product (added to favorite) and all the other products so we dont have to refetch each time
-      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: 1} : p))
+      setProducts(
+        products.map(p =>
+          p.product_id === product.product_id ? { ...p, favorite_id: 1 } : p
+        )
+      );
     } catch (error) {
       console.error(error);
     }
   }
 
-  async function removeFromFavorites(product){
+  async function removeFromFavorites(product) {
     try {
       await privateAxios.delete(`/favorites/${product.favorite_id}`);
       // update state of products - return a new array that includes the updated product (removed from favorite) and all the other products so we dont have to refetch each time
-      setProducts(products.map(p => p.product_id === product.product_id ? {...p, favorite_id: null} : p));
+      setProducts(
+        products.map(p =>
+          p.product_id === product.product_id ? { ...p, favorite_id: null } : p
+        )
+      );
     } catch (err) {
       console.log(err);
     }
@@ -91,10 +105,23 @@ export default function Shoppage({ addToBasket }) {
 
   return (
     <>
-      <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
-        <Navbar setCategory={setCategory} setPage={setPage}/>
-        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
-        <Items addToBasket={addToBasket} products={products} addToFavorites={addToFavorites} removeFromFavorites={removeFromFavorites} auth={auth} alwaysShowStar={false}/>
+      <div
+        className="min-h-screen bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <Navbar setCategory={setCategory} setPage={setPage} />
+        <Search
+          handleSort={handleSort}
+          handleFilter={handleFilter}
+          handleSearch={handleSearch}
+        />
+        <Items
+          products={products}
+          addToFavorites={addToFavorites}
+          removeFromFavorites={removeFromFavorites}
+          auth={auth}
+          alwaysShowStar={false}
+        />
         {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />

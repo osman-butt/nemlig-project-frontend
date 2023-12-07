@@ -1,9 +1,8 @@
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
-import { useEffect } from "react";
 
-function DesktopNavBasket({ basket }) {
+function DesktopNavBasket() {
   const { cart } = useCart();
 
   return (

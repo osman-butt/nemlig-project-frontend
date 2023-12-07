@@ -1,7 +1,7 @@
 import useCart from "../hooks/useCart";
 import Listitem from "./Listitem";
 
-function List({ basket, addQuantity, deductQuantity }) {
+function List() {
   const { cart } = useCart();
   return (
     <div className="max-w-[900px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
@@ -20,12 +20,7 @@ function List({ basket, addQuantity, deductQuantity }) {
             <tbody className="">
               {cart.length > 0 &&
                 cart.map(product => (
-                  <Listitem
-                    key={product.product_id}
-                    product={product}
-                    addQuantity={addQuantity}
-                    deductQuantity={deductQuantity}
-                  />
+                  <Listitem key={product.product_id} product={product} />
                 ))}
             </tbody>
           </table>

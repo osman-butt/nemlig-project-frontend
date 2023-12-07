@@ -1,7 +1,7 @@
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import useCart from "../hooks/useCart";
 
-function Listitem({ product, addQuantity, deductQuantity }) {
+function Listitem({ product }) {
   const { incrementCartItem, decrementCartItem } = useCart();
   return (
     <>
