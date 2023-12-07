@@ -12,7 +12,7 @@ export default function Admintable({ data, labelData, categoryData }) {
   };
 
   return (
-    <div className="py-5 max-w-[1240px] m-auto">
+    <div className="py-5 px-2 max-w-[1240px] m-auto">
       {dialogOpen && (
         <Createdialog
           closeDialog={closeDialog}

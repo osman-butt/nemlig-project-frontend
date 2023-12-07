@@ -45,9 +45,9 @@ export default function Adminpage() {
       try {
         const labelResponse = await axios.get("/products/labels");
         const categoriesResponse = await axios.get("/products/categories");
-        setLabelData(labelResponse.data)
-        setCategoryData(categoriesResponse.data)
-      } catch (err){
+        setLabelData(labelResponse.data);
+        setCategoryData(categoriesResponse.data);
+      } catch (err) {
         console.log(err);
       }
     };
@@ -70,9 +70,12 @@ export default function Adminpage() {
   }
 
   return (
-    <div className="min-h-screen bg-fixed bg-center bg-cover" style={{ backgroundImage: `url(${image})` }}>
+    <div
+      className="min-h-screen bg-fixed bg-center bg-cover"
+      style={{ backgroundImage: `url(${image})` }}
+    >
       <div className="pt-2">
-      <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
+        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
       </div>
       <Admintable data={data} labelData={labelData} categoryData={categoryData} />
       <Pagination page={page} totalPages={totalPages} setPage={setPage} />
