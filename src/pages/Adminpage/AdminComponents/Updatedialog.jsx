@@ -86,26 +86,23 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.images[0].image_url}
             onChange={(value) => handleImageChangeInstance("image_url", value)}
           />
-          {(data.labels.length > 0 ? data.labels : [null]).map((label, index) => (
-            <SelectField
-              key={index}
-              name={`labels[${index}]`}
-              value={label ? label.label_id : ""}
-              onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
-              options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
-              placeholder="Vælg label"
-            />
-          ))}
-          {(data.categories.length > 0 ? data.categories : [null]).map((category, index) => (
-            <SelectField
-              key={index}
-              name={`categories[${index}]`}
-              value={category ? category.category_id : ""}
-              onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
-              options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
-              placeholder="Vælg kategori"
-            />
-          ))}
+
+          <SelectField
+            name={`labels]`}
+            value={productData.labels[0] || ""}
+            onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
+            options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
+            placeholder="Vælg label"
+          />
+
+          <SelectField
+            name={`categories`}
+            value={productData.categories[0] || ""}
+            onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
+            options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
+            placeholder="Vælg kategori"
+          />
+
           <FormInput
             label="Antal på lager:"
             type="text"
