@@ -1,13 +1,45 @@
+// import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 import Listitem from "./Listitem";
 
 function List() {
   const { cart } = useCart();
+  // const [customer, setCustomer] = useState();
+  const { auth } = useAuth();
+
+  const navigate = useNavigate();
+
+  // const privateAxios = usePrivateAxios();
+  // useEffect(() => {
+  //   const fetchCustomer = async () => {
+  //     const response = await privateAxios.get("/customers");
+  //     console.log(response.data);
+  //     setCustomer(response.data);
+  //   };
+  //   auth?.accessToken ? fetchCustomer() : setCustomer();
+  // }, [auth]);
   return (
     <div className="max-w-[900px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
       <div className="flex flex-row justify-center mt-20 bg-[#e8e3d8] rounded">
         <section className="container w-full p-4 mb-4 rounded md:p-10">
-          <h1 className="pb-2 text-4xl text-left md:pb-4">Din kurv</h1>
+          <div className="flex flex-row justify-between mb-2 align-middle">
+            <h1 className="pb-2 text-4xl text-left align-middle md:pb-4">
+              Din kurv
+            </h1>
+            {/* {customer && (
+              <div className="text-left">
+                <h3 className="font-bold">Sendes til:</h3>
+                <p>{customer?.customer_name}</p>
+                <p>{customer?.addresses[0]?.street}</p>
+                <p>
+                  {customer?.addresses[0]?.zip_code}{" "}
+                  {customer?.addresses[0]?.city}
+                </p>
+              </div>
+            )} */}
+          </div>
           <table className="w-[100%] select-none" id="cart">
             <thead className="border-b-2 border-black">
               <tr className="text-left">
@@ -70,16 +102,26 @@ function List() {
                 kr.
               </p>
             </div>
-            {cart.length > 0 && (
-              <button
-                onClick={() => console.log("BESTILT")}
-                className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
-                  cart.length === 0 && "disabled cursor-not-allowed"
-                }`}
-              >
-                Bestil
-              </button>
-            )}
+            {cart.length > 0 &&
+              (auth?.accessToken ? (
+                <button
+                  onClick={() => navigate("/checkout")}
+                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
+                    cart.length === 0 && "disabled cursor-not-allowed"
+                  }`}
+                >
+                  Gå til checkud
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate("/login")}
+                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
+                    cart.length === 0 && "disabled cursor-not-allowed"
+                  }`}
+                >
+                  Login
+                </button>
+              ))}
           </div>
         </section>
       </div>
