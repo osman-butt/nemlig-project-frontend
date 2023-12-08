@@ -1,43 +1,11 @@
-import { useState } from "react";
-
-export default function Snackbar() {
-  const [showSnackbar, setShowSnackbar] = useState(false);
-  const [itemAdded, setItemAdded] = useState(false);
-
-  const handleAddToBasket = () => {
-    // Logic for adding item to basket goes here
-    // For example:
-    // addToBasket(item);
-
-    // Update state to show the snackbar and mark item as added
-    setShowSnackbar(true);
-    setItemAdded(true);
-
-    // Hide snackbar after 3 seconds (adjust timeout as needed)
-    setTimeout(() => {
-      setShowSnackbar(false);
-    }, 3000);
-  };
-
-  const handleUndo = () => {
-    // Logic for removing item from basket goes here
-    // For example:
-    // removeFromBasket(item);
-
-    // Update state to hide snackbar and mark item as not added
-    setShowSnackbar(false);
-    setItemAdded(false);
-  };
-
+export default function Snackbar({ showSnackbar }) {
   return (
-    <div>
-      <button onClick={handleAddToBasket}>Add to Basket</button>
-      {showSnackbar && (
-        <div>
-          <span>Item added to basket</span>
-          <button onClick={handleUndo}>Undo</button>
-        </div>
-      )}
+    <div
+      className={`bg-[#e8e3d8] w-[250px] h-14 p-2 m-auto flex rounded-md inset-0 top-[25rem] bg-opacity-90 fixed z-50 
+      ${showSnackbar ? "" : "hidden"}`}
+    >
+      <p className="text-black m-auto font-bold">Produkt tilføjet</p>
+      <button className="bg-[#d4793a] p-1.5 rounded m-auto">Fortryd</button>
     </div>
   );
 }
