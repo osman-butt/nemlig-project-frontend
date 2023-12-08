@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function Footer() {
   const companyName = "nemlig.com";
   return (
-    <div className="w-full mx-auto py-16 flex lg:grid-cols-3 gap-8 text-white bg-[#58644C]">
+    <div className="w-full mx-auto py-10 flex lg:grid-cols-3 gap-8 text-white bg-[#58644C]">
       <h1 className="font-bold text-center m-auto text-2xl hover:text-[#d4793a]">
         <Link to="/about">Om os</Link>
       </h1>
