@@ -10,7 +10,7 @@ function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const { auth } = useAuth();
   const privateAxios = usePrivateAxios();
-  const { getItem, setItem } = useLocalStorage("basket");
+  const { getItem, setItem } = useLocalStorage("cart");
 
   function getCart() {
     const cartData = getItem() || [];
