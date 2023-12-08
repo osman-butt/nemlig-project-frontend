@@ -29,7 +29,7 @@ export default function Header() {
       </div>
       <div className="flex justify-between items-center h-18 max-w-[1240px] mx-auto px-4 pb-4 text-black uppercase font-medium">
         <NavLogo />
-        <DesktopNav auth={auth} />
+        <DesktopNav />
         <MobileNav handleNav={handleNav} nav={nav} />
       </div>
     </>

@@ -26,15 +26,15 @@ function Listitem({ product }) {
           {product.prices.length > 1 ? (
             <>
               <p className="line-through">
-                {product.prices[0].price.toFixed(2)} kr.
+                {(product.prices[0].price * product.quantity).toFixed(2)} kr.
               </p>
               <p className="font-bold">
-                {product.prices[1].price.toFixed(2)} kr.
+                {(product.prices[1].price * product.quantity).toFixed(2)} kr.
               </p>
             </>
           ) : (
             <p className="font-bold">
-              {product.prices[0].price.toFixed(2)} kr.
+              {(product.prices[0].price * product.quantity).toFixed(2)} kr.
             </p>
           )}
         </td>
