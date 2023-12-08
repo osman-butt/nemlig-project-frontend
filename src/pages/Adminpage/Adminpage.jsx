@@ -4,7 +4,7 @@ import Search from "../../components/Search.jsx";
 import Admintable from "./AdminComponents/Admintable.jsx";
 import Pagination from "../../components/Pagination.jsx";
 import { useState, useEffect } from "react";
-import axios from "../../api/axios.js";
+import usePrivateAxios from "../../hooks/usePrivateAxios.js";
 
 export default function Adminpage() {
   const [data, setData] = useState([]);
@@ -17,11 +17,14 @@ export default function Adminpage() {
   const [categoryData, setCategoryData] = useState([]);
   const [update, setUpdate] = useState(false);
 
+
+  const privateAxios = usePrivateAxios();
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const url = searchQuery ? "/products/search" : "/products";
-        const response = await axios.get(url, {
+        const response = await privateAxios.get(url, {
           params: {
             search: searchQuery,
             sort: sort,
@@ -39,14 +42,14 @@ export default function Adminpage() {
       }
     };
     fetchData();
-  }, [searchQuery, sort, label, page, update]);
+  }, [searchQuery, sort, label, page, update, privateAxios]);
 
   // Fetch all labels and categories
   useEffect(() => {
     const fetchLabelsandCategories = async () => {
       try {
-        const labelResponse = await axios.get("/products/labels");
-        const categoriesResponse = await axios.get("/products/categories");
+        const labelResponse = await privateAxios.get("/products/labels");
+        const categoriesResponse = await privateAxios.get("/products/categories");
         setLabelData(labelResponse.data);
         setCategoryData(categoriesResponse.data);
       } catch (err) {
@@ -54,7 +57,7 @@ export default function Adminpage() {
       }
     };
     fetchLabelsandCategories();
-  }, []);
+  }, [privateAxios]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
