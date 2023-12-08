@@ -57,7 +57,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     })),
     labels: data.labels.map((label) => label.label_id),
     categories: data.categories.map((category) => category.category_id),
-    inventory_stock: data.inventory.inventory_stock,
+    inventory_stock: data.inventory ? data.inventory.inventory_stock : 0,
     prices: data.prices.map((price) => ({
       price_id: price.price_id,
       price: price.price,
