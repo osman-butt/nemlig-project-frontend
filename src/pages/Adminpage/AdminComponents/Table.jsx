@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineEdit, AiOutlineClose } from "react-icons/ai";
-import Updatedialog from "./Updatedialog";
-import Deletedialog from "./Deletedialog";
+import Updatedialog from "./Dialogs/Updatedialog";
+import Deletedialog from "./Dialogs/Deletedialog";
 
 export default function Table({ data, labelData, categoryData, setData, setUpdate }) {
   const [dialogType, setDialogType] = useState(null);

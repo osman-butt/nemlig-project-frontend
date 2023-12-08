@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Table from "./Table";
-import Createdialog from "./Createdialog";
+import Createdialog from "./Dialogs/Createdialog";
 
 export default function Admintable({ data, labelData, categoryData, setData, setUpdate }) {
   const [dialogOpen, setDialogOpen] = useState(false);

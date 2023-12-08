@@ -1,14 +1,15 @@
-import FormInput from "../../../components/FormInput.jsx";
+import FormInput from "../../../../components/FormInput.jsx";
 import {
   handleInputChange,
   handleImageChange,
   handlePriceOrDateChange,
   handleSelectChange,
-} from "../AdminUtils/eventHandlers.js";
-import PriceField from "./PriceField.jsx";
-import SelectField from "./SelectField.jsx";
+} from "../../AdminUtils/eventHandlers.js";
+import PriceField from "../InputFields/PriceFields.jsx";
+import SelectField from "../InputFields/SelectFields.jsx";
+import ImageFields from "../InputFields/ImageFields.jsx";
 import { useState } from "react";
-import axios from "../../../api/axios.js";
+import axios from "../../../../api/axios.js";
 
 export default function Createdialog({ closeDialog, labelData, categoryData, setUpdate }) {
   // Dynamic field states
@@ -107,25 +108,12 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             value={productData.product_description}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-          {images.map((image, index) => (
-            <div key={index}>
-              <FormInput
-                label={`Billede ${index + 1}:`}
-                type="text"
-                placeholder="Indsæt link til billede her"
-                value={image.image_url}
-                onChange={(value) => handleImageChangeInstance('image_url', index) (value)}
-              />
-              <div className="flex flex-row justify-between font-bold">
-                <button type="button" onClick={() => removeImageField(index)} disabled={images.length <= 1}>
-                  Fjern billede
-                </button>
-                <button type="button" onClick={addImageField}>
-                  Tilføj billede
-                </button>
-              </div>
-            </div>
-          ))}
+            <ImageFields
+              images={images}
+              handleImageChangeInstance={handleImageChangeInstance}
+              removeImageField={removeImageField}
+              addImageField={addImageField}
+            />
 
           <SelectField
             name={`labels`}
@@ -152,17 +140,14 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
 
-          {prices.map((price, index) => (
+
             <PriceField
-              key={index}
-              price={price}
-              index={index}
               prices={prices}
               handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
               removePriceField={removePriceField}
               addPriceField={addPriceField}
             />
-          ))}
+
 
           <div className="flex flex-row justify-around">
             <button

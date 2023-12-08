@@ -1,4 +1,4 @@
-import axios from "../../../api/axios.js";
+import axios from "../../../../api/axios.js";
 
 export default function Deletedialog({ closeDialog, product_id, setData, setUpdate }) {
   const deleteProduct = async (product_id) => {

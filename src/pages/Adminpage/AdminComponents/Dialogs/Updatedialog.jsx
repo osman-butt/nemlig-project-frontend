@@ -1,13 +1,14 @@
-import FormInput from "../../../components/FormInput";
+import FormInput from "../../../../components/FormInput.jsx";
 import {
   handleInputChange,
   handleImageChange,
   handlePriceOrDateChange,
   handleSelectChange,
-} from "../AdminUtils/eventHandlers";
-import PriceField from "./PriceField.jsx";
-import SelectField from "./SelectField.jsx";
-import axios from "../../../api/axios";
+} from "../../AdminUtils/eventHandlers.js";
+import PriceField from "../InputFields/PriceFields.jsx";
+import SelectField from "../InputFields/SelectFields.jsx";
+import ImageFields from "../InputFields/ImageFields.jsx";
+import axios from "../../../../api/axios.js";
 import { useState } from "react";
 
 export default function Updatedialog({ closeDialog, data, labelData, categoryData, setUpdate }) {
@@ -121,27 +122,12 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             value={productData.product_description || ""}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-            {images.map((image, index) => {
-              return (
-                <div key={index}>
-                  <FormInput
-                    label="Billede:"
-                    type="text"
-                    placeholder="Indsæt link til billede her"
-                    value={image.image_url}
-                    onChange={(value) => handleImageChangeInstance("image_url", index)(value)}
-                  />
-                  <div className="flex flex-row justify-between font-bold">
-                    <button type="button" onClick={() => removeImageField(index)} disabled={productData.images.length <= 1}>
-                      Fjern billede
-                    </button>
-                    <button type="button" onClick={addImageField}>
-                      Tilføj billede
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
+          <ImageFields
+            images={images}
+            handleImageChangeInstance={handleImageChangeInstance}
+            removeImageField={removeImageField}
+            addImageField={addImageField}
+          />
 
           <SelectField
             name={`labels]`}
@@ -168,19 +154,13 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
 
-          {prices.map((price, index) => {
-            return (
-              <PriceField
-                key={index}
-                price={price}
-                index={index}
-                prices={productData.prices}
-                handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-                removePriceField={removePriceField}
-                addPriceField={addPriceField}
-              />
-            );
-          })}
+            <PriceField
+              prices={prices}
+              handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
+              removePriceField={removePriceField}
+              addPriceField={addPriceField}
+             />
+    
 
           <div className="flex flex-row justify-around">
             <button
