@@ -22,10 +22,13 @@ function CheckoutList() {
     };
     auth?.accessToken ? fetchCustomer() : setCustomer();
   }, [auth]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className="max-w-[900px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
-      <div className="flex flex-row items-start justify-center gap-2 mt-20 rounded">
-        <section className="container w-1/3 bg-[#e8e3d8] p-4 mb-4 rounded md:p-10 sticky top-0 left-0">
+      <div className="items-start justify-center gap-2 mt-20 rounded md:flex md:flex-row">
+        <section className="container w-full md:w-1/3 bg-[#e8e3d8] p-4 mb-4 rounded md:p-10 md:sticky md:top-0 md:left-0">
           {customer && (
             <div className="pb-10 text-left border-b-2 border-black">
               <h3 className="font-bold">Sendes til:</h3>
@@ -114,7 +117,7 @@ function CheckoutList() {
             </form>
           </div>
         </section>
-        <section className="container w-2/3 bg-[#e8e3d8] p-4 mb-4 rounded md:p-10 overflow-y-scroll scrollbar-hide">
+        <section className="container w-full md:w-2/3 bg-[#e8e3d8] p-4 mb-4 rounded md:p-10 overflow-y-scroll scrollbar-hide">
           <h1 className="pb-2 text-2xl font-bold text-left align-middle md:pb-4">
             Din kurv
           </h1>
