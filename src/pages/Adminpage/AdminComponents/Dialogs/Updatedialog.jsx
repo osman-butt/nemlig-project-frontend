@@ -8,10 +8,11 @@ import {
 import PriceField from "../InputFields/PriceFields.jsx";
 import SelectField from "../InputFields/SelectFields.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
-import axios from "../../../../api/axios.js";
+import usePrivateAxios from "../../../../hooks/usePrivateAxios.js";
 import { useState } from "react";
 
 export default function Updatedialog({ closeDialog, data, labelData, categoryData, setUpdate }) {
+  const privateAxios = usePrivateAxios();
   // Dynamic field states
   const [prices, setPrices] = useState(data.prices.map((price) => ({
     price_id: price.price_id,
@@ -76,7 +77,7 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     };
     console.log(`Product data:`, updatedProductData);
     try {
-      const response = await axios.put(`/products/${data.product_id}`, productData);
+      const response = await privateAxios.put(`/products/${data.product_id}`, productData);
       console.log(response);
       if (response.status === 200) {
         setUpdate(true); // trigger a re-render

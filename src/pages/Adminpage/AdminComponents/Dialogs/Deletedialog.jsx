@@ -1,9 +1,10 @@
-import axios from "../../../../api/axios.js";
+import usePrivateAxios from "../../../../hooks/usePrivateAxios";
 
 export default function Deletedialog({ closeDialog, product_id, setData, setUpdate }) {
+  const privateAxios = usePrivateAxios();
   const deleteProduct = async (product_id) => {
     try {
-      const response = await axios.delete(`products/${product_id}`);
+      const response = await privateAxios.delete(`products/${product_id}`);
       if (response.status === 200) {
         console.log("Produkt slettet:", response.data);
         setUpdate(true); // trigger a re-render
