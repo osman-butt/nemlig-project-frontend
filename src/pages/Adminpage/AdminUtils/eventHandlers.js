@@ -10,22 +10,21 @@ function handleInputChange(setProductData) {
 function handleImageChange(setProductData, setImages) {
   return function (name, index) {
     return function (value) {
-    setProductData((prevState) => {
-      const updatedImages = [...prevState.images];
-      updatedImages[index] = { ...updatedImages[index], [name]: value };
-      return { ...prevState, images: updatedImages };
-    });
-    if (setImages){
-      setImages((prevImages) => {
-        const updatedImages = [...prevImages];
+      setProductData((prevState) => {
+        const updatedImages = [...prevState.images];
         updatedImages[index] = { ...updatedImages[index], [name]: value };
-        return updatedImages;
-      })
-    }
-  };
+        return { ...prevState, images: updatedImages };
+      });
+      if (setImages) {
+        setImages((prevImages) => {
+          const updatedImages = [...prevImages];
+          updatedImages[index] = { ...updatedImages[index], [name]: value };
+          return updatedImages;
+        });
+      }
+    };
   };
 }
-
 
 function handlePriceOrDateChange(setProductData, setPrices) {
   return function (name, index) {
@@ -48,21 +47,21 @@ function handlePriceOrDateChange(setProductData, setPrices) {
 
 function handleSelectChange(setProductData, setArray, type) {
   return function (index) {
-    return function (value){
-    setProductData((prevState) => {
-      const updatedArray = [...prevState[type]];
-      updatedArray[index] = Number(value)
-      return { ...prevState, [type]: updatedArray };
-    });
-    if (setArray){
-      setArray((prevArray) => {
-        const updatedArray = [...prevArray];
-        updatedArray[index] = Number(value)
-        return updatedArray;
-      })
-    }
-    }
+    return function (value) {
+      setProductData((prevState) => {
+        const updatedArray = [...prevState[type]];
+        updatedArray[index] = Number(value);
+        return { ...prevState, [type]: updatedArray };
+      });
+      if (setArray) {
+        setArray((prevArray) => {
+          const updatedArray = [...prevArray];
+          updatedArray[index] = Number(value);
+          return updatedArray;
+        });
+      }
+    };
   };
 }
 
-export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange};
+export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange };

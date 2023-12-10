@@ -1,10 +1,11 @@
-import  SelectField from "../InputFields/SelectFields.jsx";
+import SelectField from "../InputFields/SelectFields.jsx";
 
 export default function CategoryFields({ categories, categoryData, handleCategoryChangeInstance, removeCategoryField, addCategoryField }) {
   return (
     <>
       {categories.map((_, index) => (
         <div key={index}>
+          <label className="font-bold">Kategori {index + 1}:</label>
           <SelectField
             name={`categories`}
             value={categories[index] || ""}
@@ -13,8 +14,12 @@ export default function CategoryFields({ categories, categoryData, handleCategor
             placeholder="Vælg kategori"
           />
           <div className="flex flex-row justify-between font-bold">
-            <button type="button" onClick={() => removeCategoryField(index)} disabled={categories.length === 1}>Fjern kategori</button>
-            <button type="button" onClick={() => addCategoryField()}>Tilføj kategori</button>
+            <button type="button" onClick={() => removeCategoryField(index)} disabled={categories.length === 1}>
+              Fjern kategori
+            </button>
+            <button type="button" onClick={() => addCategoryField()}>
+              Tilføj kategori
+            </button>
           </div>
         </div>
       ))}

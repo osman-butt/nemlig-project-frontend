@@ -1,10 +1,5 @@
 import FormInput from "../../../../components/FormInput.jsx";
-import {
-  handleInputChange,
-  handleImageChange,
-  handlePriceOrDateChange,
-  handleSelectChange,
-} from "../../AdminUtils/eventHandlers.js";
+import { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
 import LabelFields from "../InputFields/LabelFields.jsx";
@@ -33,16 +28,16 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   function removeImageField(index) {
     setImages(images.filter((_, i) => i !== index));
   }
-  function addLabelField(){
-    setLabels([...labels, 0])
+  function addLabelField() {
+    setLabels([...labels, 0]);
   }
-  function removeLabelField(index){
+  function removeLabelField(index) {
     setLabels(labels.filter((_, i) => i !== index));
   }
-  function addCategoryField(){
-    setCategories([...categories, 0])
+  function addCategoryField() {
+    setCategories([...categories, 0]);
   }
-  function removeCategoryField(index){
+  function removeCategoryField(index) {
     setCategories(categories.filter((_, i) => i !== index));
   }
   const [productData, setProductData] = useState({
@@ -67,9 +62,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
-  const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, 'labels');
-  const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, 'categories');
-  
+  const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, "labels");
+  const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, "categories");
 
   async function handleAddProduct(event) {
     event.preventDefault();
@@ -78,8 +72,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
       ...productData,
       ...(prices.length > 0 && { prices }),
       ...(images.length > 0 && { images }),
-      ...(labels.length > 0 && {labels}),
-      ...(categories.length > 0 && {categories})
+      ...(labels.length > 0 && { labels }),
+      ...(categories.length > 0 && { categories }),
     };
 
     try {
@@ -127,12 +121,12 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             value={productData.product_description}
             onChange={(value) => handleInputChangeInstance("product_description", value)}
           />
-            <ImageFields
-              images={images}
-              handleImageChangeInstance={handleImageChangeInstance}
-              removeImageField={removeImageField}
-              addImageField={addImageField}
-            />
+          <ImageFields
+            images={images}
+            handleImageChangeInstance={handleImageChangeInstance}
+            removeImageField={removeImageField}
+            addImageField={addImageField}
+          />
 
           <LabelFields
             labels={labels}
@@ -159,14 +153,12 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
             onChange={(value) => handleInputChangeInstance("inventory_stock", value)}
           />
 
-
-            <PriceField
-              prices={prices}
-              handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-              removePriceField={removePriceField}
-              addPriceField={addPriceField}
-            />
-
+          <PriceField
+            prices={prices}
+            handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
+            removePriceField={removePriceField}
+            addPriceField={addPriceField}
+          />
 
           <div className="flex flex-row justify-around">
             <button

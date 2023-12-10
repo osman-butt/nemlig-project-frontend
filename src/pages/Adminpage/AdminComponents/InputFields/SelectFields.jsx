@@ -1,7 +1,6 @@
 export default function SelectField({ name, value, onChange, options, placeholder }) {
   return (
     <label className="font-bold">
-      {placeholder}:
       <select
         name={name}
         value={value}
