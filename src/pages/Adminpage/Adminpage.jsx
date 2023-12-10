@@ -5,8 +5,12 @@ import Admintable from "./AdminComponents/Admintable.jsx";
 import Pagination from "../../components/Pagination.jsx";
 import { useState, useEffect } from "react";
 import axios from "../../api/axios.js";
+import useAuth from "../../hooks/useAuth.js";
+import { Navigate } from "react-router-dom";
 
 export default function Adminpage() {
+  const { auth } = useAuth();
+
   const [data, setData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sort, setSort] = useState("");
@@ -69,6 +73,10 @@ export default function Adminpage() {
   function handleSearch(searchQuery) {
     setSearchQuery(searchQuery);
     setPage(1);
+  }
+
+  if (!auth || !auth.user_roles?.includes("admin")) {
+    return <Navigate to="/*" />;
   }
 
   return (
