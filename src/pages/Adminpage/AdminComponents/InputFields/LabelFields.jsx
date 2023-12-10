@@ -13,7 +13,7 @@ export default function LabelFields({ labels, labelData, handleLabelChangeInstan
             placeholder="Vælg label"
           />
           <div className="flex flex-row justify-between font-bold">
-            <button type="button" onClick={() => removeLabelField(index)}>Fjern label</button>
+            <button type="button" onClick={() => removeLabelField(index)} disabled={labels.length === 1}>Fjern label</button>
             <button type="button" onClick={() => addLabelField()}>Tilføj label</button>
           </div>
         </div>

@@ -6,7 +6,8 @@ import {
   handleSelectChange,
 } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
-import SelectField from "../InputFields/SelectFields.jsx";
+import LabelFields from "../InputFields/LabelFields.jsx";
+import CategoryFields from "../InputFields/CategoryField.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios.js";
 import { useState } from "react";
@@ -25,27 +26,51 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     image_id: image.image_id,
     image_url: image.image_url,
   })));
+  const [labels, setLabels] = useState(data.labels.length ? data.labels.map((label) => label.label_id) : [0]);
+  const [categories, setCategories] = useState(data.categories.length ? data.categories.map((category) => category.category_id) : [0]);
 
   function addPriceField() {
     const newPrice = { price: "", starting_at: "", is_campaign: false, ending_at: "" };
     setPrices([...prices, newPrice]);
     setProductData({ ...productData, prices: [...productData.prices, newPrice] });
   }
-  function addImageField() {
-    const newImage = { image_url: "" };
-    setImages([...images, newImage]);
-    setProductData({ ...productData, images: [...productData.images, newImage]});
-    
-  }
   function removePriceField(index) {
     const newPrices = prices.filter((_, i) => i !== index);
     setPrices(newPrices);
     setProductData({ ...productData, prices: newPrices});
   }
+  function addImageField() {
+    const newImage = { image_url: "" };
+    setImages([...images, newImage]);
+    setProductData({ ...productData, images: [...productData.images, newImage]});
+  }
   function removeImageField(index) {
     const newImages = images.filter((_, i) => i !== index);
     setImages(newImages);
     setProductData({ ...productData, images: newImages});
+  }
+  function addLabelField() {
+    const newLabel = 0; // or any default value
+    setLabels([...labels, newLabel]);
+    setProductData({ ...productData, labels: [...productData.labels, newLabel] });
+  }
+  
+  function removeLabelField(index) {
+    const newLabels = labels.filter((_, i) => i !== index);
+    setLabels(newLabels);
+    setProductData({ ...productData, labels: newLabels });
+  }
+  
+  function addCategoryField() {
+    const newCategory = 0; // or any default value
+    setCategories([...categories, newCategory]);
+    setProductData({ ...productData, categories: [...productData.categories, newCategory] });
+  }
+  
+  function removeCategoryField(index) {
+    const newCategories = categories.filter((_, i) => i !== index);
+    setCategories(newCategories);
+    setProductData({ ...productData, categories: newCategories });
   }
 
   const [productData, setProductData] = useState({
@@ -92,7 +117,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
-  const handleSelectChangeInstance = handleSelectChange(setProductData);
+  const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, 'labels');
+  const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, 'categories');
 
   return (
     <div className="fixed overflow-scroll inset-0 pt-10 items-center justify-center z-50 bg-black bg-opacity-50">
@@ -130,20 +156,21 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
             addImageField={addImageField}
           />
 
-          <SelectField
-            name={`labels]`}
-            value={productData.labels[0] || ""}
-            onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
-            options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
-            placeholder="Vælg label"
+          <LabelFields
+            labels={labels}
+            labelData={labelData}
+            handleLabelChangeInstance={handleLabelChangeInstance}
+            removeLabelField={removeLabelField}
+            addLabelField={addLabelField}
           />
+          
 
-          <SelectField
-            name={`categories`}
-            value={productData.categories[0] || ""}
-            onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
-            options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
-            placeholder="Vælg kategori"
+          <CategoryFields
+            categories={categories}
+            categoryData={categoryData}
+            handleCategoryChangeInstance={handleCategoryChangeInstance}
+            removeCategoryField={removeCategoryField}
+            addCategoryField={addCategoryField}
           />
 
           <FormInput

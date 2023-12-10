@@ -13,7 +13,7 @@ export default function CategoryFields({ categories, categoryData, handleCategor
             placeholder="Vælg kategori"
           />
           <div className="flex flex-row justify-between font-bold">
-            <button type="button" onClick={() => removeCategoryField(index)}>Fjern kategori</button>
+            <button type="button" onClick={() => removeCategoryField(index)} disabled={categories.length === 1}>Fjern kategori</button>
             <button type="button" onClick={() => addCategoryField()}>Tilføj kategori</button>
           </div>
         </div>
