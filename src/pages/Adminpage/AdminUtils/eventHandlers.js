@@ -46,42 +46,23 @@ function handlePriceOrDateChange(setProductData, setPrices) {
   };
 }
 
-function handleSelectChange(setProductData, setLabels) {
+function handleSelectChange(setProductData, setArray, type) {
   return function (index) {
     return function (value){
     setProductData((prevState) => {
-      const updatedLabels = [...prevState.labels];
-      updatedLabels[index] = Number(value)
-      return { ...prevState, labels: updatedLabels };
+      const updatedArray = [...prevState[type]];
+      updatedArray[index] = Number(value)
+      return { ...prevState, [type]: updatedArray };
     });
-    if (setLabels){
-      setLabels((prevLabels) => {
-        const updatedLabels = [...prevLabels];
-        updatedLabels[index] = Number(value)
-        return updatedLabels;
+    if (setArray){
+      setArray((prevArray) => {
+        const updatedArray = [...prevArray];
+        updatedArray[index] = Number(value)
+        return updatedArray;
       })
     }
     }
   };
 }
 
-function handleCategoryChange(setProductData, setCategories){
-  return function (index){
-    return function (value){
-      setProductData((prevState) => {
-        const updatedCategories = [...prevState.categories];
-        updatedCategories[index] = Number(value)
-        return { ...prevState, categories: updatedCategories };
-      });
-      if (setCategories){
-        setCategories((prevCategories) => {
-          const updatedCategories = [...prevCategories];
-          updatedCategories[index] = Number(value)
-          return updatedCategories;
-        })
-      }
-  }
-}
-}
-
-export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange, handleCategoryChange };
+export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange};

@@ -1,6 +1,6 @@
 import  SelectField from "../InputFields/SelectFields.jsx";
 
-export default function LabelFields({ labels, labelData, handleSelectChangeInstance, removeLabelField, addLabelField }) {
+export default function LabelFields({ labels, labelData, handleLabelChangeInstance, removeLabelField, addLabelField }) {
   return (
     <>
       {labels.map((_, index) => (
@@ -8,7 +8,7 @@ export default function LabelFields({ labels, labelData, handleSelectChangeInsta
           <SelectField
             name={`labels`}
             value={labels[index]|| ""}
-            onChange={(event) => handleSelectChangeInstance(index)(event.target.value)}
+            onChange={(event) => handleLabelChangeInstance(index)(event.target.value)}
             options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
             placeholder="Vælg label"
           />

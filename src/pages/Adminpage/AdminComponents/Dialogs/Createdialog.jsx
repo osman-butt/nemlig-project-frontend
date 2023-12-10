@@ -4,7 +4,6 @@ import {
   handleImageChange,
   handlePriceOrDateChange,
   handleSelectChange,
-  handleCategoryChange
 } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
@@ -68,8 +67,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
-  const handleSelectChangeInstance = handleSelectChange(setProductData, setLabels);
-  const handleCategoryChangeInstance = handleCategoryChange(setProductData, setCategories);
+  const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, 'labels');
+  const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, 'categories');
   
 
   async function handleAddProduct(event) {
@@ -137,7 +136,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
 
           <LabelFields
             labels={labels}
-            handleSelectChangeInstance={handleSelectChangeInstance}
+            handleLabelChangeInstance={handleLabelChangeInstance}
             removeLabelField={removeLabelField}
             addLabelField={addLabelField}
             labelData={labelData}
