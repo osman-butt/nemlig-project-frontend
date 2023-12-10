@@ -46,13 +46,42 @@ function handlePriceOrDateChange(setProductData, setPrices) {
   };
 }
 
-function handleSelectChange(setProductData) {
-  return function (name, value) {
-    setProductData((prevState) => ({
-      ...prevState,
-      [name]: [Number(value)],
-    }));
+function handleSelectChange(setProductData, setLabels) {
+  return function (index) {
+    return function (value){
+    setProductData((prevState) => {
+      const updatedLabels = [...prevState.labels];
+      updatedLabels[index] = Number(value)
+      return { ...prevState, labels: updatedLabels };
+    });
+    if (setLabels){
+      setLabels((prevLabels) => {
+        const updatedLabels = [...prevLabels];
+        updatedLabels[index] = Number(value)
+        return updatedLabels;
+      })
+    }
+    }
   };
 }
 
-export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange };
+function handleCategoryChange(setProductData, setCategories){
+  return function (index){
+    return function (value){
+      setProductData((prevState) => {
+        const updatedCategories = [...prevState.categories];
+        updatedCategories[index] = Number(value)
+        return { ...prevState, categories: updatedCategories };
+      });
+      if (setCategories){
+        setCategories((prevCategories) => {
+          const updatedCategories = [...prevCategories];
+          updatedCategories[index] = Number(value)
+          return updatedCategories;
+        })
+      }
+  }
+}
+}
+
+export { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange, handleCategoryChange };

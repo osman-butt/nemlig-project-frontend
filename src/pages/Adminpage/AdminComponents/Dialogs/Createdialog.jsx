@@ -4,10 +4,12 @@ import {
   handleImageChange,
   handlePriceOrDateChange,
   handleSelectChange,
+  handleCategoryChange
 } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
-import SelectField from "../InputFields/SelectFields.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
+import LabelFields from "../InputFields/LabelFields.jsx";
+import CategoryFields from "../InputFields/CategoryField.jsx";
 import { useState } from "react";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios.js";
 
@@ -16,6 +18,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   // Dynamic field states
   const [prices, setPrices] = useState([{ price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
   const [images, setImages] = useState([{ image_url: "" }]);
+  const [labels, setLabels] = useState([0]);
+  const [categories, setCategories] = useState([0]);
 
   function addPriceField() {
     setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
@@ -30,7 +34,18 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   function removeImageField(index) {
     setImages(images.filter((_, i) => i !== index));
   }
-
+  function addLabelField(){
+    setLabels([...labels, 0])
+  }
+  function removeLabelField(index){
+    setLabels(labels.filter((_, i) => i !== index));
+  }
+  function addCategoryField(){
+    setCategories([...categories, 0])
+  }
+  function removeCategoryField(index){
+    setCategories(categories.filter((_, i) => i !== index));
+  }
   const [productData, setProductData] = useState({
     product_name: "",
     product_underline: "",
@@ -53,7 +68,9 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   const handleInputChangeInstance = handleInputChange(setProductData);
   const handleImageChangeInstance = handleImageChange(setProductData, setImages);
   const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
-  const handleSelectChangeInstance = handleSelectChange(setProductData);
+  const handleSelectChangeInstance = handleSelectChange(setProductData, setLabels);
+  const handleCategoryChangeInstance = handleCategoryChange(setProductData, setCategories);
+  
 
   async function handleAddProduct(event) {
     event.preventDefault();
@@ -62,6 +79,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
       ...productData,
       ...(prices.length > 0 && { prices }),
       ...(images.length > 0 && { images }),
+      ...(labels.length > 0 && {labels}),
+      ...(categories.length > 0 && {categories})
     };
 
     try {
@@ -116,20 +135,20 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
               addImageField={addImageField}
             />
 
-          <SelectField
-            name={`labels`}
-            value={productData.labels[0] || ""}
-            onChange={(event) => handleSelectChangeInstance(`labels`, event.target.value)}
-            options={labelData.map((label) => ({ id: label.label_id, name: label.label_name }))}
-            placeholder="Vælg label"
+          <LabelFields
+            labels={labels}
+            handleSelectChangeInstance={handleSelectChangeInstance}
+            removeLabelField={removeLabelField}
+            addLabelField={addLabelField}
+            labelData={labelData}
           />
 
-          <SelectField
-            name={`categories`}
-            value={productData.categories[0] || ""}
-            onChange={(event) => handleSelectChangeInstance(`categories`, event.target.value)}
-            options={categoryData.map((category) => ({ id: category.category_id, name: category.category_name }))}
-            placeholder="Vælg kategori"
+          <CategoryFields
+            categories={categories}
+            handleCategoryChangeInstance={handleCategoryChangeInstance}
+            removeCategoryField={removeCategoryField}
+            addCategoryField={addCategoryField}
+            categoryData={categoryData}
           />
 
           <FormInput
