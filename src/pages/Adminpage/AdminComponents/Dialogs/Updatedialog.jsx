@@ -1,9 +1,10 @@
 import FormInput from "../../../../components/FormInput.jsx";
-import { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange } from "../../AdminUtils/eventHandlers.js";
+import { handleInputChange, handleSelectChange, handleArrayChange } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
 import LabelFields from "../InputFields/LabelFields.jsx";
 import CategoryFields from "../InputFields/CategoryField.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
+import useFieldHandlers from "../../../../hooks/useFieldHandlers.js";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios.js";
 import { useState } from "react";
 import ReactDOM from "react-dom";
@@ -29,50 +30,6 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
   const [labels, setLabels] = useState(data.labels.length ? data.labels.map((label) => label.label_id) : [0]);
   const [categories, setCategories] = useState(data.categories.length ? data.categories.map((category) => category.category_id) : [0]);
 
-  function addPriceField() {
-    const newPrice = { price: "", starting_at: "", is_campaign: false, ending_at: "" };
-    setPrices([...prices, newPrice]);
-    setProductData({ ...productData, prices: [...productData.prices, newPrice] });
-  }
-  function removePriceField(index) {
-    const newPrices = prices.filter((_, i) => i !== index);
-    setPrices(newPrices);
-    setProductData({ ...productData, prices: newPrices });
-  }
-  function addImageField() {
-    const newImage = { image_url: "" };
-    setImages([...images, newImage]);
-    setProductData({ ...productData, images: [...productData.images, newImage] });
-  }
-  function removeImageField(index) {
-    const newImages = images.filter((_, i) => i !== index);
-    setImages(newImages);
-    setProductData({ ...productData, images: newImages });
-  }
-  function addLabelField() {
-    const newLabel = 0; // or any default value
-    setLabels([...labels, newLabel]);
-    setProductData({ ...productData, labels: [...productData.labels, newLabel] });
-  }
-
-  function removeLabelField(index) {
-    const newLabels = labels.filter((_, i) => i !== index);
-    setLabels(newLabels);
-    setProductData({ ...productData, labels: newLabels });
-  }
-
-  function addCategoryField() {
-    const newCategory = 0; // or any default value
-    setCategories([...categories, newCategory]);
-    setProductData({ ...productData, categories: [...productData.categories, newCategory] });
-  }
-
-  function removeCategoryField(index) {
-    const newCategories = categories.filter((_, i) => i !== index);
-    setCategories(newCategories);
-    setProductData({ ...productData, categories: newCategories });
-  }
-
   const [productData, setProductData] = useState({
     product_name: data.product_name,
     product_underline: data.product_underline,
@@ -93,15 +50,15 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
     })),
   });
 
+  const { addField: addPriceField, removeField: removePriceField } = useFieldHandlers(setPrices, setProductData);
+  const { addField: addImageField, removeField: removeImageField } = useFieldHandlers(setImages, setProductData);
+  const { addField: addLabelField, removeField: removeLabelField } = useFieldHandlers(setLabels, setProductData);
+  const { addField: addCategoryField, removeField: removeCategoryField } = useFieldHandlers(setCategories, setProductData);
+
   async function handleUpdateProduct(event) {
     event.preventDefault();
-    const updatedProductData = {
-      ...productData,
-      prices: prices,
-      images: images,
-    };
-    console.log(`Product data:`, updatedProductData);
     try {
+      console.log(`Updating product with data`, productData);
       const response = await privateAxios.put(`/products/${data.product_id}`, productData);
       console.log(response);
       if (response.status === 200) {
@@ -115,8 +72,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
 
   // Setup instances of event handlers
   const handleInputChangeInstance = handleInputChange(setProductData);
-  const handleImageChangeInstance = handleImageChange(setProductData, setImages);
-  const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
+  const handleImageChangeInstance = handleArrayChange(setProductData, setImages, "images");
+  const handlePriceOrDateChangeInstance = handleArrayChange(setProductData, setPrices, "prices");
   const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, "labels");
   const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, "categories");
 
@@ -152,24 +109,24 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
           <ImageFields
             images={images}
             handleImageChangeInstance={handleImageChangeInstance}
-            removeImageField={removeImageField}
-            addImageField={addImageField}
+            removeImageField={(index) => removeImageField("images", index)}
+            addImageField={() => addImageField("images")}
           />
 
           <LabelFields
             labels={labels}
             labelData={labelData}
             handleLabelChangeInstance={handleLabelChangeInstance}
-            removeLabelField={removeLabelField}
-            addLabelField={addLabelField}
+            removeLabelField={(index) => removeLabelField("labels", index)}
+            addLabelField={() => addLabelField("labels")}
           />
 
           <CategoryFields
             categories={categories}
             categoryData={categoryData}
             handleCategoryChangeInstance={handleCategoryChangeInstance}
-            removeCategoryField={removeCategoryField}
-            addCategoryField={addCategoryField}
+            removeCategoryField={(index) => removeCategoryField("categories", index)}
+            addCategoryField={() => addCategoryField("categories")}
           />
 
           <FormInput
@@ -184,8 +141,8 @@ export default function Updatedialog({ closeDialog, data, labelData, categoryDat
           <PriceField
             prices={prices}
             handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-            removePriceField={removePriceField}
-            addPriceField={addPriceField}
+            removePriceField={(index) => removePriceField("prices", index)}
+            addPriceField={() => addPriceField("prices")}
           />
 
           <div className="flex flex-row justify-around">

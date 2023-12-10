@@ -1,11 +1,12 @@
 import FormInput from "../../../../components/FormInput.jsx";
-import { handleInputChange, handleImageChange, handlePriceOrDateChange, handleSelectChange } from "../../AdminUtils/eventHandlers.js";
+import { handleInputChange, handleArrayChange, handleSelectChange } from "../../AdminUtils/eventHandlers.js";
 import PriceField from "../InputFields/PriceFields.jsx";
 import ImageFields from "../InputFields/ImageFields.jsx";
 import LabelFields from "../InputFields/LabelFields.jsx";
 import CategoryFields from "../InputFields/CategoryField.jsx";
 import { useState } from "react";
 import usePrivateAxios from "../../../../hooks/usePrivateAxios.js";
+import useFieldHandlers from "../../../../hooks/useFieldHandlers.js";
 
 export default function Createdialog({ closeDialog, labelData, categoryData, setUpdate }) {
   const privateAxios = usePrivateAxios();
@@ -15,31 +16,11 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
   const [labels, setLabels] = useState([0]);
   const [categories, setCategories] = useState([0]);
 
-  function addPriceField() {
-    setPrices([...prices, { price: "", starting_at: "", is_campaign: false, ending_at: "" }]);
-  }
+  const { addField: addPriceField, removeField: removePriceField } = useFieldHandlers(setPrices);
+  const { addField: addImageField, removeField: removeImageField } = useFieldHandlers(setImages);
+  const { addField: addLabelField, removeField: removeLabelField } = useFieldHandlers(setLabels);
+  const { addField: addCategoryField, removeField: removeCategoryField } = useFieldHandlers(setCategories);
 
-  function removePriceField(index) {
-    setPrices(prices.filter((_, i) => i !== index));
-  }
-  function addImageField() {
-    setImages([...images, { image_url: "" }]);
-  }
-  function removeImageField(index) {
-    setImages(images.filter((_, i) => i !== index));
-  }
-  function addLabelField() {
-    setLabels([...labels, 0]);
-  }
-  function removeLabelField(index) {
-    setLabels(labels.filter((_, i) => i !== index));
-  }
-  function addCategoryField() {
-    setCategories([...categories, 0]);
-  }
-  function removeCategoryField(index) {
-    setCategories(categories.filter((_, i) => i !== index));
-  }
   const [productData, setProductData] = useState({
     product_name: "",
     product_underline: "",
@@ -60,8 +41,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
 
   // Setup instances of event handlers
   const handleInputChangeInstance = handleInputChange(setProductData);
-  const handleImageChangeInstance = handleImageChange(setProductData, setImages);
-  const handlePriceOrDateChangeInstance = handlePriceOrDateChange(setProductData, setPrices);
+  const handleImageChangeInstance = handleArrayChange(setProductData, setImages, "images");
+  const handlePriceOrDateChangeInstance = handleArrayChange(setProductData, setPrices, "prices");
   const handleLabelChangeInstance = handleSelectChange(setProductData, setLabels, "labels");
   const handleCategoryChangeInstance = handleSelectChange(setProductData, setCategories, "categories");
 
@@ -77,6 +58,7 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
     };
 
     try {
+      console.log(`Adding product with data`, updatedProductData);
       const response = await privateAxios.post("/products", updatedProductData);
 
       if (response.status === 200) {
@@ -124,23 +106,23 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
           <ImageFields
             images={images}
             handleImageChangeInstance={handleImageChangeInstance}
-            removeImageField={removeImageField}
-            addImageField={addImageField}
+            removeImageField={(index) => removeImageField("images", index)}
+            addImageField={() => addImageField("images")}
           />
 
           <LabelFields
             labels={labels}
             handleLabelChangeInstance={handleLabelChangeInstance}
-            removeLabelField={removeLabelField}
-            addLabelField={addLabelField}
+            removeLabelField={(index) => removeLabelField("labels", index)}
+            addLabelField={() => addLabelField("labels")}
             labelData={labelData}
           />
 
           <CategoryFields
             categories={categories}
             handleCategoryChangeInstance={handleCategoryChangeInstance}
-            removeCategoryField={removeCategoryField}
-            addCategoryField={addCategoryField}
+            removeCategoryField={(index) => removeCategoryField("categories", index)}
+            addCategoryField={() => addCategoryField("categories")}
             categoryData={categoryData}
           />
 
@@ -156,8 +138,8 @@ export default function Createdialog({ closeDialog, labelData, categoryData, set
           <PriceField
             prices={prices}
             handlePriceOrDateChangeInstance={handlePriceOrDateChangeInstance}
-            removePriceField={removePriceField}
-            addPriceField={addPriceField}
+            removePriceField={(index) => removePriceField("prices", index)}
+            addPriceField={() => addPriceField("prices")}
           />
 
           <div className="flex flex-row justify-around">
