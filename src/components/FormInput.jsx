@@ -1,4 +1,4 @@
-function FormInput({ label, type, value, onChange, placeholder }) {
+function FormInput({ label, type, value, onChange, placeholder}) {
   return (
     <label className="block mb-2 text-sm font-bold">
       {label}

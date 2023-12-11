@@ -20,6 +20,11 @@ function DesktopNav() {
         ) : (
           <>
             <DesktopNavItem path="/shop">Dagligvarer</DesktopNavItem>
+            {auth && auth.user_roles.includes("admin") && (
+              <>
+                <DesktopNavItem path="/admin">Admin</DesktopNavItem>
+              </>
+            )}
             {auth && (
               <>
                 <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
