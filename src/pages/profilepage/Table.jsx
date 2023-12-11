@@ -27,7 +27,7 @@ function Table() {
 
   return (
     <div className="max-w-[600px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
-      <div className="flex flex-row justify-center mt-20 bg-[#e8e3d8] rounded mb-2">
+      <div className="flex flex-row justify-center mt-8 bg-[#e8e3d8] rounded mb-2">
         {!isOpen && (
           <section className="container w-full p-4 mb-4 rounded md:p-10">
             <div className="flex flex-row justify-between mb-2 align-middle">
