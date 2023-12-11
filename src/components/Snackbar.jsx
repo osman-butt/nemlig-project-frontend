@@ -5,7 +5,7 @@ export default function Snackbar({ showSnackbar }) {
       ${showSnackbar ? "" : "hidden"}`}
     >
       <p className="text-black m-auto font-bold">Produkt tilføjet</p>
-      <button className="bg-[#d4793a] p-1.5 rounded m-auto">Fortryd</button>
+      {/* <button className="bg-[#d4793a] p-1.5 rounded m-auto">Fortryd</button> */}
     </div>
   );
 }
