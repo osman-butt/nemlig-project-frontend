@@ -14,6 +14,7 @@ import FavoritePage from "./pages/FavoritePage.jsx";
 import NotFoundpage from "./pages/NotFoundpage.jsx";
 import useRefreshToken from "./hooks/useRefreshToken.js";
 import useAuth from "./hooks/useAuth.js";
+import CheckoutPage from "./pages/checkout/CheckoutPage.jsx";
 
 export default function App() {
   const refreshToken = useRefreshToken();
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/shop" element={<Shoppage />} />
         <Route path="/order" element={<Orderpage />} />
         <Route path="/cart" element={<BasketPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
         <Route path="/favorites" element={<FavoritePage />} />

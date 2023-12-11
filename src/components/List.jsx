@@ -83,7 +83,7 @@ function List() {
             {cart.length > 0 &&
               (auth?.accessToken ? (
                 <button
-                  onClick={() => console.log("BESTILT")}
+                  onClick={() => navigate("/checkout")}
                   className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
                     cart.length === 0 && "disabled cursor-not-allowed"
                   }`}
