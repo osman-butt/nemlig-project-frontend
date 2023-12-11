@@ -21,15 +21,12 @@ function useCheckout(cardNumber, expiry, cvc) {
         expiry: expiry,
         cvc: cvc,
       });
-      console.log(response.data.order_id);
       setCart([]);
       setOrder(response.data.order_id);
       setError(false);
       setErrorMessage("");
       navigate("/order");
     } catch (error) {
-      console.log(error.response?.data.message);
-      console.log(error.response?.data);
       setError(true);
       setErrorMessage(error.response?.data.message);
       setCart(
@@ -44,7 +41,6 @@ function useCheckout(cardNumber, expiry, cvc) {
   useEffect(() => {
     const fetchCustomer = async () => {
       const response = await privateAxios.get("/customers");
-      console.log(response.data);
       setCustomer(response.data);
     };
     auth?.accessToken ? fetchCustomer() : setCustomer();

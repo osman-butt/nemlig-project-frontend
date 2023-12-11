@@ -26,10 +26,8 @@ function usePayment() {
   const handleExpiryChange = input => {
     const str = input.replace("/", "");
     const month = str.slice(0, 2);
-    console.log(month);
     if (Number(month) < 13) {
       const year = str.slice(2, 4);
-      console.log(year);
       !year ? setExpiry(month) : setExpiry(month + "/" + year);
     }
   };
