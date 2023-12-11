@@ -1,4 +1,5 @@
 import Landingpage from "./pages/Landingpage";
+import Aboutpage from "./pages/Aboutpage.jsx";
 import Shoppage from "./pages/Shoppage";
 import Orderpage from "./pages/Orderpage";
 import BasketPage from "./pages/BasketPage";
@@ -36,6 +37,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Landingpage />} />
+        <Route path="/about" element={<Aboutpage />} />
         <Route path="/login" element={<Loginpage />} />
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage />} />
