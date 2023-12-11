@@ -8,7 +8,6 @@ const CartContext = createContext({});
 // All children wrapped in this component, gets access to the states defined below
 function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
-  const [order, setOrder] = useState();
   const { auth } = useAuth();
   const privateAxios = usePrivateAxios();
   const { getItem, setItem } = useLocalStorage("cart");
@@ -142,8 +141,6 @@ function CartProvider({ children }) {
         setCart,
         incrementCartItem,
         decrementCartItem,
-        order,
-        setOrder,
       }}
     >
       {children}
