@@ -41,7 +41,7 @@ export default function Card({ data, addToFavorites, removeFromFavorites, auth, 
       <p className="font-light text-[14px] mt-auto">{data.product_underline}</p>
       {pricematchPrice ? (
         <>
-          <h3 className="text-red-500 font-bold">PRICEMATCHED</h3>
+          <h3 className="text-red-500 font-bold">PRISMATCH</h3>
           <p className="text-[18px] mt-auto line-through">
             {lowestOldPrice.toFixed(2)} kr.
           </p>
