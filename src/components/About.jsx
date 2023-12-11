@@ -2,11 +2,11 @@ import aboutimage from "../assets/about.jpg";
 
 export default function About() {
   return (
-    <div>
-      <img className="py-4 px-3 rounded-3xl" src={aboutimage} alt="aboutimage" />
-      <div className="flex flex-col bg-white max-w-[1240px] py-6 m-auto mb-6 mx-3 rounded-lg">
+    <div className="max-w-[1240px] mx-auto px-2">
+      <img className="py-4 rounded-3xl" src={aboutimage} alt="aboutimage" />
+      <div className="flex flex-col bg-white py-6 mb-6 rounded-lg">
         <h1 className="text-3xl text-center font-bold text-[#d4793a]">Om os</h1>
-        <p className="max-w-[1240px] text-left px-4 py-2">
+        <p className=" text-left px-4 py-2">
           Vi er en virksomhed, der arbejder ud fra ambitiøse mål og et brændende engagement. Vi har
           et stort fokus på at gøre en forskel i vores kunders hverdagsliv. Derfor ønsker vi at
           levere gode løsninger, som kommer vores kunde til gode. <br /> <br /> Vi har en uformel
