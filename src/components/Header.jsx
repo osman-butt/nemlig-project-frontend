@@ -4,6 +4,7 @@ import DesktopNav from "./header/desktop/DesktopNav";
 import NavLogo from "./header/NavLogo";
 import useAuth from "../hooks/useAuth";
 import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const [nav, setNav] = useState(true);
@@ -20,7 +21,10 @@ export default function Header() {
         {auth && location.pathname !== "/" ? (
           <p className="text-right h-8 text-[14px] ">
             <span className="hidden md:block">
-              Bruger: <span className="font-bold">{auth.user_email}</span>
+              Bruger:{" "}
+              <Link to="/profile">
+                <span className="font-bold">{auth.user_email}</span>
+              </Link>
             </span>
           </p>
         ) : (
