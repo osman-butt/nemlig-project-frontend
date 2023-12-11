@@ -6,7 +6,7 @@ import BasketPage from "./pages/BasketPage";
 import { Route, Routes } from "react-router-dom";
 import Loginpage from "./pages/Loginpage";
 import Createaccountpage from "./pages/Createaccountpage.jsx";
-import Adminpage from "./pages/Adminpage.jsx";
+import Adminpage from "./pages/Adminpage/Adminpage.jsx"
 import { useEffect } from "react";
 import Header from "./components/Header.jsx";
 // import Formdialog from "./components/Formdialog.jsx";
