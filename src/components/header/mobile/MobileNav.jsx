@@ -3,7 +3,7 @@ import MobileNavItem from "./MobileNavItem";
 import MobileNavBasket from "./MobileNavBasket";
 import MobileNavLogo from "./MobileNavLogo";
 
-function MobileNav({ handleNav, basket, nav }) {
+function MobileNav({ handleNav, nav }) {
   return (
     <>
       <div onClick={handleNav} className="block md:hidden hover:cursor-pointer">
@@ -41,7 +41,7 @@ function MobileNav({ handleNav, basket, nav }) {
               <MobileNavItem handleNav={handleNav} path="/createaccount">
                 Opret bruger
               </MobileNavItem>
-              <MobileNavBasket handleNav={handleNav} basket={basket} />
+              <MobileNavBasket handleNav={handleNav} />
             </>
           )}
         </ul>

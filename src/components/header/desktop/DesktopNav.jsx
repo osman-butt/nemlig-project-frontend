@@ -1,20 +1,13 @@
 import { useLocation } from "react-router-dom";
 import DesktopNavBasket from "./DesktopNavBasket";
 import DesktopNavItem from "./DesktopNavItem";
-import axios from "../../../api/axios";
+import useLogout from "../../../hooks/useLogout";
 import useAuth from "../../../hooks/useAuth";
 
-function DesktopNav({ basket, auth }) {
+function DesktopNav() {
   const location = useLocation();
-  const { setAuth } = useAuth();
-
-  async function handleLogout() {
-    setAuth();
-    // Make a request to your server's logout endpoint
-    await axios.get("http://localhost:3000/api/v1/logout", {
-      withCredentials: true,
-    });
-  }
+  const logout = useLogout();
+  const { auth } = useAuth();
 
   return (
     <>
@@ -27,11 +20,16 @@ function DesktopNav({ basket, auth }) {
         ) : (
           <>
             <DesktopNavItem path="/shop">Dagligvarer</DesktopNavItem>
+            {auth && auth.user_roles.includes("admin") && (
+              <>
+                <DesktopNavItem path="/admin">Admin</DesktopNavItem>
+              </>
+            )}
             {auth && (
               <>
                 <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
                 <DesktopNavItem path="/login">
-                  <button onClick={handleLogout}>LOG UD</button>
+                  <button onClick={logout}>LOG UD</button>
                 </DesktopNavItem>
               </>
             )}
@@ -44,7 +42,7 @@ function DesktopNav({ basket, auth }) {
               </>
             )}
             <div className="h-10 align-top">
-              <DesktopNavBasket basket={basket} />
+              <DesktopNavBasket />
             </div>
           </>
         )}
