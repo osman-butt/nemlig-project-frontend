@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import useAuth from "./useAuth";
 import usePrivateAxios from "./usePrivateAxios";
 import useCart from "./useCart";
 import { useNavigate } from "react-router-dom";
+import OrderContext from "../context/OrderProvider";
 
 function useCheckout(cardNumber, expiry, cvc) {
   const [customer, setCustomer] = useState();
@@ -10,7 +11,8 @@ function useCheckout(cardNumber, expiry, cvc) {
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const privateAxios = usePrivateAxios();
-  const { setCart, setOrder } = useCart();
+  const { setCart } = useCart();
+  const { setOrder } = useContext(OrderContext);
   const navigate = useNavigate();
 
   async function handleCheckout(e) {
@@ -29,12 +31,15 @@ function useCheckout(cardNumber, expiry, cvc) {
     } catch (error) {
       setError(true);
       setErrorMessage(error.response?.data.message);
-      setCart(
-        error.response?.data.cart_items.map(item => ({
-          ...item.products,
-          quantity: item.quantity,
-        }))
-      );
+      console.log(error.response?.data.cart_items);
+      if (error.response?.data.cart_items) {
+        setCart(
+          error.response?.data.cart_items.map(item => ({
+            ...item.products,
+            quantity: item.quantity,
+          }))
+        );
+      }
     }
   }
 

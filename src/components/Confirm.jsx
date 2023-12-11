@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
-import useCart from "../hooks/useCart";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import OrderContext from "../context/OrderProvider";
 
 export default function Confirm() {
-  const { order } = useCart();
+  const { order } = useContext(OrderContext);
   const navigate = useNavigate();
 
   useEffect(() => {
