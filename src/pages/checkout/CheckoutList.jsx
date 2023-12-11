@@ -7,11 +7,80 @@ import FormInput from "../../components/FormInput.jsx";
 import CheckoutListItem from "./CheckoutListItem.jsx";
 
 function CheckoutList() {
-  const { cart } = useCart();
+  const { cart, setCart, setOrder } = useCart();
   const [customer, setCustomer] = useState();
   const { auth } = useAuth();
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const navigate = useNavigate();
+
+  const [cardNumber, setCardNumber] = useState("");
+  const [expiry, setExpiry] = useState("");
+  const [cvc, setCvc] = useState("");
+  const formatCreditCardNumber = input => {
+    // Remove any non-numeric characters
+    const numericOnly = input.replace(/\D/g, "");
+
+    // Split the string into groups of 4 digits
+    const groups = numericOnly.match(/(\d{1,4})/g);
+
+    // Join the groups with a space
+    const formattedNumber = groups ? groups.join(" ") : "";
+
+    return formattedNumber;
+  };
+
+  const handleCardNumberChange = input => {
+    // Format the input and set the state
+    const formattedNumber = formatCreditCardNumber(input);
+    if (formattedNumber.length < 20) setCardNumber(formattedNumber);
+  };
+
+  const handleExpiryChange = input => {
+    const str = input.replace("/", "");
+    const month = str.slice(0, 2);
+    console.log(month);
+    if (Number(month) < 13) {
+      const year = str.slice(2, 4);
+      console.log(year);
+      !year ? setExpiry(month) : setExpiry(month + "/" + year);
+    }
+  };
+
+  const handleCvcChange = input => {
+    if (Number(input) < 999) {
+      setCvc(input);
+    }
+  };
+
+  async function handleCheckout(e) {
+    e.preventDefault();
+    try {
+      const response = await privateAxios.post("/orders", {
+        cardNo: cardNumber,
+        expiry: expiry,
+        cvc: cvc,
+      });
+      console.log(response.data.order_id);
+      setCart([]);
+      setOrder(response.data.order_id);
+      setError(false);
+      setErrorMessage("");
+      navigate("/order");
+    } catch (error) {
+      console.log(error.response?.data.message);
+      console.log(error.response?.data);
+      setError(true);
+      setErrorMessage(error.response?.data.message);
+      setCart(
+        error.response?.data.cart_items.map(item => ({
+          ...item.products,
+          quantity: item.quantity,
+        }))
+      );
+    }
+  }
 
   const privateAxios = usePrivateAxios();
   useEffect(() => {
@@ -91,6 +160,8 @@ function CheckoutList() {
                 label="Kortnummer"
                 type="text"
                 placeholder="Kortnummer"
+                value={cardNumber}
+                onChange={handleCardNumberChange}
               />
               <div className="flex flex-row w-full gap-2 mt-4">
                 <FormInput
@@ -98,16 +169,25 @@ function CheckoutList() {
                   type="text"
                   placeholder="fx 01/24"
                   className="w-1/2"
+                  value={expiry}
+                  onChange={handleExpiryChange}
                 />
                 <FormInput
                   label="CVC"
                   type="text"
                   placeholder="CVC"
                   className="w-1/2"
+                  value={cvc}
+                  onChange={handleCvcChange}
                 />
               </div>
+              {error ? (
+                <p className="pb-4 text-center text-red-600">{errorMessage}</p>
+              ) : (
+                <p></p>
+              )}
               <button
-                onClick={() => navigate("/cart/checkout")}
+                onClick={handleCheckout}
                 className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded w-full ${
                   cart.length === 0 && "disabled cursor-not-allowed"
                 }`}
