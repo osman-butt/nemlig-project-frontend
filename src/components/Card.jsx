@@ -18,8 +18,8 @@ export default function Card({ data, addToFavorites, removeFromFavorites, auth, 
   };
     // Find the pricematch price
     const pricematchPrice = data.prices.find(price => price.is_pricematch === true);
-    console.log(pricematchPrice);
 
+    // Find the lowest old price
     const oldPrice = data.prices.filter(price => !price.is_pricematch).map(price => price.price)
     const lowestOldPrice = Math.min(...oldPrice);
   return (
