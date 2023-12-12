@@ -3,7 +3,7 @@ export default function Pagination({ page, totalPages, setPage }) {
     "h-[30px] px-2 font-normal text-black lg:text-[18px] md:text-[16px] sm:text-[14px] hover:bg-[#d4793a] hover:cursor-pointer text-bold hover:text-white rounded";
 
   return (
-    <div className="flex flex-row justify-center gap-2 p-2 mx-auto align-middle bg-white max-w-[280px] rounded-xl mb-2">
+    <div className="flex flex-row justify-center gap-2 p-2 mx-auto align-middle bg-white max-w-[300px] rounded-xl mb-2">
       <button className={buttonStyle} onClick={() => setPage(1)}>
         &lt;&lt;
       </button>
