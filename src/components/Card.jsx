@@ -16,12 +16,13 @@ export default function Card({ data, addToFavorites, removeFromFavorites, auth, 
       setShowSnackbar(false);
     }, 3000); // Skjul snackbar efter 3 sekunder (justér efter behov)
   };
-    // Find the pricematch price
-    const pricematchPrice = data.prices.find(price => price.is_pricematch === true);
 
-    // Find the lowest old price
-    const oldPrice = data.prices.filter(price => !price.is_pricematch).map(price => price.price)
-    const lowestOldPrice = Math.min(...oldPrice);
+    // Find the lowest price
+    const lowestPrice = data.prices.reduce((prev, curr) => prev.price < curr.price ? prev : curr);
+
+    // Find highest price
+    const highestPrice = data.prices.reduce((prev, curr) => prev.price > curr.price ? prev : curr);
+
   return (
     <article className="bg-white rounded flex flex-col items-center gap-2 p-4 w-[200px] h-[450px] justify-self-center">
       {(alwaysShowStar || (auth && auth.user_email)) && (
@@ -39,19 +40,19 @@ export default function Card({ data, addToFavorites, removeFromFavorites, auth, 
       />
       <p className="font-medium text-center mt-auto">{data.product_name}</p>
       <p className="font-light text-[14px] mt-auto">{data.product_underline}</p>
-      {pricematchPrice ? (
+      {lowestPrice.is_pricematch ? (
         <>
           <h3 className="text-red-500 font-bold">PRISMATCH</h3>
           <p className="text-[18px] mt-auto line-through">
-            {lowestOldPrice.toFixed(2)} kr.
+            {highestPrice.price.toFixed(2)} kr.
           </p>
           <p className="font-bold text-[18px] mt-auto">
-            {pricematchPrice.price.toFixed(2)} kr.
+            {lowestPrice.price.toFixed(2)} kr.
           </p>
         </>
       ) : (
         <p className="font-bold text-[18px] mt-auto">
-          {lowestOldPrice.toFixed(2)} kr.
+          {lowestPrice.price.toFixed(2)} kr.
         </p>
       )}
       <button
