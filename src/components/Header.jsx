@@ -18,15 +18,17 @@ export default function Header() {
   return (
     <>
       <div className="max-w-[1240px] mx-auto px-4">
-        {auth?.accessToken &&
-        location.pathname !== "/" &&
-        auth?.user_roles.includes("customer") ? (
+        {auth?.accessToken && location.pathname !== "/" ? (
           <p className="text-right h-8 text-[14px] ">
             <span className="hidden md:block">
               Bruger:{" "}
-              <Link to="/profile">
+              {auth?.user_roles.includes("admin") ? (
                 <span className="font-bold">{auth.user_email}</span>
-              </Link>
+              ) : (
+                <Link to="/profile">
+                  <span className="font-bold">{auth.user_email}</span>
+                </Link>
+              )}
             </span>
           </p>
         ) : (
