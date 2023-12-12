@@ -18,7 +18,9 @@ export default function Header() {
   return (
     <>
       <div className="max-w-[1240px] mx-auto px-4">
-        {auth && location.pathname !== "/" ? (
+        {auth &&
+        location.pathname !== "/" &&
+        auth.user_roles.contains("customer") ? (
           <p className="text-right h-8 text-[14px] ">
             <span className="hidden md:block">
               Bruger:{" "}
