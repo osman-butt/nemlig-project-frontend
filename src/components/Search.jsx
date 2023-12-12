@@ -37,7 +37,23 @@ function handleSubmit(e){
         >
           <option value="">Filtrer efter</option>
           <option value="økologi">Økologi</option>
-          <option value="andet">Andet</option>
+          <option value="ecocert">Ecocert</option>
+          <option value="MSC">MSC</option>
+          <option value="ikke tilsat sukker">Sukkerfri</option>
+          <option value="laktose fri">Laktose fri</option>
+          <option value="gluten fri">Gluten fri</option>
+          <option value="gram slot">Gram slot</option>
+          <option value="nøglehul">Nøglehul</option>
+          <option value="fairtrade">Fairtrade</option>
+          <option value="svanemærket">Svanemærket</option>
+          <option value="fuldkorn">Fuldkorn</option>
+          <option value="ecolabel">Ecolabel</option>
+          <option value="dansk">Dansk</option>
+          <option value="Asthma Allergy Nordic">Asthma Allergy Nordic</option>
+          <option value="Rainforest Alliance">Rainforest Alliance</option>
+          <option value="Bedre dyrevelfærd 1">Bedre dyrevelfærd 1</option>
+          <option value="Bedre dyrevelfærd 2">Bedre dyrevelfærd 2</option>
+          <option value="Bedre dyrevelfærd 3">Bedre dyrevelfærd 3</option>
           </select>
       </div>
     </div>
