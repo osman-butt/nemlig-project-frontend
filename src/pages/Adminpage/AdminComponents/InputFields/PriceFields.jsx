@@ -1,11 +1,12 @@
 import FormInput from "../../../../components/FormInput";
 
 export default function PriceFields({ prices, handlePriceOrDateChangeInstance, removePriceField, addPriceField }) {
+  console.log(prices);
   return prices.map((price, index) => (
     <fieldset key={index} className="border-4 border-solid black">
       <div className="px-2">
         <FormInput
-          label={`Pris: ${index + 1}`}
+          label={price.is_pricematch ? `Prismatch pris: ` : `Pris: ${index + 1}`}
           type="number"
           placeholder="Skriv pris på varen her"
           name="price"
