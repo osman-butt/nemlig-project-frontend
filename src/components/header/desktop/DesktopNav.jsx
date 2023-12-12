@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import DesktopNavBasket from "./DesktopNavBasket";
 import DesktopNavItem from "./DesktopNavItem";
 import useLogout from "../../../hooks/useLogout";
@@ -8,6 +8,13 @@ function DesktopNav() {
   const location = useLocation();
   const logout = useLogout();
   const { auth } = useAuth();
+
+  const navigate = useNavigate();
+
+  const signOut = async () => {
+    await logout();
+    navigate("/login");
+  };
 
   return (
     <>
@@ -20,7 +27,7 @@ function DesktopNav() {
         ) : (
           <>
             <DesktopNavItem path="/shop">Dagligvarer</DesktopNavItem>
-            {auth && auth.user_roles.includes("admin") && (
+            {auth?.user_roles?.includes("admin") && (
               <>
                 <DesktopNavItem path="/admin">Admin</DesktopNavItem>
               </>
@@ -29,7 +36,7 @@ function DesktopNav() {
               <>
                 <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
                 <DesktopNavItem path="/login">
-                  <button onClick={logout}>LOG UD</button>
+                  <button onClick={signOut}>LOG UD</button>
                 </DesktopNavItem>
               </>
             )}

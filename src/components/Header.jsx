@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <>
       <div className="max-w-[1240px] mx-auto px-4">
-        {auth &&
+        {auth?.accessToken &&
         location.pathname !== "/" &&
         auth?.user_roles.includes("customer") ? (
           <p className="text-right h-8 text-[14px] ">
