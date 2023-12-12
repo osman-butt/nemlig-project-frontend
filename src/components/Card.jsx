@@ -60,9 +60,11 @@ export default function Card({
             src={data.images && data.images[0] ? data.images[0].image_url : ""}
             alt="productImage"
           />
-          {/* <div className="absolute top-10 left-0 z-10 flex flex-row justify-center w-full h-10 text-black align-middle bg-[#d4793a] bg-opacity-70 rounded-2xl">
-            <p className="self-center">Prismatch</p>
-          </div> */}
+          {lowestPrice.is_pricematch && (
+            <div className="absolute top-10 left-0 z-10 flex flex-row justify-center w-full h-10 text-black align-middle bg-[#d4793a] bg-opacity-70 rounded-2xl">
+              <p className="self-center">Prismatch</p>
+            </div>
+          )}
         </div>
         <div>
           <p className="mt-auto font-medium text-center">{data.product_name}</p>
