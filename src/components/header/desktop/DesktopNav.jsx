@@ -35,9 +35,13 @@ function DesktopNav() {
             {auth?.accessToken && (
               <>
                 <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
-                <DesktopNavItem path="/login">
-                  <button onClick={signOut}>LOG UD</button>
-                </DesktopNavItem>
+
+                <button
+                  className="p-4 hover:text-[#d4793a] hover:cursor-pointer"
+                  onClick={signOut}
+                >
+                  LOG UD
+                </button>
               </>
             )}
             {!auth?.accessToken && (
