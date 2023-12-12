@@ -32,7 +32,7 @@ function DesktopNav() {
                 <DesktopNavItem path="/admin">Admin</DesktopNavItem>
               </>
             )}
-            {auth && (
+            {auth?.accessToken && (
               <>
                 <DesktopNavItem path="/favorites">Favoritter</DesktopNavItem>
                 <DesktopNavItem path="/login">
@@ -40,7 +40,7 @@ function DesktopNav() {
                 </DesktopNavItem>
               </>
             )}
-            {!auth && (
+            {!auth?.accessToken && (
               <>
                 <DesktopNavItem path="/login">Log ind</DesktopNavItem>
                 <DesktopNavItem path="/createaccount">
