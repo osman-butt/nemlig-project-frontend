@@ -5,6 +5,8 @@ import { useState } from "react";
 // import useAuth from "../hooks/useAuth.js";
 import FormInput from "./FormInput.jsx";
 import useLogin from "../hooks/useLogin.js";
+import ButtonFullSecondary from "./buttons/ButtonFullSecondary.jsx";
+import ButtonFullPrimary from "./buttons/ButtonFullPrimary.jsx";
 
 export default function Loginform() {
   const navigate = useNavigate();
@@ -20,7 +22,7 @@ export default function Loginform() {
   return (
     <div className="w-full max-w-lg pt-8 m-auto">
       <div className="bg-[#e8e3d8] rounded">
-        <h2 className="py-3 text-2xl font-medium text-center pt-6">Log ind</h2>
+        <h2 className="py-3 pt-6 text-2xl font-medium text-center">Log ind</h2>
         <div className="w-full max-w-xs m-auto mt-4">
           <form className="" onSubmit={handleSubmit}>
             <div className="mb-6">
@@ -47,21 +49,13 @@ export default function Loginform() {
               <p></p>
             )}
             <div className="">
-              <button
-                type="submit"
-                className="w-full px-4 py-3 font-bold text-white bg-[#d4793a] rounded hover:bg-[#ecbc9a] focus:outline-none focus:shadow-outline"
-              >
-                Log ind
-              </button>
+              <ButtonFullPrimary type={"submit"}>Log ind</ButtonFullPrimary>
             </div>
           </form>
           <div className="flex items-center mt-6">
-            <button
-              onClick={() => navigate("/createaccount")}
-              className="w-full px-4 py-3 font-bold text-white bg-[#58644C] rounded hover:bg-[#798072] focus:outline-none focus:shadow-outline"
-            >
+            <ButtonFullSecondary onClick={() => navigate("/createaccount")}>
               Opret bruger
-            </button>
+            </ButtonFullSecondary>
           </div>
         </div>
         <p className="py-4 font-medium text-center underline cursor-pointer">

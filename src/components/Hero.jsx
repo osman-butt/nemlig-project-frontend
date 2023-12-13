@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import ButtonPrimary from "./buttons/ButtonPrimary";
 
 export default function Hero() {
   const navigate = useNavigate();
@@ -15,12 +16,9 @@ export default function Hero() {
               Få leveret lige til døren!
             </p>
           </div>
-          <button
-            onClick={() => navigate("/shop")}
-            className="bg-[#d4793a] hover:bg-[#ecbc9a] w-[200px] rounded-md my-6 mx-auto py-3 text-black font-bold"
-          >
+          <ButtonPrimary onClick={() => navigate("/shop")}>
             Se udvalget
-          </button>
+          </ButtonPrimary>
         </div>
       </div>
     </div>

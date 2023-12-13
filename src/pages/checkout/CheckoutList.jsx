@@ -4,6 +4,7 @@ import CheckoutListItem from "./CheckoutListItem.jsx";
 import useCheckout from "../../hooks/useCheckout.js";
 import usePayment from "../../hooks/usePayment.js";
 import useCart from "../../hooks/useCart.js";
+import ButtonFullPrimary from "../../components/buttons/ButtonFullPrimary.jsx";
 
 function CheckoutList() {
   const { cart } = useCart();
@@ -117,14 +118,14 @@ function CheckoutList() {
               ) : (
                 <p></p>
               )}
-              <button
+              <ButtonFullPrimary
                 onClick={handleCheckout}
-                className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded w-full ${
+                className={`mt-2 ${
                   cart.length === 0 && "disabled cursor-not-allowed"
                 }`}
               >
                 Betal
-              </button>
+              </ButtonFullPrimary>
             </form>
           </div>
         </section>
