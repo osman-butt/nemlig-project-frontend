@@ -3,7 +3,7 @@ import useCart from "../hooks/useCart";
 import Listitem from "./Listitem";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
-import ButtonPrimary from "./buttons/ButtonPrimary";
+import ButtonFullPrimary from "./buttons/ButtonFullPrimary";
 
 function List() {
   const { cart } = useCart();
@@ -79,21 +79,21 @@ function List() {
             </div>
             {cart.length > 0 &&
               (auth?.accessToken ? (
-                <ButtonPrimary
+                <ButtonFullPrimary
                   onClick={() => navigate("/checkout")}
                   className={`md:w-[300px] ${
                     cart.length === 0 && "disabled cursor-not-allowed"
                   }`}
                 >
                   Gå til checkud
-                </ButtonPrimary>
+                </ButtonFullPrimary>
               ) : (
-                <ButtonPrimary
+                <ButtonFullPrimary
                   onClick={() => navigate("/login")}
                   className={"md:w-[300px]"}
                 >
                   Login
-                </ButtonPrimary>
+                </ButtonFullPrimary>
               ))}
           </div>
         </section>
