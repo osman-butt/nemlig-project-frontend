@@ -1,13 +1,13 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { AuthProvider } from "./context/AuthProvider.jsx";
 import { CartProvider } from "./context/CartProvider.jsx";
 import { OrderProvider } from "./context/OrderProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <HashRouter>
     <AuthProvider>
       <CartProvider>
         <OrderProvider>
@@ -15,5 +15,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </OrderProvider>
       </CartProvider>
     </AuthProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
