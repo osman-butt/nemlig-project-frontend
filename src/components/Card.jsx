@@ -39,7 +39,7 @@ export default function Card({
       : null;
 
   return (
-    <article className="bg-white rounded-xl w-[200px] h-[350px] relative mx-auto pt-4">
+    <article className="bg-white rounded-xl w-[200px] min-h-[340px] relative mx-auto pt-4">
       {showSnackbar && <Snackbar />}
       <div className="flex flex-col items-center w-full h-full gap-2 justify-self-center">
         {(alwaysShowStar || (auth && auth.user_email)) && (
@@ -56,7 +56,7 @@ export default function Card({
         )}
         <div className="relative">
           <img
-            className="pt-2 object-contain w-[130px] h-[130px]"
+            className="pt-2 object-contain w-[100px] h-[100px]"
             src={data.images && data.images[0] ? data.images[0].image_url : ""}
             alt="productImage"
           />
@@ -68,8 +68,10 @@ export default function Card({
         </div>
         <div>
           <p className="mt-auto font-medium text-center">{data.product_name}</p>
-          <p className="font-light text-[14px] mt-auto">
-            {data.product_underline}
+          <p className="font-light text-[12px] mt-auto px-2 text-center">
+            {data.product_underline.length > 40
+              ? data.product_underline.substring(0, 40) + "..."
+              : data.product_underline}
           </p>
         </div>
         {lowestPrice.price !== highestPrice.price ? (

@@ -3,11 +3,18 @@ import useCart from "../hooks/useCart";
 import Listitem from "./Listitem";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import ButtonPrimary from "./buttons/ButtonPrimary";
 
 function List() {
   const { cart } = useCart();
   const { auth } = useAuth();
   const navigate = useNavigate();
+
+  function getLowestPrice(c) {
+    return c.prices.length > 0
+      ? c.prices.reduce((prev, curr) => (prev.price < curr.price ? prev : curr))
+      : null;
+  }
 
   return (
     <div className="max-w-[900px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
@@ -44,12 +51,7 @@ function List() {
                 {cart.length > 0
                   ? cart
                       .reduce(
-                        (a, c) =>
-                          c.quantity *
-                            (c.prices.length > 1
-                              ? c.prices[1].price
-                              : c.prices[0].price) +
-                          a,
+                        (a, c) => c.quantity * getLowestPrice(c).price + a,
                         0
                       )
                       .toFixed(2)
@@ -67,12 +69,7 @@ function List() {
                 {cart.length > 0
                   ? (
                       cart.reduce(
-                        (a, c) =>
-                          c.quantity *
-                            (c.prices.length > 1
-                              ? c.prices[1].price
-                              : c.prices[0].price) +
-                          a,
+                        (a, c) => c.quantity * getLowestPrice(c).price + a,
                         0
                       ) + 59
                     ).toFixed(2)
@@ -82,23 +79,21 @@ function List() {
             </div>
             {cart.length > 0 &&
               (auth?.accessToken ? (
-                <button
+                <ButtonPrimary
                   onClick={() => navigate("/checkout")}
-                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
+                  className={`md:w-[300px] ${
                     cart.length === 0 && "disabled cursor-not-allowed"
                   }`}
                 >
                   Gå til checkud
-                </button>
+                </ButtonPrimary>
               ) : (
-                <button
+                <ButtonPrimary
                   onClick={() => navigate("/login")}
-                  className={`bg-[#d4793a] hover:bg-[#ecbc9a] text-white font-bold text-xl py-2 mt-2 rounded md:w-[300px] ${
-                    cart.length === 0 && "disabled cursor-not-allowed"
-                  }`}
+                  className={"md:w-[300px]"}
                 >
                   Login
-                </button>
+                </ButtonPrimary>
               ))}
           </div>
         </section>

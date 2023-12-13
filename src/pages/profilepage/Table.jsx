@@ -3,6 +3,7 @@ import TableItem from "./TableItem.jsx";
 import usePrivateAxios from "../../hooks/usePrivateAxios";
 import useAuth from "../../hooks/useAuth.js";
 import OrderListItem from "./OrderListItem.jsx";
+import ButtonSmallPrimary from "../../components/buttons/ButtonSmallPrimary.jsx";
 
 function Table() {
   const [orders, setOrders] = useState([]);
@@ -92,12 +93,12 @@ function Table() {
                 </tbody>
               </table>
             </section>
-            <button
-              className="px-4 py-2 mb-4 text-white bg-[#d4793a] rounded"
+            <ButtonSmallPrimary
               onClick={() => setIsOpen(false)}
+              className={"px-4 py-2 mb-4"}
             >
               Luk
-            </button>
+            </ButtonSmallPrimary>
           </div>
           //   </div>
         )}

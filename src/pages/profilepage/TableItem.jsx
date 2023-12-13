@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ButtonSmallPrimary from "../../components/buttons/ButtonSmallPrimary";
 
 function TableItem({ order, showOrder }) {
   const dateConfig = {
@@ -44,12 +45,18 @@ function TableItem({ order, showOrder }) {
           </p>
         </td>
         <td className="w-[20%] py-4 text-center" data-field="product-name">
-          <button
+          {/* <button
             onClick={() => showOrder(order)}
             className="px-2 py-2 text-white bg-[#d4793a] rounded"
           >
             Se ordre
-          </button>
+          </button> */}
+          <ButtonSmallPrimary
+            onClick={() => showOrder(order)}
+            className={"p-2"}
+          >
+            Se ordre
+          </ButtonSmallPrimary>
         </td>
       </tr>
     </>

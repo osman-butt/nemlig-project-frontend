@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "../api/axios";
 import FormInput from "./FormInput";
 import { useState } from "react";
+import ButtonFullSecondary from "./buttons/ButtonFullSecondary";
 
 export default function Createaccountform() {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ export default function Createaccountform() {
   return (
     <div className="w-full max-w-lg pt-8 m-auto">
       <div className="bg-[#e8e3d8] rounded">
-        <h2 className="py-3 text-2xl font-medium text-center pt-6">
+        <h2 className="py-3 pt-6 text-2xl font-medium text-center">
           Opret bruger
         </h2>
         <div className="w-full max-w-xs m-auto mt-4">
@@ -115,12 +116,9 @@ export default function Createaccountform() {
               <p></p>
             )}
             <div className="flex items-center py-4">
-              <button
-                type="submit"
-                className="w-full px-4 py-3 font-bold text-white bg-[#58644C] rounded hover:bg-[#798072] focus:outline-none focus:shadow-outline"
-              >
+              <ButtonFullSecondary type={"submit"}>
                 Opret bruger
-              </button>
+              </ButtonFullSecondary>
             </div>
           </form>
         </div>

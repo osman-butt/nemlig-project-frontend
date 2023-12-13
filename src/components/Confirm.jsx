@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import OrderContext from "../context/OrderProvider";
+import ButtonFullPrimary from "./buttons/ButtonFullPrimary";
 
 export default function Confirm() {
   const { order } = useContext(OrderContext);
@@ -25,14 +26,7 @@ export default function Confirm() {
         </p>
         <div className="mt-auto">
           <Link to="/">
-            <button
-              className="w-full  h-12 lg:h-16 font-general font-bold text-white text-lg lg:text-xl border text-center justify-center border-black rounded-md bg-[#58644c]"
-              alt="Bestil btn"
-              src="bestil-btn.png"
-            >
-              {" "}
-              Tilbage til forsiden
-            </button>
+            <ButtonFullPrimary>Tilbage til forsiden</ButtonFullPrimary>
           </Link>
         </div>
       </div>

@@ -5,6 +5,12 @@ import useCart from "../../../hooks/useCart";
 function DesktopNavBasket() {
   const { cart } = useCart();
 
+  function getLowestPrice(c) {
+    return c.prices.length > 0
+      ? c.prices.reduce((prev, curr) => (prev.price < curr.price ? prev : curr))
+      : null;
+  }
+
   return (
     <Link
       className=" pb-0 hover:text-[#d4793a] hover:cursor-pointer w-32 flex flex-col items-center"
@@ -16,12 +22,7 @@ function DesktopNavBasket() {
         {cart &&
           cart
             .reduce(
-              (acc, item) =>
-                (item.prices.length > 1
-                  ? item.prices[1].price
-                  : item.prices[0].price) *
-                  item.quantity +
-                acc,
+              (acc, item) => getLowestPrice(item).price * item.quantity + acc,
               0
             )
             .toFixed(2)}{" "}
