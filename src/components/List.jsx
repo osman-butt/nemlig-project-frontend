@@ -10,6 +10,12 @@ function List() {
   const { auth } = useAuth();
   const navigate = useNavigate();
 
+  function getLowestPrice(c) {
+    return c.prices.length > 0
+      ? c.prices.reduce((prev, curr) => (prev.price < curr.price ? prev : curr))
+      : null;
+  }
+
   return (
     <div className="max-w-[900px] w-full min-h-screen mx-auto text-center flex flex-col font-general">
       <div className="flex flex-row justify-center mt-20 bg-[#e8e3d8] rounded">
@@ -45,12 +51,7 @@ function List() {
                 {cart.length > 0
                   ? cart
                       .reduce(
-                        (a, c) =>
-                          c.quantity *
-                            (c.prices.length > 1
-                              ? c.prices[1].price
-                              : c.prices[0].price) +
-                          a,
+                        (a, c) => c.quantity * getLowestPrice(c).price + a,
                         0
                       )
                       .toFixed(2)
@@ -68,12 +69,7 @@ function List() {
                 {cart.length > 0
                   ? (
                       cart.reduce(
-                        (a, c) =>
-                          c.quantity *
-                            (c.prices.length > 1
-                              ? c.prices[1].price
-                              : c.prices[0].price) +
-                          a,
+                        (a, c) => c.quantity * getLowestPrice(c).price + a,
                         0
                       ) + 59
                     ).toFixed(2)
