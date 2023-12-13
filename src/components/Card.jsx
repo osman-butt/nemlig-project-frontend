@@ -76,7 +76,6 @@ export default function Card({
         lowestPrice.is_pricematch &&
         lowestPrice.is_pricematch ? (
           <>
-            <h3 className="font-bold text-red-500">PRISMATCH</h3>
             <p className="text-[18px] my-auto line-through text-red-700">
               {highestPrice.price.toFixed(2)} kr.
             </p>
