@@ -2,7 +2,7 @@ import Landingpage from "./pages/Landingpage";
 import Aboutpage from "./pages/Aboutpage.jsx";
 import Shoppage from "./pages/Shoppage";
 import Orderpage from "./pages/Orderpage";
-import BasketPage from "./pages/BasketPage";
+import CartPage from "./pages/cartpage/CartPage.jsx";
 import { Route, Routes } from "react-router-dom";
 import Loginpage from "./pages/Loginpage";
 import Createaccountpage from "./pages/Createaccountpage.jsx";
@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage />} />
         <Route path="/order" element={<Orderpage />} />
-        <Route path="/cart" element={<BasketPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
