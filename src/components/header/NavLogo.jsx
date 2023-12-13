@@ -1,10 +1,20 @@
 import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 function NavLogo() {
+  const { auth } = useAuth();
   return (
-    <Link className="text-3xl font-bold text-[#d4793a] lowercase" to="/">
-      nemlig.com
-    </Link>
+    <>
+      {auth?.user_roles?.includes("admin") ? (
+        <p className="text-3xl font-bold text-[#d4793a] lowercase">
+          nemlig.com
+        </p>
+      ) : (
+        <Link className="text-3xl font-bold text-[#d4793a] lowercase" to="/">
+          nemlig.com
+        </Link>
+      )}
+    </>
   );
 }
 
