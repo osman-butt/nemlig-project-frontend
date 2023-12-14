@@ -32,36 +32,33 @@ export default function Admintable({
       <div className="flex justify-center">
         <ButtonPrimary onClick={openDialog}>Tilføj produkt</ButtonPrimary>
       </div>
-      <table className="font-medium bg-[#e8e3d8] text-center text-xs sm:text-lg md:text-xl w-full">
-        <thead className="uppercase text-sm sm:text-xl md:text-2xl border-[3px] border-solid border-black">
-          <tr>
-            <th className="border-black border-solid border-[3px] p-1">ID</th>
-            <th className="border-black border-solid border-[3px] p-1">
-              Billede
-            </th>
-            <th className="border-black border-solid border-[3px] p-1">
-              Produktnavn
-            </th>
-            <th className="border-black border-solid border-[3px] p-1">Pris</th>
-            <th className="border-black border-solid border-[3px] p-1">
-              Rediger
-            </th>
-            <th className="border-black border-solid border-[3px] p-1">Slet</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map(item => (
-            <Table
-              key={item.product_id}
-              data={item}
-              labelData={labelData}
-              categoryData={categoryData}
-              setData={setData}
-              setUpdate={setUpdate}
-            />
-          ))}
-        </tbody>
-      </table>
+      <section className="container w-full bg-[#e8e3d8] p-4 mb-4 rounded md:p-10 overflow-y-scroll scrollbar-hide">
+        <table className="w-[100%] select-none mx-auto" id="cart">
+          <thead className="border-b-2 border-black">
+            <tr className="text-left">
+              <th className="hidden md:table-cell">ID</th>
+              <th className="hidden text-center md:table-cell">Billede</th>
+              <th>Produkt</th>
+              <th>Pris</th>
+              <th>På lager</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody className="">
+            {data.map(item => (
+              <Table
+                key={item.product_id}
+                data={item}
+                labelData={labelData}
+                categoryData={categoryData}
+                setData={setData}
+                setUpdate={setUpdate}
+              />
+            ))}
+          </tbody>
+        </table>
+      </section>
     </div>
   );
 }

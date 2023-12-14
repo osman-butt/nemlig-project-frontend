@@ -49,35 +49,40 @@ export default function Table({
         />
       )}
 
-      <tr>
-        <td className="border-2 border-black border-solid">
-          {data.product_id}
+      <tr className="text-left text-[14px] border-gray-500 border-b w-full">
+        <td className="hidden md:table-cell w-[5%]">{data.product_id}</td>
+        <td className="w-[20%] hidden md:table-cell" data-field="name">
+          <div className="flex items-center justify-center py-2">
+            <img
+              className="max-h-[80px] max-w-[80px] object-contain"
+              src={data.images[0].image_url}
+              alt="product-img"
+            />
+          </div>
         </td>
-        <td className="p-1 border-2 border-black border-solid">
-          <img
-            className="m-auto h-12 sm:h-14 md:h-16 sm:max-w-[100px]"
-            src={data.images && data.images[0] ? data.images[0].image_url : ""}
-            alt=""
-          />
+        <td className="w-[30%] py-4">
+          <p className="w-[135px] font-bold truncate md:hidden">
+            {data.product_name}
+          </p>
+          <p className="hidden font-bold md:block">{data.product_name}</p>
+          <p className="font-light">{data.product_underline}</p>
         </td>
-        <td className="p-1 border-2 border-black border-solid">
-          {data.product_name}
-        </td>
-        <td className="p-1 border-2 border-black border-solid">
+        <td className="w-[20%]">
           {data.prices && data.prices[0]
-            ? data.prices[0].price + " kr."
+            ? data.prices[0].price.toFixed(2) + " kr."
             : "N/A"}
         </td>
+        <td className="w-[10%]">{data.inventory.inventory_stock}</td>
         <td
           onClick={() => openDialog("update")}
-          className="border-black border-solid border-2 p-1 hover:text-[#d4793a]"
+          className="w-[10%] hover:text-[#d4793a]"
         >
           {editIcon}
         </td>
 
         <td
           onClick={() => openDialog("delete")}
-          className="border-black border-solid border-2 p-1 hover:text-[#d4793a]"
+          className="w-[10%] hover:text-[#d4793a]"
         >
           {deleteIcon}
         </td>
