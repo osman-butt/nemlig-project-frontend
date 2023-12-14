@@ -106,8 +106,9 @@ export default function Shoppage() {
   return (
     <>
       <div
-        className="min-h-screen bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: `url(${image})` }}
+        className="min-h-screen"
+        //  bg-fixed bg-center bg-cover"
+        // style={{ backgroundImage: `url(${image})` }}
       >
         <Navbar setCategory={setCategory} setPage={setPage} />
         <Search
