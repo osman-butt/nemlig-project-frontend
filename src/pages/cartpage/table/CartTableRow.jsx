@@ -1,9 +1,7 @@
-import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import useCart from "../hooks/useCart";
+import CartPriceField from "./CartPriceField.jsx";
+import ToggleQuantity from "./ToggleQuantity.jsx";
 
-function Listitem({ product }) {
-  const { incrementCartItem, decrementCartItem } = useCart();
-
+function CartTableRow({ product }) {
   // Find the lowest price / only if prices.length > 0
   const lowestPrice =
     product.prices.length > 0
@@ -40,32 +38,14 @@ function Listitem({ product }) {
           <p className="font-light">{product.product_underline}</p>
         </td>
         <td className="w-[20%]" data-field="price">
-          {lowestPrice.price !== highestPrice.price ? (
-            <>
-              <p className="line-through">
-                {highestPrice.price.toFixed(2)} kr.
-              </p>
-              <p className="font-bold">{lowestPrice.price.toFixed(2)} kr.</p>
-            </>
-          ) : (
-            <p className="font-bold">
-              {lowestPrice && lowestPrice.price.toFixed(2)} kr.
-            </p>
-          )}
+          <CartPriceField
+            lowestPrice={lowestPrice}
+            highestPrice={highestPrice}
+          />
         </td>
         <td className="w-[10%] text-center" data-field="toggle-quantity">
           <div className="flex flex-row items-center justify-center align-middle">
-            <CiCircleMinus
-              size={30}
-              onClick={() => decrementCartItem(product)}
-            />
-            <p className="mx-1 w-[30px] py-1 px-1 bg-[#58644c] rounded-full font-bold text-white">
-              {product.quantity}
-            </p>
-            <CiCirclePlus
-              size={30}
-              onClick={() => incrementCartItem(product)}
-            />
+            <ToggleQuantity product={product} />
           </div>
         </td>
       </tr>
@@ -73,4 +53,4 @@ function Listitem({ product }) {
   );
 }
 
-export default Listitem;
+export default CartTableRow;

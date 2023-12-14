@@ -3,12 +3,12 @@ import { useState } from "react";
 
 // import axios from "../api/axios.js";
 // import useAuth from "../hooks/useAuth.js";
-import FormInput from "./FormInput.jsx";
-import useLogin from "../hooks/useLogin.js";
-import ButtonFullSecondary from "./buttons/ButtonFullSecondary.jsx";
-import ButtonFullPrimary from "./buttons/ButtonFullPrimary.jsx";
+import FormInput from "../../components/forms/FormInput.jsx";
+import useLogin from "../../hooks/useLogin.js";
+import ButtonFullSecondary from "../../components/buttons/ButtonFullSecondary.jsx";
+import ButtonFullPrimary from "../../components/buttons/ButtonFullPrimary.jsx";
 
-export default function Loginform() {
+export default function LoginForm() {
   const navigate = useNavigate();
   const { login, error, errorMessage } = useLogin();
   const [email, setEmail] = useState("");

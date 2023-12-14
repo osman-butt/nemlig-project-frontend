@@ -1,4 +1,4 @@
-import FormInput from "../../../../components/FormInput.jsx";
+import FormInput from "../../../../components/forms/FormInput.jsx";
 import {
   handleInputChange,
   handleSelectChange,
@@ -30,7 +30,7 @@ export default function Updatedialog({
       starting_at: price.starting_at,
       is_campaign: price.is_campaign,
       ending_at: price.ending_at,
-      is_pricematch: price.is_pricematch,
+      is_pricematch: price?.is_pricematch,
     }))
   );
   const [images, setImages] = useState(

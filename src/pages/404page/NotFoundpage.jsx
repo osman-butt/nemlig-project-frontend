@@ -1,6 +1,6 @@
-import image from "../assets/hero.jpg";
-import Footer from "../components/Footer";
-import NotFoundContainer from "../components/NotFoundContainer";
+import image from "../../assets/hero.jpg";
+import Footer from "../../components/Footer";
+import NotFoundContainer from "./NotFoundContainer";
 
 function NotFoundpage() {
   return (

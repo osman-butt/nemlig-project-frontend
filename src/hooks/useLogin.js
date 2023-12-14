@@ -34,7 +34,12 @@ function useLogin() {
 
         setError(false);
         setErrorMessage("");
-        navigate("/shop");
+        if (response.data.user_roles.includes("customer")) {
+          navigate("/shop");
+        }
+        if (response.data.user_roles.includes("admin")) {
+          navigate("/admin");
+        }
       } catch (error) {
         //   return err.response?.data.message;
         setError(true);

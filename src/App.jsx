@@ -1,21 +1,21 @@
-import Landingpage from "./pages/Landingpage";
-import Aboutpage from "./pages/Aboutpage.jsx";
-import Shoppage from "./pages/Shoppage";
-import Orderpage from "./pages/Orderpage";
-import BasketPage from "./pages/BasketPage";
+import Aboutpage from "./pages/aboutpage/Aboutpage.jsx";
+import Shoppage from "./pages/shoppage/Shoppage.jsx";
+import Orderpage from "./pages/orderpage/Orderpage.jsx";
+import CartPage from "./pages/cartpage/CartPage.jsx";
 import { Route, Routes } from "react-router-dom";
-import Loginpage from "./pages/Loginpage";
-import Createaccountpage from "./pages/Createaccountpage.jsx";
+import Loginpage from "./pages/loginpage/Loginpage.jsx";
+import Createaccountpage from "./pages/createaccountpage/Createaccountpage.jsx";
 import Adminpage from "./pages/Adminpage/Adminpage.jsx";
 import { useEffect } from "react";
 import Header from "./components/Header.jsx";
 // import Formdialog from "./components/Formdialog.jsx";
-import FavoritePage from "./pages/FavoritePage.jsx";
-import NotFoundpage from "./pages/NotFoundpage.jsx";
+import FavoritePage from "./pages/favoritepage/FavoritePage.jsx";
+import NotFoundpage from "./pages/404page/NotFoundpage.jsx";
 import useRefreshToken from "./hooks/useRefreshToken.js";
 import useAuth from "./hooks/useAuth.js";
 import CheckoutPage from "./pages/checkout/CheckoutPage.jsx";
 import ProfilePage from "./pages/profilepage/ProfilePage.jsx";
+import Landingpage from "./pages/landingpage/Landingpage.jsx";
 
 export default function App() {
   const refreshToken = useRefreshToken();
@@ -34,7 +34,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <div className="font-general">
       <Header />
       <Routes>
         <Route path="/" element={<Landingpage />} />
@@ -43,7 +43,7 @@ export default function App() {
         <Route path="/createaccount" element={<Createaccountpage />} />
         <Route path="/shop" element={<Shoppage />} />
         <Route path="/order" element={<Orderpage />} />
-        <Route path="/cart" element={<BasketPage />} />
+        <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
@@ -51,6 +51,6 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={<NotFoundpage />} />
       </Routes>
-    </>
+    </div>
   );
 }

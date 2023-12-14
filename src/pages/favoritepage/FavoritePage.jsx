@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import usePrivateAxios from "../hooks/usePrivateAxios";
-import image from "../assets/hero.jpg";
-import Navbar from "../components/Navbar";
-import Search from "../components/Search";
-import Items from "../components/Items";
-import Footer from "../components/Footer";
+import usePrivateAxios from "../../hooks/usePrivateAxios";
+// import image from "../../assets/hero.jpg";
+import Navbar from "../../components/Navbar.jsx";
+import Search from "../../components/Search.jsx";
+import Items from "../../components/Items.jsx";
+import Footer from "../../components/Footer.jsx";
 
 export default function FavoritePage() {
   const [products, setProducts] = useState([]);
@@ -34,7 +34,7 @@ export default function FavoritePage() {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, category, privateAxios]);
+  }, [sort, label, searchQuery, category]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
@@ -63,8 +63,9 @@ export default function FavoritePage() {
   return (
     <>
       <div
-        className="min-h-screen bg-fixed bg-center bg-cover"
-        style={{ backgroundImage: `url(${image})` }}
+        className="min-h-screen"
+        //  bg-fixed bg-center bg-cover"
+        // style={{ backgroundImage: `url(${image})` }}
       >
         <Navbar setCategory={setCategory} />
         <Search

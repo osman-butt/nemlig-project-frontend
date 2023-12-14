@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import FormInput from "../../components/FormInput.jsx";
+import FormInput from "../../components/forms/FormInput.jsx";
 import CheckoutListItem from "./CheckoutListItem.jsx";
 import useCheckout from "../../hooks/useCheckout.js";
 import usePayment from "../../hooks/usePayment.js";
