@@ -1,6 +1,6 @@
 import image from "../../assets/hero.jpg";
 import Footer from "../../components/Footer";
-import LoginForm from "./Loginform.jsx";
+import LoginForm from "./LoginForm.jsx";
 
 export default function Loginpage() {
   return (
