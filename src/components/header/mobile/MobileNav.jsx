@@ -5,7 +5,7 @@ import MobileNavLogo from "./MobileNavLogo";
 
 function MobileNav({ handleNav, nav }) {
   return (
-    <>
+    <div className="relative z-50">
       <div onClick={handleNav} className="block md:hidden hover:cursor-pointer">
         {!nav ? <AiOutlineClose size={30} /> : <AiOutlineMenu size={30} />}
       </div>
@@ -46,7 +46,7 @@ function MobileNav({ handleNav, nav }) {
           )}
         </ul>
       </div>
-    </>
+    </div>
   );
 }
 
