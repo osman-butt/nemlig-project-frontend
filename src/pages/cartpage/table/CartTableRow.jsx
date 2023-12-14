@@ -1,5 +1,5 @@
-import CartPriceField from "./CartPriceField";
-import ToggleQuantity from "./ToggleQuantity";
+import CartPriceField from "./CartPriceField.jsx";
+import ToggleQuantity from "./ToggleQuantity.jsx";
 
 function CartTableRow({ product }) {
   // Find the lowest price / only if prices.length > 0

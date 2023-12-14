@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ButtonPrimary from "../../components/buttons/ButtonPrimary";
+import ButtonPrimary from "../../components/buttons/ButtonPrimary.jsx";
 
 export default function Hero() {
   const navigate = useNavigate();

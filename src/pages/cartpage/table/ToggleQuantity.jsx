@@ -1,5 +1,5 @@
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
-import useCart from "../../../hooks/useCart";
+import useCart from "../../../hooks/useCart.js";
 
 function ToggleQuantity({ product }) {
   const { incrementCartItem, decrementCartItem } = useCart();

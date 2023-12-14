@@ -1,6 +1,6 @@
 import image from "../../assets/hero.jpg";
-import Footer from "../../components/Footer";
-import CartContainer from "./container/CartContainer";
+import Footer from "../../components/Footer.jsx";
+import CartContainer from "./container/CartContainer.jsx";
 
 function CartPage() {
   return (

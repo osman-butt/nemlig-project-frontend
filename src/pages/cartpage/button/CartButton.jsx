@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
-import ButtonFullPrimary from "../../../components/buttons/ButtonFullPrimary";
-import useAuth from "../../../hooks/useAuth";
+import ButtonFullPrimary from "../../../components/buttons/ButtonFullPrimary.jsx";
+import useAuth from "../../../hooks/useAuth.js";
 
 function CartButton({ cart }) {
   const { auth } = useAuth();

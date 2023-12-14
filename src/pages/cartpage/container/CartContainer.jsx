@@ -1,10 +1,10 @@
-import useCart from "../../../hooks/useCart";
-import CartTable from "../table/CartTable";
-import CartButton from "../button/CartButton";
-import TotalPrice from "../utility/TotalPrice";
-import TotalQuantity from "../utility/TotalQuantity";
-import CartTableRow from "../table/CartTableRow";
-import Container from "../../../components/container/Container";
+import useCart from "../../../hooks/useCart.js";
+import CartTable from "../table/CartTable.jsx";
+import CartButton from "../button/CartButton.jsx";
+import TotalPrice from "../utility/TotalPrice.jsx";
+import TotalQuantity from "../utility/TotalQuantity.jsx";
+import CartTableRow from "../table/CartTableRow.jsx";
+import Container from "../../../components/container/Container.jsx";
 
 function CartContainer() {
   const { cart } = useCart();

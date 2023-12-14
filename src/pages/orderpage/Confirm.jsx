@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import OrderContext from "../../context/OrderProvider";
-import Container from "../../components/container/Container";
-import ButtonPrimary from "../../components/buttons/ButtonPrimary";
+import OrderContext from "../../context/OrderProvider.jsx";
+import Container from "../../components/container/Container.jsx";
+import ButtonPrimary from "../../components/buttons/ButtonPrimary.jsx";
 
 export default function Confirm() {
   const { order } = useContext(OrderContext);
