@@ -34,7 +34,7 @@ export default function App() {
   }, []);
 
   return (
-    <>
+    <div className="font-general">
       <Header />
       <Routes>
         <Route path="/" element={<Landingpage />} />
@@ -51,6 +51,6 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={<NotFoundpage />} />
       </Routes>
-    </>
+    </div>
   );
 }
