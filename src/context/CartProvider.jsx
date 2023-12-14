@@ -136,7 +136,12 @@ function CartProvider({ children }) {
 
   return (
     <CartContext.Provider
-      value={{ cart, setCart, incrementCartItem, decrementCartItem }}
+      value={{
+        cart,
+        setCart,
+        incrementCartItem,
+        decrementCartItem,
+      }}
     >
       {children}
     </CartContext.Provider>

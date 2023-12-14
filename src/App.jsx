@@ -6,7 +6,7 @@ import BasketPage from "./pages/BasketPage";
 import { Route, Routes } from "react-router-dom";
 import Loginpage from "./pages/Loginpage";
 import Createaccountpage from "./pages/Createaccountpage.jsx";
-import Adminpage from "./pages/Adminpage/Adminpage.jsx"
+import Adminpage from "./pages/Adminpage/Adminpage.jsx";
 import { useEffect } from "react";
 import Header from "./components/Header.jsx";
 // import Formdialog from "./components/Formdialog.jsx";
@@ -14,6 +14,8 @@ import FavoritePage from "./pages/FavoritePage.jsx";
 import NotFoundpage from "./pages/NotFoundpage.jsx";
 import useRefreshToken from "./hooks/useRefreshToken.js";
 import useAuth from "./hooks/useAuth.js";
+import CheckoutPage from "./pages/checkout/CheckoutPage.jsx";
+import ProfilePage from "./pages/profilepage/ProfilePage.jsx";
 
 export default function App() {
   const refreshToken = useRefreshToken();
@@ -42,9 +44,11 @@ export default function App() {
         <Route path="/shop" element={<Shoppage />} />
         <Route path="/order" element={<Orderpage />} />
         <Route path="/cart" element={<BasketPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin" element={<Adminpage />} />
         {/* <Route path="/formdialog" element={<Formdialog />} /> */}
         <Route path="/favorites" element={<FavoritePage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={<NotFoundpage />} />
       </Routes>
     </>

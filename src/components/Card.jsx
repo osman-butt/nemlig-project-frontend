@@ -5,48 +5,100 @@ import useCart from "../hooks/useCart";
 import { useState } from "react";
 import Snackbar from "./Snackbar";
 
-export default function Card({ data, addToFavorites, removeFromFavorites, auth, alwaysShowStar }) {
+export default function Card({
+  data,
+  addToFavorites,
+  removeFromFavorites,
+  auth,
+  alwaysShowStar,
+}) {
   const { incrementCartItem } = useCart();
   const [showSnackbar, setShowSnackbar] = useState(false);
 
-  const showSnackybar = () => {
+  function showSnackybar() {
     setShowSnackbar(true);
-
     setTimeout(() => {
       setShowSnackbar(false);
-    }, 3000); // Skjul snackbar efter 3 sekunder (justér efter behov)
-  };
+    }, 800);
+  }
+
+  // Find the lowest price / only if prices.length > 0
+  const lowestPrice =
+    data.prices.length > 0
+      ? data.prices.reduce((prev, curr) =>
+          prev.price < curr.price ? prev : curr
+        )
+      : null;
+
+  // Find highest price / only if prices.length > 0
+  const highestPrice =
+    data.prices.length > 0
+      ? data.prices.reduce((prev, curr) =>
+          prev.price > curr.price ? prev : curr
+        )
+      : null;
 
   return (
-    <article className="bg-white rounded flex flex-col items-center gap-2 p-4 w-[200px] h-[400px] justify-self-center">
-      {(alwaysShowStar || (auth && auth.user_email)) && (
-        <img
-          className="translate-x-[74px]"
-          alt="Star"
-          src={data.favorite_id ? filledstar : star}
-          onClick={() => (data.favorite_id ? removeFromFavorites(data) : addToFavorites(data))}
-        />
-      )}
-      <img
-        className="object-contain w-[150px] h-[150px]"
-        src={data.images && data.images[0] ? data.images[0].image_url : ""}
-        alt="productImage"
-      />
-      <p className="font-medium text-center mt-auto">{data.product_name}</p>
-      <p className="font-light text-[14px] mt-auto">{data.product_underline}</p>
-      <p className="font-bold text-[18px] mt-auto">
-        {data.prices && data.prices[0] ? data.prices[0].price.toFixed(2) : "N/A"} kr.
-      </p>
-      <button
-        onClick={() => {
-          incrementCartItem(data);
-          showSnackybar();
-        }}
-        className="bg-[#d4793a] p-2 rounded"
-      >
-        Læg i kurv
-      </button>
-      {showSnackbar && <Snackbar showSnackbar={showSnackbar} />}
+    <article className="bg-white rounded-xl w-[200px] min-h-[340px] relative mx-auto pt-4">
+      {showSnackbar && <Snackbar />}
+      <div className="flex flex-col items-center w-full h-full gap-2 justify-self-center">
+        {(alwaysShowStar || (auth && auth.user_email)) && (
+          <img
+            className="translate-x-[74px]"
+            alt="Star"
+            src={data.favorite_id ? filledstar : star}
+            onClick={() =>
+              data.favorite_id
+                ? removeFromFavorites(data)
+                : addToFavorites(data)
+            }
+          />
+        )}
+        <div className="relative">
+          <img
+            className="pt-2 object-contain w-[100px] h-[100px]"
+            src={data.images && data.images[0] ? data.images[0].image_url : ""}
+            alt="productImage"
+          />
+          {lowestPrice.is_pricematch && (
+            <div className="absolute top-10 left-0 z-10 flex flex-row justify-center w-full h-10 text-black align-middle bg-[#d4793a] bg-opacity-70 rounded-2xl">
+              <p className="self-center">Prismatch</p>
+            </div>
+          )}
+        </div>
+        <div>
+          <p className="mt-auto font-medium text-center">{data.product_name}</p>
+          <p className="font-light text-[12px] mt-auto px-2 text-center">
+            {data.product_underline.length > 40
+              ? data.product_underline.substring(0, 40) + "..."
+              : data.product_underline}
+          </p>
+        </div>
+        {lowestPrice.price !== highestPrice.price ? (
+          <>
+            <p className="text-[18px] my-auto line-through text-red-700">
+              {highestPrice.price.toFixed(2)} kr.
+            </p>
+            <p className="font-bold text-[18px] my-auto align-middle">
+              {lowestPrice.price.toFixed(2)} kr.
+            </p>
+          </>
+        ) : (
+          <p className="font-bold text-[18px] my-auto align-middle">
+            {lowestPrice && lowestPrice.price.toFixed(2)} kr.
+          </p>
+        )}
+        <button
+          onClick={() => {
+            incrementCartItem(data);
+            showSnackybar();
+          }}
+          className="bg-[#d4793a] rounded-b-xl w-full py-3 text-white"
+        >
+          Læg i kurv
+        </button>
+        {showSnackbar && <Snackbar showSnackbar={showSnackbar} />}
+      </div>
     </article>
   );
 }

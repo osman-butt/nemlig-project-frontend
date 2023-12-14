@@ -8,7 +8,6 @@ import Items from "../components/Items";
 import Pagination from "../components/Pagination";
 import usePrivateAxios from "../hooks/usePrivateAxios.js";
 import useAuth from "../hooks/useAuth.js";
-import Snackbar from "../components/Snackbar.jsx";
 
 export default function Shoppage() {
   const [products, setProducts] = useState([]);
@@ -81,7 +80,9 @@ export default function Shoppage() {
       });
       // update state of products - return a new array that includes the updated product (added to favorite) and all the other products so we dont have to refetch each time
       setProducts(
-        products.map((p) => (p.product_id === product.product_id ? { ...p, favorite_id: 1 } : p))
+        products.map(p =>
+          p.product_id === product.product_id ? { ...p, favorite_id: 1 } : p
+        )
       );
     } catch (error) {
       console.error(error);
@@ -93,7 +94,9 @@ export default function Shoppage() {
       await privateAxios.delete(`/favorites/${product.favorite_id}`);
       // update state of products - return a new array that includes the updated product (removed from favorite) and all the other products so we dont have to refetch each time
       setProducts(
-        products.map((p) => (p.product_id === product.product_id ? { ...p, favorite_id: null } : p))
+        products.map(p =>
+          p.product_id === product.product_id ? { ...p, favorite_id: null } : p
+        )
       );
     } catch (err) {
       console.log(err);
@@ -107,7 +110,11 @@ export default function Shoppage() {
         style={{ backgroundImage: `url(${image})` }}
       >
         <Navbar setCategory={setCategory} setPage={setPage} />
-        <Search handleSort={handleSort} handleFilter={handleFilter} handleSearch={handleSearch} />
+        <Search
+          handleSort={handleSort}
+          handleFilter={handleFilter}
+          handleSearch={handleSearch}
+        />
         <Items
           products={products}
           addToFavorites={addToFavorites}
@@ -115,7 +122,6 @@ export default function Shoppage() {
           auth={auth}
           alwaysShowStar={false}
         />
-        <Snackbar />
         {<Pagination page={page} totalPages={totalPages} setPage={setPage} />}
       </div>
       <Footer />

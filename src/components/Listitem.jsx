@@ -3,6 +3,23 @@ import useCart from "../hooks/useCart";
 
 function Listitem({ product }) {
   const { incrementCartItem, decrementCartItem } = useCart();
+
+  // Find the lowest price / only if prices.length > 0
+  const lowestPrice =
+    product.prices.length > 0
+      ? product.prices.reduce((prev, curr) =>
+          prev.price < curr.price ? prev : curr
+        )
+      : null;
+
+  // Find highest price / only if prices.length > 0
+  const highestPrice =
+    product.prices.length > 0
+      ? product.prices.reduce((prev, curr) =>
+          prev.price > curr.price ? prev : curr
+        )
+      : null;
+
   return (
     <>
       <tr className="text-left text-[14px] border-gray-500 border-b">
@@ -23,18 +40,16 @@ function Listitem({ product }) {
           <p className="font-light">{product.product_underline}</p>
         </td>
         <td className="w-[20%]" data-field="price">
-          {product.prices.length > 1 ? (
+          {lowestPrice.price !== highestPrice.price ? (
             <>
               <p className="line-through">
-                {(product.prices[0].price * product.quantity).toFixed(2)} kr.
+                {highestPrice.price.toFixed(2)} kr.
               </p>
-              <p className="font-bold">
-                {(product.prices[1].price * product.quantity).toFixed(2)} kr.
-              </p>
+              <p className="font-bold">{lowestPrice.price.toFixed(2)} kr.</p>
             </>
           ) : (
             <p className="font-bold">
-              {(product.prices[0].price * product.quantity).toFixed(2)} kr.
+              {lowestPrice && lowestPrice.price.toFixed(2)} kr.
             </p>
           )}
         </td>
