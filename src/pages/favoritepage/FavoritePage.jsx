@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import usePrivateAxios from "../../hooks/usePrivateAxios";
-import image from "../../assets/hero.jpg";
+// import image from "../../assets/hero.jpg";
 import Navbar from "../../components/Navbar.jsx";
 import Search from "../../components/Search.jsx";
 import Items from "../../components/Items.jsx";
