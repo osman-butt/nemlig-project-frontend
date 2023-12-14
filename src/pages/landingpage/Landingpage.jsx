@@ -1,6 +1,6 @@
-import image from "../assets/hero.jpg";
-import Footer from "../components/Footer";
-import Hero from "../components/Hero";
+import image from "../../assets/hero.jpg";
+import Footer from "../../components/Footer";
+import Hero from "./Hero";
 
 export default function Landingpage() {
   return (

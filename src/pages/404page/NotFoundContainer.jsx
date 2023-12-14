@@ -26,12 +26,6 @@ export default function NotFoundContainer() {
               </span>
             </p>
           </div>
-          {/* <button
-            onClick={() => navigate("/shop")}
-            className="bg-[#d4793a] hover:bg-[#ecbc9a] w-[200px] rounded-md my-6 mx-auto py-3 text-black font-bold"
-          >
-            Til butik
-          </button> */}
         </div>
       </div>
     </div>

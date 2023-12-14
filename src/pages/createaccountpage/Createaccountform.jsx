@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 // import InputField from "./InputField";
-import axios from "../api/axios";
-import FormInput from "./FormInput";
+import axios from "../../api/axios";
+import FormInput from "../../components/forms/FormInput";
 import { useState } from "react";
-import ButtonFullSecondary from "./buttons/ButtonFullSecondary";
+import ButtonFullSecondary from "../../components/buttons/ButtonFullSecondary";
 
 export default function Createaccountform() {
   const navigate = useNavigate();

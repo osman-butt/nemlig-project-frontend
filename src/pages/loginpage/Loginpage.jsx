@@ -1,6 +1,6 @@
-import image from "../assets/hero.jpg";
-import Loginform from "../components/Loginform";
-import Footer from "../components/Footer";
+import image from "../../assets/hero.jpg";
+import Footer from "../../components/Footer";
+import LoginForm from "./Loginform";
 
 export default function Loginpage() {
   return (
@@ -9,7 +9,7 @@ export default function Loginpage() {
         className="min-h-screen bg-fixed bg-center bg-cover"
         style={{ backgroundImage: `url(${image})` }}
       >
-        <Loginform />
+        <LoginForm />
       </div>
       <Footer />
     </>

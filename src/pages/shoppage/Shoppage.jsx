@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import axios from "../api/axios.js";
-import image from "../assets/hero.jpg";
-import Navbar from "../components/Navbar";
-import Search from "../components/Search";
-import Footer from "../components/Footer";
-import Items from "../components/Items";
-import Pagination from "../components/Pagination";
-import usePrivateAxios from "../hooks/usePrivateAxios.js";
-import useAuth from "../hooks/useAuth.js";
+import axios from "../../api/axios.js";
+import image from "../../assets/hero.jpg";
+import Navbar from "../../components/Navbar.jsx";
+import Search from "../../components/Search.jsx";
+import Footer from "../../components/Footer.jsx";
+import Items from "../../components/Items.jsx";
+import Pagination from "../../components/Pagination.jsx";
+import usePrivateAxios from "../../hooks/usePrivateAxios.js";
+import useAuth from "../../hooks/useAuth.js";
 
 export default function Shoppage() {
   const [products, setProducts] = useState([]);

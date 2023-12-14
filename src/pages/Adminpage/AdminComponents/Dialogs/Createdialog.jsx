@@ -1,4 +1,4 @@
-import FormInput from "../../../../components/FormInput.jsx";
+import FormInput from "../../../../components/forms/FormInput.jsx";
 import {
   handleInputChange,
   handleArrayChange,

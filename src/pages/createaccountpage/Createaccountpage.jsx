@@ -1,6 +1,6 @@
-import image from "../assets/hero.jpg";
-import Createaccountform from "../components/Createaccountform";
-import Footer from "../components/Footer";
+import image from "../../assets/hero.jpg";
+import Createaccountform from "./Createaccountform";
+import Footer from "../../components/Footer";
 
 export default function Createaccountpage() {
   return (
