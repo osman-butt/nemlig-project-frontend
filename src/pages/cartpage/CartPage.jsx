@@ -1,5 +1,4 @@
 import image from "../../assets/hero.jpg";
-import Footer from "../../components/Footer.jsx";
 import CartContainer from "./container/CartContainer.jsx";
 
 function CartPage() {
@@ -9,7 +8,6 @@ function CartPage() {
       style={{ backgroundImage: `url(${image})` }}
     >
       <CartContainer />
-      <Footer />
     </div>
   );
 }

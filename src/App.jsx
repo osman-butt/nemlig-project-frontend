@@ -16,6 +16,7 @@ import useAuth from "./hooks/useAuth.js";
 import CheckoutPage from "./pages/checkout/CheckoutPage.jsx";
 import ProfilePage from "./pages/profilepage/ProfilePage.jsx";
 import Landingpage from "./pages/landingpage/Landingpage.jsx";
+import Footer from "./components/Footer.jsx";
 
 export default function App() {
   const refreshToken = useRefreshToken();
@@ -51,6 +52,7 @@ export default function App() {
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/*" element={<NotFoundpage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }

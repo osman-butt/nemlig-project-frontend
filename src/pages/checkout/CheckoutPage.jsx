@@ -1,6 +1,5 @@
 import image from "../../assets/hero.jpg";
 import CheckoutList from "./CheckoutList.jsx";
-import Footer from "../../components/Footer.jsx";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import useCart from "../../hooks/useCart.js";
@@ -20,7 +19,6 @@ function CheckoutPage() {
       style={{ backgroundImage: `url(${image})` }}
     >
       <CheckoutList />
-      <Footer />
     </div>
   );
 }

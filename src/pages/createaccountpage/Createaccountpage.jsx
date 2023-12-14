@@ -1,6 +1,5 @@
 import image from "../../assets/hero.jpg";
 import Createaccountform from "./Createaccountform.jsx";
-import Footer from "../../components/Footer.jsx";
 
 export default function Createaccountpage() {
   return (
@@ -11,7 +10,6 @@ export default function Createaccountpage() {
       >
         <Createaccountform />
       </div>
-      <Footer />
     </>
   );
 }

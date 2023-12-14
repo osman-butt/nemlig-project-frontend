@@ -4,7 +4,6 @@ import usePrivateAxios from "../../hooks/usePrivateAxios";
 import Navbar from "../../components/Navbar.jsx";
 import Search from "../../components/Search.jsx";
 import Items from "../../components/Items.jsx";
-import Footer from "../../components/Footer.jsx";
 
 export default function FavoritePage() {
   const [products, setProducts] = useState([]);
@@ -79,7 +78,6 @@ export default function FavoritePage() {
           alwaysShowStar={true}
         />
       </div>
-      <Footer />
     </>
   );
 }
