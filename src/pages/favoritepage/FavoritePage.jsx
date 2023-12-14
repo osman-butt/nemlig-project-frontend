@@ -34,7 +34,7 @@ export default function FavoritePage() {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, category, privateAxios]);
+  }, [sort, label, searchQuery, category]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);

@@ -56,7 +56,7 @@ export default function Shoppage() {
       }
     };
     fetchData();
-  }, [sort, label, searchQuery, page, category, privateAxios, auth]);
+  }, [sort, label, searchQuery, page, category]);
 
   function handleSort(sortOptions) {
     setSort(sortOptions);
