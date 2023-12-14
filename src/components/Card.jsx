@@ -39,10 +39,10 @@ export default function Card({
       : null;
 
   return (
-    <article className="bg-white rounded-xl w-[200px] min-h-[340px] relative mx-auto pt-4">
+    <article className="bg-white rounded-xl w-[200px] min-h-[330px] relative mx-auto pt-4">
       {showSnackbar && <Snackbar />}
       <div className="flex flex-col items-center w-full h-full gap-2 justify-self-center">
-        {(alwaysShowStar || (auth && auth.user_email)) && (
+        {alwaysShowStar || (auth && auth.user_email) ? (
           <img
             className="translate-x-[74px]"
             alt="Star"
@@ -53,6 +53,8 @@ export default function Card({
                 : addToFavorites(data)
             }
           />
+        ) : (
+          <div className="h-6"></div>
         )}
         <div className="relative">
           <img
@@ -61,7 +63,7 @@ export default function Card({
             alt="productImage"
           />
           {lowestPrice?.is_pricematch && (
-            <div className="absolute top-10 left-0 z-10 flex flex-row justify-center w-full h-10 text-black align-middle bg-[#d4793a] bg-opacity-70 rounded-2xl">
+            <div className="absolute top-10 left-0 z-10 flex flex-row justify-center w-full h-10 text-white align-middle bg-[#d4793a] bg-opacity-70 rounded-2xl">
               <p className="self-center">Prismatch</p>
             </div>
           )}
@@ -75,18 +77,20 @@ export default function Card({
           </p>
         </div>
         {lowestPrice.price !== highestPrice.price ? (
-          <>
-            <p className="text-[18px] my-auto line-through text-red-700">
+          <div className="flex flex-col justify-end h-full">
+            <p className="text-[18px] line-through text-red-700">
               {highestPrice.price.toFixed(2)} kr.
             </p>
-            <p className="font-bold text-[18px] my-auto align-middle">
+            <p className="font-bold text-[18px] gap-4 align-middle">
               {lowestPrice.price.toFixed(2)} kr.
             </p>
-          </>
+          </div>
         ) : (
-          <p className="font-bold text-[18px] my-auto align-middle">
-            {lowestPrice && lowestPrice.price.toFixed(2)} kr.
-          </p>
+          <div className="flex flex-col justify-end h-full gap-4">
+            <p className="font-bold text-[18px]  align-middle">
+              {lowestPrice && lowestPrice.price.toFixed(2)} kr.
+            </p>
+          </div>
         )}
         <button
           onClick={() => {
