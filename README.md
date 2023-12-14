@@ -11,7 +11,7 @@ Group project made by [Benjamin](https://github.com/Benjamin-Harris1), [Gustav](
 ## Installation
 * Fork the repository by clicking the "Fork" button in the top right corner of the GitHub page.
 
-OR
+or
 
 * Clone the repository to your local machine using the following command in your terminal:
 ```bash
