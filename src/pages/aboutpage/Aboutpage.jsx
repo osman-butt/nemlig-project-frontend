@@ -1,5 +1,4 @@
 import image from "../../assets/hero.jpg";
-import Footer from "../../components/Footer";
 import About from "./About";
 
 export default function Aboutpage() {
@@ -9,7 +8,6 @@ export default function Aboutpage() {
       style={{ backgroundImage: `url(${image})` }}
     >
       <About />
-      <Footer />
     </div>
   );
 }

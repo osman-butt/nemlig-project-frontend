@@ -1,4 +1,3 @@
-import Footer from "../../components/Footer";
 import Table from "./Table.jsx";
 import image from "../../assets/hero.jpg";
 
@@ -9,7 +8,6 @@ function ProfilePage() {
       style={{ backgroundImage: `url(${image})` }}
     >
       <Table />
-      <Footer />
     </div>
   );
 }
