@@ -119,7 +119,9 @@ function CartProvider({ children }) {
 
     if (auth?.accessToken) {
       if (getCart().length == 0) {
-        fetchDB();
+        if (auth?.user_roles?.includes("customer")) {
+          fetchDB();
+        }
       } else {
         const localStorageData = getCart();
         // POST LOCALSTORAGE TO DB
