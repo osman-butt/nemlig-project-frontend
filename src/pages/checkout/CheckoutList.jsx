@@ -42,7 +42,7 @@ function CheckoutList() {
             </div>
           )}
           <div className="flex flex-col justify-between gap-2 pt-2 md:items-end">
-            <div className="flex flex-row justify-between md:gap-4 md:w-full">
+            <div className="flex flex-row justify-between md:gap-2 md:w-full">
               <p>Varer i alt: {cart.reduce((a, c) => c.quantity + a, 0)} stk</p>
               <p>
                 {cart.length > 0
